@@ -7,23 +7,43 @@
   <meta name="description" content="Mochilas económicas para escuela, trabajo y bici. Entrega especial en Ourense sin coste y envíos en 48h. 100% fiable y trato cercano.">
   <link rel="icon" type="image/png" href="imagen/logo-nortepack.png">
   <style>
-    :root { --bg:#0b0f14; --card:#10161d; --text:#e6f0ff; --accent:#00d084; --muted:#7b8a9a; }
+    :root { 
+      --bg:#0b0f14; 
+      --card:#10161d; 
+      --text:#e6f0ff; 
+      --accent:#00d084; 
+      --muted:#7b8a9a; 
+      --logoH: clamp(64px, 9vw, 96px); /* ALTURA DEL LOGO (ajusta aquí si quieres) */
+    }
     * { box-sizing:border-box }
     html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, Ubuntu, Cantarell, 'Noto Sans', 'Helvetica Neue', sans-serif; }
     a { color:inherit; text-decoration:none }
 
-    .header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; position:sticky; top:0; background:rgba(11,15,20,.9); backdrop-filter:saturate(1.5) blur(6px); border-bottom:1px solid #19222d }
-    .logo { display:flex; align-items:center; gap:12px }
-    .logo img { height:56px; image-rendering:auto; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; width:auto; display:block }
-    .tag { font-weight:700; letter-spacing:.5px }
+    .header { display:flex; align-items:center; justify-content:space-between; padding:18px 20px; position:sticky; top:0; background:rgba(11,15,20,.9); backdrop-filter:saturate(1.5) blur(6px); border-bottom:1px solid #19222d; z-index:10 }
+    .logo { display:flex; align-items:center; gap:14px }
+    .logo img { height:var(--logoH); width:auto; display:block; image-rendering:auto; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    .tag { font-weight:800; letter-spacing:.5px; font-size:clamp(16px,2.2vw,22px) }
     .nav { display:flex; gap:14px }
-    .nav a { padding:8px 12px; border:1px solid #1d2a36; border-radius:12px }
+    .nav a { padding:10px 14px; border:1px solid #1d2a36; border-radius:12px }
     .nav a:hover { border-color:#2a3a4c }
 
     .hero { display:grid; place-items:center; padding:60px 18px 40px }
-    .hero h1 { font-size:clamp(28px,5vw,44px); margin:12px 0 8px }
-    .hero p { max-width:680px; color:var(--muted); font-size:clamp(14px,2.4vw,18px) }
+    .hero h1 { font-size:clamp(28px,5vw,48px); margin:12px 0 8px; text-align:center }
+    .hero p { max-width:780px; color:var(--muted); font-size:clamp(14px,2.4vw,18px); text-align:center }
     .cta { margin-top:18px; display:inline-block; background:var(--accent); color:#002810; padding:12px 18px; font-weight:800; border-radius:14px }
+
+    .section { padding:28px 18px 48px; scroll-margin-top:calc(var(--logoH) + 24px) }
+    .section-title { text-align:center; font-size:clamp(22px,4.2vw,34px); margin:8px 0 6px }
+    .section-sub { text-align:center; color:var(--muted); margin:0 0 18px }
+
+    .grid { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:16px }
+    .card { background:var(--card); border:1px solid #1d2a36; border-radius:16px; overflow:hidden; transition:transform .15s ease, box-shadow .15s ease }
+    .card:hover { transform:translateY(-3px); box-shadow:0 6px 22px rgba(0,0,0,.25) }
+    .thumb { height:200px; background:linear-gradient(180deg,#121a22,#0e151c); display:grid; place-items:center }
+    .thumb img { width:100%; height:100%; object-fit:cover; display:block }
+    .meta { display:flex; align-items:center; justify-content:space-between; padding:12px 14px }
+    .meta h3 { font-size:16px; margin:0 }
+    .price { background:var(--accent); color:#032e1a; font-weight:900; padding:6px 10px; border-radius:10px }
 
     .footer { padding:24px 18px; color:#9cb0c6; border-top:1px solid #1d2a36; text-align:center }
   </style>
@@ -32,11 +52,11 @@
   <header class="header">
     <div class="logo">
       <!-- IMPORTANTE: sube tu archivo a imagen/logo-nortepack.png (todo en minúsculas) -->
-      <img src="imagen/logo-nortepack.png" alt="Logo NORTEPACK" height="56" loading="eager" fetchpriority="high" decoding="async">
+      <img src="imagen/logo-nortepack.png" alt="Logo NORTEPACK">
       <span class="tag">NORTEPACK</span>
     </div>
     <nav class="nav">
-      <a href="#">Catálogo</a>
+      <a href="#catalogo">Catálogo</a>
       <a href="#">Envíos</a>
       <a href="#">Contacto</a>
     </nav>
@@ -48,7 +68,75 @@
     <a class="cta" href="https://www.nortepack.es" target="_blank" rel="noopener">www.nortepack.es</a>
   </section>
 
+  <!-- CATÁLOGO -->
+  <section id="catalogo" class="section">
+    <h2 class="section-title">Catálogo</h2>
+    <p class="section-sub">Sube tus fotos a la carpeta <code>imagen/</code> con estos nombres y aparecerán solas.</p>
+
+    <div class="grid" id="grid-catalogo">
+      <!-- 4 básicas 15€ -->
+      <div class="card" data-name="Básica A" data-price="15" data-img="imagen/prod-01.jpg">
+        <div class="thumb"><img alt="Básica A"></div>
+        <div class="meta"><h3>Básica A</h3><span class="price">15€</span></div>
+      </div>
+      <div class="card" data-name="Básica B" data-price="15" data-img="imagen/prod-02.jpg">
+        <div class="thumb"><img alt="Básica B"></div>
+        <div class="meta"><h3>Básica B</h3><span class="price">15€</span></div>
+      </div>
+      <div class="card" data-name="Básica C" data-price="15" data-img="imagen/prod-03.jpg">
+        <div class="thumb"><img alt="Básica C"></div>
+        <div class="meta"><h3>Básica C</h3><span class="price">15€</span></div>
+      </div>
+      <div class="card" data-name="Básica D" data-price="15" data-img="imagen/prod-04.jpg">
+        <div class="thumb"><img alt="Básica D"></div>
+        <div class="meta"><h3>Básica D</h3><span class="price">15€</span></div>
+      </div>
+
+      <!-- 4 premium 20€ -->
+      <div class="card" data-name="Premium A" data-price="20" data-img="imagen/prod-05.jpg">
+        <div class="thumb"><img alt="Premium A"></div>
+        <div class="meta"><h3>Premium A</h3><span class="price">20€</span></div>
+      </div>
+      <div class="card" data-name="Premium B" data-price="20" data-img="imagen/prod-06.jpg">
+        <div class="thumb"><img alt="Premium B"></div>
+        <div class="meta"><h3>Premium B</h3><span class="price">20€</span></div>
+      </div>
+      <div class="card" data-name="Premium C" data-price="20" data-img="imagen/prod-07.jpg">
+        <div class="thumb"><img alt="Premium C"></div>
+        <div class="meta"><h3>Premium C</h3><span class="price">20€</span></div>
+      </div>
+      <div class="card" data-name="Premium D" data-price="20" data-img="imagen/prod-08.jpg">
+        <div class="thumb"><img alt="Premium D"></div>
+        <div class="meta"><h3>Premium D</h3><span class="price">20€</span></div>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">© <span id="year"></span> NORTEPACK · www.nortepack.es</footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script>
+    // Pone el año del footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Carga cada imagen del catálogo y si no existe, muestra un placeholder con el nombre esperado
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      const path = card.dataset.img;
+      const name = card.dataset.name || 'Producto';
+      const price = card.dataset.price || '';
+      const img = card.querySelector('img');
+      const svgPlaceholder = encodeURIComponent(`
+        <svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'>
+          <rect width='100%' height='100%' fill='#0f151c'/>
+          <text x='50%' y='46%' dominant-baseline='middle' text-anchor='middle' font-size='20' fill='#7b8a9a'>Sube ${path}</text>
+          <text x='50%' y='60%' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='#9cb0c6'>${name} ${price?('· '+price+'€'):''}</text>
+        </svg>`);
+      const ph = `data:image/svg+xml;utf8,${svgPlaceholder}`;
+      const probe = new Image();
+      probe.onload = () => { img.src = path; };
+      probe.onerror = () => { img.src = ph; };
+      probe.src = path;
+    });
+  </script>
 </body>
 </html>
