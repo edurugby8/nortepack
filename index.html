@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -16,7 +17,7 @@
       --muted:#8da0b5;
       --border:#1c2a3a;
 
-      /* Accent (estilo logo) */
+      /* Accent (logo Nortepack) */
       --accent:#00d084;
       --accent2:#18e6ff;
       --accentSoft: rgba(0,208,132,.12);
@@ -30,18 +31,18 @@
       --shadow2: 0 26px 90px rgba(0,0,0,.62);
       --radius: 18px;
       --radius2: 24px;
-      --logoH: clamp(64px, 7vw, 92px);
+      --logoH: clamp(56px, 7vw, 92px);
     }
 
     *{ box-sizing:border-box }
     html,body{ margin:0; padding:0; }
 
-    /* ✅ FONDO TIPO SOLANA (auroras + blobs + grid suave + grain) */
+    /* ✅ FONDO ABSTRACTO INTENSO + MOVIMIENTO (tipo Solana) */
     body{
       background:
-        radial-gradient(900px 520px at 8% -10%, rgba(153,69,255,.28), transparent 60%),
-        radial-gradient(760px 520px at 110% 10%, rgba(20,241,149,.22), transparent 62%),
-        radial-gradient(1000px 700px at 50% 120%, rgba(0,194,255,.16), transparent 60%),
+        radial-gradient(1200px 700px at 8% -10%, rgba(153,69,255,.34), transparent 62%),
+        radial-gradient(980px 720px at 110% 10%, rgba(20,241,149,.28), transparent 64%),
+        radial-gradient(1200px 880px at 50% 120%, rgba(0,194,255,.22), transparent 62%),
         linear-gradient(180deg, #05060a 0%, #05070b 40%, #04060a 100%);
       color:var(--text);
       font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
@@ -50,22 +51,22 @@
       overflow-x:hidden;
     }
 
-    /* Grid MUY sutil + brillo suave */
+    /* Grid suave + brillo */
     body::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
       background:
-        linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px),
-        radial-gradient(circle at 20% 10%, rgba(255,255,255,.03), transparent 26%),
-        radial-gradient(circle at 80% 30%, rgba(255,255,255,.02), transparent 28%),
+        linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px),
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.035), transparent 26%),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,.025), transparent 28%),
         radial-gradient(circle at 40% 80%, rgba(255,255,255,.02), transparent 30%);
-      background-size: 56px 56px, 56px 56px, 520px 520px, 640px 640px, 760px 760px;
+      background-size: 60px 60px, 60px 60px, 520px 520px, 640px 640px, 760px 760px;
       opacity:.10;
       mix-blend-mode: overlay;
-      z-index:-3;
+      z-index:-7;
     }
 
     /* Grain / noise (sin imágenes) */
@@ -75,70 +76,104 @@
       inset:0;
       pointer-events:none;
       background-image:
-        repeating-linear-gradient(0deg, rgba(255,255,255,.020) 0 1px, transparent 1px 2px),
-        repeating-linear-gradient(90deg, rgba(255,255,255,.016) 0 1px, transparent 1px 3px);
-      opacity:.05;
+        repeating-linear-gradient(0deg, rgba(255,255,255,.028) 0 1px, transparent 1px 2px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.020) 0 1px, transparent 1px 3px);
+      opacity:.06;
       mix-blend-mode: overlay;
-      z-index:-2;
+      z-index:-6;
     }
 
-    /* Aurora animada */
+    /* Aurora animada (más visible) */
     .bg-aurora{
       position:fixed;
-      inset:-25%;
-      z-index:-6;
+      inset:-30%;
+      z-index:-10;
       pointer-events:none;
-      filter: blur(60px);
-      opacity:.70;
+      filter: blur(62px);
+      opacity:.90;
       background:
-        radial-gradient(720px 520px at 20% 25%, rgba(153,69,255,.22), transparent 60%),
-        radial-gradient(680px 520px at 78% 35%, rgba(20,241,149,.18), transparent 62%),
-        radial-gradient(640px 640px at 55% 80%, rgba(0,194,255,.14), transparent 62%);
-      animation: auroraFloat 14s ease-in-out infinite alternate;
+        radial-gradient(820px 560px at 18% 25%, rgba(153,69,255,.32), transparent 62%),
+        radial-gradient(760px 560px at 78% 35%, rgba(20,241,149,.26), transparent 64%),
+        radial-gradient(720px 720px at 55% 80%, rgba(0,194,255,.20), transparent 66%);
+      animation: auroraFloat 12s ease-in-out infinite alternate;
+      will-change: transform;
     }
     @keyframes auroraFloat{
       0%   { transform: translate3d(-2%, -1%, 0) scale(1.02); }
-      50%  { transform: translate3d(2%, 1%, 0) scale(1.05); }
-      100% { transform: translate3d(-1%, 2%, 0) scale(1.03); }
+      50%  { transform: translate3d(2.5%, 1.5%, 0) scale(1.06); }
+      100% { transform: translate3d(-1.5%, 2.5%, 0) scale(1.04); }
     }
 
-    /* Blobs extra (más “Solana”) */
+    /* Blobs extra (abstracto intenso) */
     .bg-blobs{
       position:fixed;
       inset:0;
-      z-index:-5;
+      z-index:-9;
       pointer-events:none;
-      opacity:.55;
+      opacity:.80;
+      filter: blur(0px);
     }
     .bg-blobs span{
       position:absolute;
-      width:520px;
-      height:520px;
+      width:560px;
+      height:560px;
       border-radius:50%;
-      filter: blur(55px);
-      transform: translate3d(0,0,0);
+      filter: blur(60px);
       mix-blend-mode: screen;
+      opacity:1;
       animation: blob 16s ease-in-out infinite alternate;
+      will-change: transform;
     }
     .bg-blobs span:nth-child(1){
-      top:-140px; left:-120px;
-      background: radial-gradient(circle at 30% 30%, rgba(153,69,255,.55), transparent 65%);
+      top:-170px; left:-160px;
+      background: radial-gradient(circle at 30% 30%, rgba(153,69,255,.66), transparent 66%);
       animation-duration: 18s;
     }
     .bg-blobs span:nth-child(2){
-      top:120px; right:-160px;
-      background: radial-gradient(circle at 30% 30%, rgba(20,241,149,.45), transparent 65%);
+      top:110px; right:-210px;
+      background: radial-gradient(circle at 30% 30%, rgba(20,241,149,.55), transparent 66%);
       animation-duration: 20s;
     }
     .bg-blobs span:nth-child(3){
-      bottom:-220px; left:35%;
-      background: radial-gradient(circle at 30% 30%, rgba(0,194,255,.38), transparent 65%);
+      bottom:-260px; left:32%;
+      background: radial-gradient(circle at 30% 30%, rgba(0,194,255,.50), transparent 66%);
       animation-duration: 22s;
+    }
+    .bg-blobs span:nth-child(4){
+      top:55%; left:-220px;
+      width:640px; height:640px;
+      background: radial-gradient(circle at 35% 35%, rgba(0,208,132,.42), transparent 66%);
+      animation-duration: 19s;
     }
     @keyframes blob{
       0%   { transform: translate(-2%, -1%) scale(1.00); }
-      50%  { transform: translate(3%, 2%) scale(1.08); }
-      100% { transform: translate(-1%, 3%) scale(1.04); }
+      40%  { transform: translate(4%, 2%) scale(1.10); }
+      70%  { transform: translate(-1%, 4%) scale(1.06); }
+      100% { transform: translate(3%, -2%) scale(1.12); }
+    }
+
+    /* Sheen animado (onda abstracta suave) */
+    .bg-sheen{
+      position:fixed;
+      inset:-25%;
+      z-index:-8;
+      pointer-events:none;
+      opacity:.26;
+      filter: blur(30px);
+      background:
+        conic-gradient(from 180deg at 50% 50%,
+          rgba(153,69,255,.0) 0deg,
+          rgba(153,69,255,.35) 55deg,
+          rgba(20,241,149,.30) 120deg,
+          rgba(0,194,255,.26) 200deg,
+          rgba(153,69,255,.30) 280deg,
+          rgba(153,69,255,.0) 360deg);
+      animation: sheenSpin 18s linear infinite;
+      will-change: transform;
+    }
+    @keyframes sheenSpin{
+      from{ transform: rotate(0deg) scale(1.06); }
+      to{ transform: rotate(360deg) scale(1.06); }
     }
 
     /* Vignette elegante */
@@ -146,9 +181,9 @@
       position:fixed;
       inset:0;
       pointer-events:none;
-      z-index:-4;
+      z-index:-5;
       background:
-        radial-gradient(circle at 50% 18%, transparent 0, rgba(0,0,0,.22) 52%, rgba(0,0,0,.66) 100%);
+        radial-gradient(circle at 50% 18%, transparent 0, rgba(0,0,0,.22) 52%, rgba(0,0,0,.70) 100%);
     }
 
     a{ color:inherit; text-decoration:none }
@@ -164,8 +199,8 @@
     /* HEADER */
     .header{
       position:sticky; top:0; z-index:30;
-      background:rgba(5,7,11,.68);
-      backdrop-filter: blur(14px) saturate(1.5);
+      background:rgba(5,7,11,.66);
+      backdrop-filter: blur(16px) saturate(1.6);
       border-bottom:1px solid rgba(28,42,58,.9);
       box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset, 0 18px 60px rgba(0,0,0,.35);
     }
@@ -178,6 +213,7 @@
     }
     .logo{
       display:flex; align-items:center; gap:12px;
+      min-width: 240px;
     }
     .logo img{ height:var(--logoH); width:auto }
     .brand{
@@ -209,6 +245,7 @@
       font-size:13px;
       background:rgba(10,16,24,.35);
       transition: border-color .18s ease, color .18s ease, transform .18s ease;
+      white-space: nowrap;
     }
     .nav a:hover{
       border-color: rgba(24,230,255,.45);
@@ -353,9 +390,7 @@
       background:rgba(7,11,17,.55);
       color:var(--text);
     }
-    .btn-ghost:hover{
-      border-color: rgba(24,230,255,.45);
-    }
+    .btn-ghost:hover{ border-color: rgba(24,230,255,.45); }
 
     .hero-media{
       border-radius: var(--radius2);
@@ -453,6 +488,7 @@
       scroll-snap-type: x mandatory;
       padding-bottom:6px;
       scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
     }
     .carousel::-webkit-scrollbar{ height:8px; }
     .carousel::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.12); border-radius: 999px; }
@@ -724,7 +760,6 @@
       backdrop-filter: blur(10px);
       color:#eaf1ff;
     }
-
     .ribbon{
       position:absolute;
       top:12px;
@@ -744,11 +779,6 @@
       border-color: rgba(255,200,0,.35);
       background: rgba(255,200,0,.12);
       color:#ffe8a6;
-    }
-    .ribbon.low{
-      border-color: rgba(255,90,90,.32);
-      background: rgba(255,90,90,.10);
-      color:#ffd1d1;
     }
 
     .content{
@@ -1021,24 +1051,76 @@
     .wa-btn:hover::after{ opacity:.9 }
     .wa-btn:hover{ opacity:.95 }
 
-    /* RESPONSIVE */
+    /* ✅ MOVIL: NAV FIJA ABAJO + MÁS COMPACTO (100% usable) */
     @media (max-width: 980px){
       .hero-inner{ grid-template-columns: 1fr; }
       .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
       .two{ grid-template-columns: 1fr; }
-      .header-inner{ flex-direction:column; align-items:flex-start; }
-      .nav{ justify-content:flex-start; }
       .reviews{ grid-template-columns: 1fr; }
       .compare-grid{ grid-template-columns: 1fr; }
+
+      .header-inner{ flex-direction:column; align-items:flex-start; }
+      .nav{ justify-content:flex-start; }
+
       .wa-pill{ display:block; }
     }
-    @media (max-width: 560px){
-      .grid{ grid-template-columns: 1fr; }
+
+    @media (max-width: 640px){
+      /* más aire arriba porque el menú irá abajo */
+      body{ padding-bottom: 76px; }
+
+      .brand .sub{ font-size:11px; }
+      .hero{ padding:22px 0 10px; }
+      .hero h1{ font-size: clamp(26px, 8vw, 36px); }
+      .lead{ font-size: 14px; }
+
       .mini{ min-width: 100%; }
       .actions{ flex-direction:column; align-items:stretch; }
       .btn{ width:100%; }
+
       .strip-inner{ flex-direction:column; align-items:flex-start; }
+      .grid{ grid-template-columns: 1fr; }
+      .thumb{ height: 220px; }
+
+      /* ✅ Menú inferior tipo “app” */
+      .nav{
+        position:fixed;
+        left:10px;
+        right:10px;
+        bottom:10px;
+        z-index:70;
+        background: rgba(5,7,11,.78);
+        border:1px solid rgba(28,42,58,.9);
+        border-radius: 18px;
+        padding:10px;
+        box-shadow: 0 18px 60px rgba(0,0,0,.55);
+        backdrop-filter: blur(16px) saturate(1.6);
+        justify-content:space-between;
+        gap:8px;
+      }
+      .nav a{
+        flex:1;
+        text-align:center;
+        padding:10px 10px;
+        font-size:12px;
+        border-radius: 14px;
+        background: rgba(10,16,24,.35);
+      }
+      .nav a:nth-child(4){ display:none; } /* oculta FAQ en móvil para que no quede apretado */
+      .nav .cta{
+        flex:1.2;
+        font-size:12px;
+      }
+
+      /* Whatsapp flotante un pelín más arriba para no chocar con la nav inferior */
+      .wa-float{ bottom: 92px; right: 14px; }
       .wa-pill{ display:none; }
+    }
+
+    /* Menos movimiento si el usuario lo pide en el sistema */
+    @media (prefers-reduced-motion: reduce){
+      .bg-aurora, .bg-blobs span, .bg-sheen{ animation: none !important; }
+      .card, .panel, .block, .hero-media, .strip-inner, .compare, .review{ animation:none !important; }
     }
 
     /* Entrada suave */
@@ -1057,9 +1139,10 @@
 
 <body>
   <div class="bg-aurora" aria-hidden="true"></div>
+  <div class="bg-sheen" aria-hidden="true"></div>
 
   <div class="bg-blobs" aria-hidden="true">
-    <span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
   </div>
 
   <div class="bg-vignette" aria-hidden="true"></div>
@@ -1077,9 +1160,9 @@
       <nav class="nav">
         <a href="#catalogo">Catálogo</a>
         <a href="#envios">Envíos</a>
-        <a href="#como-comprar">Cómo comprar</a>
+        <a href="#como-comprar">Comprar</a>
         <a href="#faq">FAQ</a>
-        <a class="cta" href="https://wa.me/34697625964" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        <a class="cta" href="https://wa.me/34697625964" target="_blank" rel="noopener">WhatsApp</a>
       </nav>
     </div>
   </header>
@@ -1349,7 +1432,6 @@
               </article>
             </div>
 
-            <!-- COMPARADOR -->
             <div class="compare">
               <h3>Comparativa rápida: Básicas vs Core</h3>
               <div class="compare-grid">
@@ -1372,7 +1454,6 @@
               </div>
             </div>
 
-            <!-- RESEÑAS -->
             <div class="reviews">
               <div class="review">
                 <div class="head"><span class="name">Laura</span><span class="rate">★★★★★</span></div>
@@ -1540,4 +1621,3 @@
   </script>
 </body>
 </html>
-
