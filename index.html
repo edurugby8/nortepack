@@ -4,21 +4,23 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NORTEPACK | Mochilas económicas con entrega en Ourense</title>
-  <meta name="description" content="Mochilas económicas y resistentes. Entrega especial en Ourense sin coste y envíos en 48h. Pago en mano o Bizum.">
+  <meta name="description" content="Mochilas económicas y resistentes. Entrega a domicilio en Ourense y envíos en 48h. Pago en mano o Bizum.">
   <link rel="icon" type="image/png" href="imagen/logo-nortepack.png">
 
   <style>
     :root{
       --bg:#05070b;
-      --bg2:#070b12;
+      --bg2:#060b11;
       --card:#0f1620;
-      --card2:#0c131c;
       --text:#eaf1ff;
       --muted:#8da0b5;
       --border:#1c2a3a;
+
+      /* Accent (estilo logo) */
       --accent:#00d084;
-      --accent2:#19f2a6;
+      --accent2:#18e6ff; /* toque cian elegante */
       --accentSoft: rgba(0,208,132,.12);
+
       --shadow: 0 18px 60px rgba(0,0,0,.55);
       --radius: 18px;
       --radius2: 24px;
@@ -27,17 +29,34 @@
 
     *{ box-sizing:border-box }
     html,body{ margin:0; padding:0; }
+
+    /* FONDO NUEVO (más “logo/tech”) */
     body{
       background:
-        radial-gradient(900px 500px at 10% -10%, rgba(25,242,166,.14), transparent 55%),
-        radial-gradient(700px 420px at 100% 0%, rgba(0,208,132,.12), transparent 55%),
-        radial-gradient(900px 600px at 50% 120%, rgba(70,120,255,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+        radial-gradient(900px 520px at 12% -12%, rgba(0,208,132,.22), transparent 58%),
+        radial-gradient(760px 460px at 105% 6%, rgba(24,230,255,.18), transparent 60%),
+        radial-gradient(900px 650px at 50% 120%, rgba(0,208,132,.12), transparent 60%),
+        linear-gradient(180deg, #05070b 0%, #060b11 50%, #05070b 100%);
       color:var(--text);
       font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       -webkit-font-smoothing:antialiased;
       line-height:1.35;
     }
+
+    /* Detalle extra: textura sutil tipo “grid” */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 46px 46px;
+      opacity:.10;
+      mix-blend-mode: overlay;
+    }
+
     a{ color:inherit; text-decoration:none }
     img{ display:block; max-width:100% }
 
@@ -45,12 +64,13 @@
       max-width:1140px;
       margin:0 auto;
       padding:0 18px;
+      position:relative; /* para quedar por encima del fondo */
     }
 
     /* HEADER */
     .header{
       position:sticky; top:0; z-index:30;
-      background:rgba(5,7,11,.72);
+      background:rgba(5,7,11,.70);
       backdrop-filter: blur(12px) saturate(1.4);
       border-bottom:1px solid rgba(28,42,58,.9);
     }
@@ -95,7 +115,7 @@
       background:rgba(10,16,24,.35);
     }
     .nav a:hover{
-      border-color: rgba(25,242,166,.55);
+      border-color: rgba(24,230,255,.45);
       color:var(--text);
     }
     .nav .cta{
@@ -108,22 +128,21 @@
     .nav .cta:hover{ opacity:.92 }
 
     /* HERO */
-    .hero{
-      padding:34px 0 14px;
-    }
+    .hero{ padding:34px 0 14px; }
     .hero-inner{
       display:grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(0, .95fr);
       gap:26px;
       align-items:center;
     }
+
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       padding:6px 11px;
       border-radius:999px;
-      border:1px solid rgba(25,242,166,.25);
+      border:1px solid rgba(24,230,255,.22);
       background:rgba(0,208,132,.08);
-      color:#c8ffea;
+      color:#d7fff0;
       font-size:11px;
       letter-spacing:.12em;
       text-transform:uppercase;
@@ -171,13 +190,6 @@
       font-size:15px;
       color:#eafff6;
     }
-    .mini .v span{
-      color:#bfffe6;
-      font-weight:800;
-      font-size:12px;
-      margin-left:6px;
-      opacity:.95;
-    }
 
     .actions{
       display:flex;
@@ -212,14 +224,14 @@
       color:var(--text);
     }
     .btn-ghost:hover{
-      border-color: rgba(25,242,166,.55);
+      border-color: rgba(24,230,255,.45);
     }
 
     .hero-media{
       border-radius: var(--radius2);
       background:
-        radial-gradient(500px 280px at 20% 0%, rgba(25,242,166,.14), transparent 60%),
-        radial-gradient(400px 220px at 90% 20%, rgba(70,120,255,.12), transparent 60%),
+        radial-gradient(500px 280px at 20% 0%, rgba(0,208,132,.16), transparent 60%),
+        radial-gradient(400px 220px at 90% 20%, rgba(24,230,255,.14), transparent 60%),
         rgba(10,16,24,.55);
       border:1px solid rgba(28,42,58,.9);
       padding:14px;
@@ -250,9 +262,7 @@
     .cap strong{ color:#dfffee }
 
     /* STRIP */
-    .strip{
-      padding:14px 0 6px;
-    }
+    .strip{ padding:14px 0 6px; }
     .strip-inner{
       border:1px solid rgba(28,42,58,.9);
       background:linear-gradient(90deg, rgba(15,22,32,.65), rgba(12,18,28,.65));
@@ -281,9 +291,7 @@
     }
 
     /* SECTION */
-    .section{
-      padding:34px 0 44px;
-    }
+    .section{ padding:34px 0 44px; }
     .section-header{
       display:flex;
       align-items:flex-end;
@@ -322,7 +330,7 @@
     }
     .chip.active{
       background:rgba(0,208,132,.12);
-      border-color:rgba(25,242,166,.55);
+      border-color:rgba(24,230,255,.35);
       color:#dfffee;
     }
 
@@ -372,15 +380,15 @@
       font-weight:900;
       letter-spacing:.10em;
       text-transform:uppercase;
-      border:1px solid rgba(25,242,166,.25);
+      border:1px solid rgba(0,208,132,.25);
       background:rgba(0,208,132,.08);
       color:#caffea;
       width:max-content;
     }
     .badge.core{
-      border-color: rgba(70,120,255,.35);
-      background: rgba(70,120,255,.10);
-      color:#d6e4ff;
+      border-color: rgba(24,230,255,.25);
+      background: rgba(24,230,255,.10);
+      color:#dbf7ff;
     }
 
     .grid{
@@ -401,7 +409,7 @@
     }
     .card:hover{
       transform: translateY(-4px);
-      border-color: rgba(25,242,166,.35);
+      border-color: rgba(24,230,255,.28);
       box-shadow: 0 16px 50px rgba(0,0,0,.55);
     }
 
@@ -460,7 +468,7 @@
       font-weight:900;
       font-size:13px;
       white-space:nowrap;
-      background: rgba(0,208,132,.16);
+      background: rgba(0,208,132,.14);
       border:1px solid rgba(0,208,132,.35);
       color:#dfffee;
     }
@@ -495,7 +503,7 @@
     }
     .btn-mini:hover{ opacity:.95 }
 
-    /* TRUST / FAQ / CONTACT */
+    /* PANELS / FAQ */
     .two{
       display:grid;
       grid-template-columns: 1.3fr 1fr;
@@ -525,6 +533,7 @@
       font-size:13px;
     }
     .steps li{ margin:7px 0 }
+
     .highlight{
       margin-top:12px;
       border-radius:16px;
@@ -535,6 +544,7 @@
       font-size:12px;
     }
     .highlight strong{ color:#eafff6 }
+
     .faq details{
       border-top:1px solid rgba(28,42,58,.7);
       padding:10px 0;
@@ -593,7 +603,7 @@
         <img src="imagen/logo-nortepack.png" alt="Logo NORTEPACK">
         <div class="brand">
           <div class="name">NORTEPACK</div>
-          <div class="sub">Mochilas económicas · Entrega en Ourense + envíos 48 h</div>
+          <div class="sub">Mochilas económicas · Entrega a domicilio en Ourense + envíos 48 h</div>
         </div>
       </div>
 
@@ -614,20 +624,20 @@
         <div>
           <div class="pill"><span class="dot"></span> Stock limitado · Proyecto local en Ourense</div>
 
-          <h1>Mochilas con buen precio,<br>sin pagar “marca”.</h1>
+          <h1>Mochilas prácticas y con buen precio,<br>para el día a día.</h1>
           <p class="lead">
-            Modelos cómodos y resistentes para instituto, trabajo y día a día.
-            Compra directa por WhatsApp: rápido, claro y sin líos.
+            Modelos cómodos y resistentes para instituto, trabajo y uso diario.
+            Compra directa por WhatsApp: atención rápida, clara y cercana.
           </p>
 
           <div class="hero-cards">
             <div class="mini">
-              <div class="k">Entrega Ourense</div>
-              <div class="v">En mano <span>sin coste</span></div>
+              <div class="k">Entrega en Ourense</div>
+              <div class="v">A domicilio</div>
             </div>
             <div class="mini">
               <div class="k">Envíos</div>
-              <div class="v">48 h <span>aprox.</span></div>
+              <div class="v">48 h aprox.</div>
             </div>
             <div class="mini">
               <div class="k">Pago</div>
@@ -647,33 +657,35 @@
           </div>
           <div class="cap">
             <span><strong>Foto real</strong> de una de nuestras mochilas</span>
-            <span>Revisa antes de pagar ✅</span>
+            <span>Compra simple y segura ✅</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STRIP -->
+    <!-- STRIP ENVÍO -->
     <section id="envios" class="strip">
       <div class="container">
         <div class="strip-inner">
-          <span><span class="tick">✓</span><strong>Ourense ciudad:</strong> quedamos en punto acordado</span>
+          <span><span class="tick">✓</span><strong>Ourense ciudad:</strong> entrega a domicilio sin coste adicional*</span>
           <span><span class="tick">✓</span><strong>Envíos 48 h:</strong> resto de España (económico)</span>
-          <span><span class="tick">✓</span><strong>Trato directo:</strong> hablas con quien prepara el pedido</span>
+          <span><span class="tick">✓</span><strong>Atención directa:</strong> hablamos contigo en todo momento</span>
         </div>
+        <p style="margin:10px 4px 0; color:var(--muted); font-size:11px;">
+          *Entrega a domicilio sujeta a disponibilidad de horario y zona. Te lo confirmamos por WhatsApp.
+        </p>
       </div>
     </section>
 
-    <!-- CATALOGO -->
+    <!-- CATÁLOGO -->
     <section id="catalogo" class="section">
       <div class="container">
         <div class="section-header">
           <div>
             <h2 class="section-title">Catálogo NORTEPACK</h2>
-            <p class="section-sub">Dos líneas claras: <b>BÁSICAS</b> (lo esencial) y <b>NORTEPACK CORE</b> (más “pro”).</p>
+            <p class="section-sub">Elige tu modelo. Si tienes dudas, te recomendamos el color ideal según tu estilo y uso.</p>
           </div>
-
-          <div class="filters" aria-label="Filtros de catálogo">
+          <div class="filters">
             <div class="chip active" data-filter="all">Ver todo</div>
             <div class="chip" data-filter="basica">Básicas</div>
             <div class="chip" data-filter="core">Nortepack Core</div>
@@ -681,29 +693,22 @@
         </div>
 
         <div class="catalog">
-
-          <!-- BLOQUE BASICAS -->
+          <!-- BASICAS -->
           <div class="block" data-group="basica">
             <div class="block-head">
               <div class="block-title">
                 <div class="badge">LÍNEA BÁSICAS</div>
-                <h3>BÁSICAS · simples, cómodas y versátiles</h3>
-                <p>Para instituto, trabajo ligero y uso diario. Buen precio y cero complicaciones.</p>
+                <h3>BÁSICAS · sencillas, cómodas y versátiles</h3>
+                <p>Una opción excelente si buscas lo esencial al mejor precio.</p>
               </div>
             </div>
 
             <div class="grid">
-              <article class="card" data-type="basica" data-name="Básica Azul" data-price="14,99">
-                <div class="thumb">
-                  <span class="label">Básica</span>
-                  <img src="imagen/prod-01.jpg" alt="Mochila Básica Azul NortePack">
-                </div>
+              <article class="card" data-type="basica">
+                <div class="thumb"><span class="label">Básica</span><img src="imagen/prod-01.jpg" alt="Mochila Básica Azul NortePack"></div>
                 <div class="content">
-                  <div class="topline">
-                    <h4>Básica Azul</h4>
-                    <div class="price">14,99 €</div>
-                  </div>
-                  <p class="note">Sencilla, práctica y ligera.</p>
+                  <div class="topline"><h4>Básica Azul</h4><div class="price">14,99 €</div></div>
+                  <p class="note">Ligera y práctica para el día a día.</p>
                   <div class="buy">
                     <a class="btn-mini primary buy-wa" href="#" data-model="Básica Azul" data-price="14,99">Pedir esta</a>
                     <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
@@ -711,17 +716,11 @@
                 </div>
               </article>
 
-              <article class="card" data-type="basica" data-name="Básica Roja" data-price="14,99">
-                <div class="thumb">
-                  <span class="label">Básica</span>
-                  <img src="imagen/prod-02.jpg" alt="Mochila Básica Roja NortePack">
-                </div>
+              <article class="card" data-type="basica">
+                <div class="thumb"><span class="label">Básica</span><img src="imagen/prod-02.jpg" alt="Mochila Básica Roja NortePack"></div>
                 <div class="content">
-                  <div class="topline">
-                    <h4>Básica Roja</h4>
-                    <div class="price">14,99 €</div>
-                  </div>
-                  <p class="note">Ideal para el día a día.</p>
+                  <div class="topline"><h4>Básica Roja</h4><div class="price">14,99 €</div></div>
+                  <p class="note">Ideal para instituto o trabajo ligero.</p>
                   <div class="buy">
                     <a class="btn-mini primary buy-wa" href="#" data-model="Básica Roja" data-price="14,99">Pedir esta</a>
                     <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
@@ -729,17 +728,11 @@
                 </div>
               </article>
 
-              <article class="card" data-type="basica" data-name="Básica Negra" data-price="14,99">
-                <div class="thumb">
-                  <span class="label">Básica</span>
-                  <img src="imagen/prod-03.jpg" alt="Mochila Básica Negra NortePack">
-                </div>
+              <article class="card" data-type="basica">
+                <div class="thumb"><span class="label">Básica</span><img src="imagen/prod-03.jpg" alt="Mochila Básica Negra NortePack"></div>
                 <div class="content">
-                  <div class="topline">
-                    <h4>Básica Negra</h4>
-                    <div class="price">14,99 €</div>
-                  </div>
-                  <p class="note">Comodidad + bolsillos prácticos.</p>
+                  <div class="topline"><h4>Básica Negra</h4><div class="price">14,99 €</div></div>
+                  <p class="note">Combina con todo. Opción segura.</p>
                   <div class="buy">
                     <a class="btn-mini primary buy-wa" href="#" data-model="Básica Negra" data-price="14,99">Pedir esta</a>
                     <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
@@ -747,17 +740,11 @@
                 </div>
               </article>
 
-              <article class="card" data-type="basica" data-name="Básica Blanca" data-price="14,99">
-                <div class="thumb">
-                  <span class="label">Básica</span>
-                  <img src="imagen/prod-04.jpg" alt="Mochila Básica Blanca NortePack">
-                </div>
+              <article class="card" data-type="basica">
+                <div class="thumb"><span class="label">Básica</span><img src="imagen/prod-04.jpg" alt="Mochila Básica Blanca NortePack"></div>
                 <div class="content">
-                  <div class="topline">
-                    <h4>Básica Blanca</h4>
-                    <div class="price">14,99 €</div>
-                  </div>
-                  <p class="note">Opción económica y limpia.</p>
+                  <div class="topline"><h4>Básica Blanca</h4><div class="price">14,99 €</div></div>
+                  <p class="note">Estilo limpio y moderno.</p>
                   <div class="buy">
                     <a class="btn-mini primary buy-wa" href="#" data-model="Básica Blanca" data-price="14,99">Pedir esta</a>
                     <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
@@ -767,27 +754,21 @@
             </div>
           </div>
 
-          <!-- BLOQUE CORE -->
+          <!-- CORE -->
           <div class="block" data-group="core">
             <div class="block-head">
               <div class="block-title">
                 <div class="badge core">LÍNEA NORTEPACK CORE</div>
-                <h3>NORTEPACK CORE · más estructura y más presencia</h3>
-                <p>Para quien quiere una mochila más “pro”, con mejor sensación y acabados.</p>
+                <h3>NORTEPACK CORE · más estructura y presencia</h3>
+                <p>Recomendada si quieres una mochila con sensación más “premium”.</p>
               </div>
             </div>
 
             <div class="grid">
-              <article class="card" data-type="core" data-name="Nortepack Core Rojo" data-price="19,99">
-                <div class="thumb">
-                  <span class="label">CORE</span>
-                  <img src="imagen/prod-05.jpg" alt="Nortepack Core Rojo">
-                </div>
+              <article class="card" data-type="core">
+                <div class="thumb"><span class="label">CORE</span><img src="imagen/prod-05.jpg" alt="Nortepack Core Rojo"></div>
                 <div class="content">
-                  <div class="topline">
-                    <h4>Nortepack Core Rojo</h4>
-                    <div class="price">19,99 €</div>
-                  </div>
+                  <div class="topline"><h4>Nortepack Core Rojo</h4><div class="price">19,99 €</div></div>
                   <p class="note">Acabados mejorados y más capacidad.</p>
                   <div class="buy">
                     <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Rojo" data-price="19,99">Pedir esta</a>
@@ -796,17 +777,11 @@
                 </div>
               </article>
 
-              <article class="card" data-type="core" data-name="Nortepack Core Negro" data-price="19,99">
-                <div class="thumb">
-                  <span class="label">CORE</span>
-                  <img src="imagen/prod-06.jpg" alt="Nortepack Core Negro">
-                </div>
+              <article class="card" data-type="core">
+                <div class="thumb"><span class="label">CORE</span><img src="imagen/prod-06.jpg" alt="Nortepack Core Negro"></div>
                 <div class="content">
-                  <div class="topline">
-                    <h4>Nortepack Core Negro</h4>
-                    <div class="price">19,99 €</div>
-                  </div>
-                  <p class="note">Perfecta para combinar trabajo y ocio.</p>
+                  <div class="topline"><h4>Nortepack Core Negro</h4><div class="price">19,99 €</div></div>
+                  <p class="note">Elegante y muy combinable.</p>
                   <div class="buy">
                     <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Negro" data-price="19,99">Pedir esta</a>
                     <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
@@ -814,17 +789,11 @@
                 </div>
               </article>
 
-              <article class="card" data-type="core" data-name="Nortepack Core Beige" data-price="19,99">
-                <div class="thumb">
-                  <span class="label">CORE</span>
-                  <img src="imagen/prod-07.jpg" alt="Nortepack Core Beige">
-                </div>
+              <article class="card" data-type="core">
+                <div class="thumb"><span class="label">CORE</span><img src="imagen/prod-07.jpg" alt="Nortepack Core Beige"></div>
                 <div class="content">
-                  <div class="topline">
-                    <h4>Nortepack Core Beige</h4>
-                    <div class="price">19,99 €</div>
-                  </div>
-                  <p class="note">Más estructura, look más “pro”.</p>
+                  <div class="topline"><h4>Nortepack Core Beige</h4><div class="price">19,99 €</div></div>
+                  <p class="note">Estilo sobrio y actual.</p>
                   <div class="buy">
                     <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Beige" data-price="19,99">Pedir esta</a>
                     <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
@@ -832,17 +801,11 @@
                 </div>
               </article>
 
-              <article class="card" data-type="core" data-name="Nortepack Core Amarillo" data-price="19,99">
-                <div class="thumb">
-                  <span class="label">CORE</span>
-                  <img src="imagen/prod-08.jpg" alt="Nortepack Core Amarillo">
-                </div>
+              <article class="card" data-type="core">
+                <div class="thumb"><span class="label">CORE</span><img src="imagen/prod-08.jpg" alt="Nortepack Core Amarillo"></div>
                 <div class="content">
-                  <div class="topline">
-                    <h4>Nortepack Core Amarillo</h4>
-                    <div class="price">19,99 €</div>
-                  </div>
-                  <p class="note">Para quien quiere algo más que lo básico.</p>
+                  <div class="topline"><h4>Nortepack Core Amarillo</h4><div class="price">19,99 €</div></div>
+                  <p class="note">Para destacar con buen gusto.</p>
                   <div class="buy">
                     <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Amarillo" data-price="19,99">Pedir esta</a>
                     <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
@@ -856,34 +819,37 @@
       </div>
     </section>
 
-    <!-- COMO COMPRAR + DATOS -->
+    <!-- CÓMO COMPRAR -->
     <section id="como-comprar" class="section">
       <div class="container two">
         <div class="panel">
-          <h3>Cómo comprar tu mochila (rápido y sin líos)</h3>
-          <p>Escribe por WhatsApp indicando modelo + color. Te confirmamos stock y quedamos para entrega o envío.</p>
+          <h3>Cómo comprar tu mochila</h3>
+          <p>
+            Puedes hacer tu pedido de forma sencilla por WhatsApp. Te confirmamos stock, precio y el método de entrega
+            (a domicilio en Ourense o envío a tu ciudad).
+          </p>
           <ol class="steps">
-            <li>Elige una mochila del catálogo y pulsa <b>“Pedir esta”</b>.</li>
-            <li>Te abre WhatsApp con el mensaje ya preparado.</li>
-            <li>Confirmamos stock + punto/hora en Ourense o envío.</li>
-            <li>Revisas la mochila y pagas en efectivo o Bizum.</li>
+            <li>Selecciona el modelo que te guste y pulsa <b>“Pedir esta”</b>.</li>
+            <li>Se abrirá WhatsApp con un mensaje ya preparado para ti.</li>
+            <li>Te confirmamos disponibilidad y coordinamos la entrega.</li>
+            <li>En Ourense, realizamos <b>entrega a domicilio</b>. En otras zonas, gestionamos el envío.</li>
           </ol>
 
           <div class="highlight">
             <strong>WhatsApp:</strong> +34 697 62 59 64<br>
             <strong>Instagram:</strong> @nortepack.es<br>
-            <strong>Entrega Ourense:</strong> sin coste extra
+            <strong>Ourense:</strong> entrega a domicilio (según zona y horario)
           </div>
         </div>
 
         <div class="panel">
-          <h3>Datos rápidos</h3>
-          <p>Transparencia y confianza: compra directa y trato cercano.</p>
+          <h3>Información rápida</h3>
+          <p>Atención cercana, compra fácil y transparencia en todo el proceso.</p>
           <ul class="steps" style="margin:0; padding-left:18px;">
             <li><b>Ciudad base:</b> Ourense</li>
             <li><b>Pago:</b> Efectivo / Bizum</li>
-            <li><b>Entrega local:</b> punto acordado</li>
-            <li><b>Envío:</b> 48 h aprox. según destino</li>
+            <li><b>Entrega local:</b> A domicilio</li>
+            <li><b>Envíos:</b> 48 h aprox. según destino</li>
           </ul>
         </div>
       </div>
@@ -895,26 +861,26 @@
         <div class="section-header">
           <div>
             <h2 class="section-title">Preguntas frecuentes</h2>
-            <p class="section-sub">Lo típico que te van a preguntar: aquí queda respondido y queda más pro.</p>
+            <p class="section-sub">Respuestas claras y formales para que el cliente se sienta seguro.</p>
           </div>
         </div>
 
         <div class="panel faq">
           <details open>
-            <summary>¿Puedo revisar la mochila antes de pagar?</summary>
-            <p class="ans">Sí. En entrega en mano puedes revisarla en el momento. Queremos que te quedes tranquilo.</p>
+            <summary>¿Cómo se realiza la entrega en Ourense?</summary>
+            <p class="ans">La entrega se realiza <b>a domicilio</b>, coordinando previamente la zona y el horario por WhatsApp.</p>
           </details>
           <details>
-            <summary>¿Cuánto tarda el envío?</summary>
-            <p class="ans">Normalmente 48 h aprox. según destino (depende del transportista y la zona).</p>
+            <summary>¿Cuánto tarda el envío fuera de Ourense?</summary>
+            <p class="ans">Habitualmente, el envío tarda <b>aprox. 48 horas</b> (puede variar según destino).</p>
           </details>
           <details>
-            <summary>¿Cómo sé si hay stock del color que quiero?</summary>
-            <p class="ans">Escríbenos por WhatsApp y te confirmamos stock al momento. Si se agota, te lo decimos claro.</p>
+            <summary>¿Cómo confirmo si hay stock del color que quiero?</summary>
+            <p class="ans">Escríbenos por WhatsApp y te confirmamos disponibilidad al momento.</p>
           </details>
           <details>
-            <summary>¿Cuál recomiendas: Básica o Core?</summary>
-            <p class="ans">Básica si quieres lo esencial al mejor precio. Core si quieres más presencia/estructura y sensación más “pro”.</p>
+            <summary>¿Qué modelo me recomendáis?</summary>
+            <p class="ans">Si buscas el mejor precio, te recomendamos <b>Básicas</b>. Si quieres un acabado más premium, <b>Nortepack Core</b>.</p>
           </details>
         </div>
       </div>
@@ -929,24 +895,22 @@
   </footer>
 
   <script>
-    // Año automático
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // WhatsApp pre-rellenado por producto
     const phone = "34697625964";
-    const buyButtons = document.querySelectorAll(".buy-wa");
-    buyButtons.forEach(btn => {
+    document.querySelectorAll(".buy-wa").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const model = btn.getAttribute("data-model") || "Mochila NORTEPACK";
         const price = btn.getAttribute("data-price") || "";
-        const msg = `Hola! Quiero pedir la ${model} (${price}€). Soy de ___ (Ourense / otra ciudad). ¿Hay stock?`;
+        const msg = `Hola, me gustaría pedir la ${model} (${price}€). Soy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.`;
         const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
         window.open(url, "_blank", "noopener");
       });
     });
 
-    // Filtros (Ver todo / Básicas / Core)
+    // Filtros
     const chips = document.querySelectorAll(".chip");
     const cards = document.querySelectorAll(".card");
     const blocks = document.querySelectorAll(".block");
@@ -954,14 +918,12 @@
     function setActiveChip(active){
       chips.forEach(c => c.classList.toggle("active", c === active));
     }
-
     function applyFilter(type){
       if(type === "all"){
         blocks.forEach(b => b.style.display = "block");
         cards.forEach(c => c.style.display = "flex");
         return;
       }
-      // Mostrar solo el bloque correspondiente y sus cards
       blocks.forEach(b => {
         const group = b.getAttribute("data-group");
         b.style.display = (group === type) ? "block" : "none";
@@ -977,7 +939,6 @@
         const f = chip.getAttribute("data-filter");
         setActiveChip(chip);
         applyFilter(f);
-        // scroll suave al catálogo
         document.getElementById("catalogo").scrollIntoView({ behavior:"smooth", block:"start" });
       });
     });
