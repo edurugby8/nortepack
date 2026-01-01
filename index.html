@@ -3,513 +3,606 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NORTEPACK | Mochilas económicas</title>
-  <meta name="description" content="Mochilas económicas para escuela, trabajo y bici. Entrega especial en Ourense sin coste y envíos en 48h. 100% fiable y trato cercano.">
+  <title>NORTEPACK | Mochilas económicas con entrega en Ourense</title>
+  <meta name="description" content="Mochilas económicas y resistentes. Entrega especial en Ourense sin coste y envíos en 48h. Pago en mano o Bizum.">
   <link rel="icon" type="image/png" href="imagen/logo-nortepack.png">
+
   <style>
-    :root { 
-      --bg:#05070b; 
-      --bg-alt:#0b0f14;
-      --card:#10161d; 
-      --text:#e6f0ff; 
-      --accent:#00d084; 
-      --accent-soft:#133c2c;
-      --muted:#7b8a9a; 
-      --border:#1d2a36;
-      --logoH: clamp(60px, 7vw, 90px);
+    :root{
+      --bg:#05070b;
+      --bg2:#070b12;
+      --card:#0f1620;
+      --card2:#0c131c;
+      --text:#eaf1ff;
+      --muted:#8da0b5;
+      --border:#1c2a3a;
+      --accent:#00d084;
+      --accent2:#19f2a6;
+      --accentSoft: rgba(0,208,132,.12);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 24px;
+      --logoH: clamp(64px, 7vw, 92px);
     }
 
-    * { box-sizing:border-box }
-
-    html, body {
-      margin:0;
-      padding:0;
+    *{ box-sizing:border-box }
+    html,body{ margin:0; padding:0; }
+    body{
       background:
-        radial-gradient(circle at 0% 0%, #172435 0, transparent 55%),
-        radial-gradient(circle at 100% 0%, #122020 0, transparent 55%),
-        var(--bg);
+        radial-gradient(900px 500px at 10% -10%, rgba(25,242,166,.14), transparent 55%),
+        radial-gradient(700px 420px at 100% 0%, rgba(0,208,132,.12), transparent 55%),
+        radial-gradient(900px 600px at 50% 120%, rgba(70,120,255,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
       color:var(--text);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       -webkit-font-smoothing:antialiased;
+      line-height:1.35;
     }
+    a{ color:inherit; text-decoration:none }
+    img{ display:block; max-width:100% }
 
-    a { color:inherit; text-decoration:none }
-
-    .container {
-      max-width:1120px;
+    .container{
+      max-width:1140px;
       margin:0 auto;
       padding:0 18px;
     }
 
     /* HEADER */
-
-    .header {
-      position:sticky;
-      top:0;
-      z-index:10;
-      background:rgba(5,7,11,0.9);
-      backdrop-filter:saturate(1.5) blur(10px);
-      border-bottom:1px solid rgba(21,33,45,0.9);
+    .header{
+      position:sticky; top:0; z-index:30;
+      background:rgba(5,7,11,.72);
+      backdrop-filter: blur(12px) saturate(1.4);
+      border-bottom:1px solid rgba(28,42,58,.9);
     }
-
-    .header-inner {
+    .header-inner{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:10px 0;
       gap:14px;
+      padding:10px 0;
     }
-
-    .logo {
-      display:flex;
-      align-items:center;
-      gap:10px;
+    .logo{
+      display:flex; align-items:center; gap:12px;
     }
-
-    .logo img {
-      height:var(--logoH);
-      width:auto;
-      display:block;
+    .logo img{ height:var(--logoH); width:auto }
+    .brand{
+      display:flex; flex-direction:column; gap:2px;
     }
-
-    .tag {
-      font-weight:800;
-      letter-spacing:.22em;
-      font-size:clamp(13px,1.5vw,15px);
+    .brand .name{
+      font-weight:900;
+      letter-spacing:.18em;
       text-transform:uppercase;
+      font-size:clamp(13px,1.6vw,16px);
     }
-
-    .logo-sub {
-      font-size:11px;
+    .brand .sub{
+      font-size:12px;
       color:var(--muted);
-      margin-top:2px;
     }
 
-    .nav {
+    .nav{
       display:flex;
-      align-items:center;
       gap:10px;
+      align-items:center;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
-
-    .nav a {
+    .nav a{
       padding:9px 14px;
       border-radius:999px;
-      border:1px solid rgba(38,54,70,0.9);
-      font-size:13px;
+      border:1px solid rgba(38,56,78,.9);
       color:var(--muted);
+      font-size:13px;
+      background:rgba(10,16,24,.35);
     }
-
-    .nav a:hover {
-      border-color:var(--accent);
+    .nav a:hover{
+      border-color: rgba(25,242,166,.55);
       color:var(--text);
     }
-
-    .nav .nav-cta {
-      background:var(--accent);
+    .nav .cta{
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
       color:#002810;
-      font-weight:700;
       border-color:transparent;
+      font-weight:900;
+      box-shadow: 0 10px 30px rgba(0,208,132,.18);
     }
-
-    .nav .nav-cta:hover {
-      opacity:.9;
-    }
+    .nav .cta:hover{ opacity:.92 }
 
     /* HERO */
-
-    .hero {
-      padding:40px 0 24px;
+    .hero{
+      padding:34px 0 14px;
     }
-
-    .hero-inner {
+    .hero-inner{
       display:grid;
-      grid-template-columns:minmax(0, 1.25fr) minmax(0, 1fr);
-      gap:34px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, .95fr);
+      gap:26px;
       align-items:center;
     }
-
-    .eyebrow {
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:4px 10px;
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 11px;
       border-radius:999px;
-      background:rgba(8,15,20,.85);
-      border:1px solid rgba(53,83,86,.9);
+      border:1px solid rgba(25,242,166,.25);
+      background:rgba(0,208,132,.08);
+      color:#c8ffea;
       font-size:11px;
-      color:var(--muted);
-      text-transform:uppercase;
       letter-spacing:.12em;
+      text-transform:uppercase;
+      width:max-content;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow:0 0 0 4px rgba(0,208,132,.12);
     }
 
-    .eyebrow-dot {
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--accent);
+    .hero h1{
+      margin:12px 0 10px;
+      font-size:clamp(28px,4.3vw,44px);
+      line-height:1.05;
+      letter-spacing:-.02em;
     }
-
-    .hero h1 {
-      font-size:clamp(26px,4.4vw,40px);
-      margin:14px 0 8px;
-    }
-
-    .hero-lead {
-      max-width:520px;
+    .lead{
+      margin:0 0 12px;
+      color:var(--muted);
       font-size:clamp(14px,2.1vw,17px);
-      color:var(--muted);
-      margin-bottom:10px;
+      max-width:56ch;
     }
 
-    .hero-tagline {
-      font-size:13px;
-      font-style:italic;
-      color:#c7f3dd;
-      margin-bottom:18px;
-    }
-
-    .hero-price-tag {
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background:var(--accent-soft);
-      border-radius:14px;
-      padding:10px 14px;
-      margin-bottom:6px;
-    }
-
-    .hero-price-main {
-      font-weight:800;
-      font-size:18px;
-      color:#e9fff4;
-    }
-
-    .hero-price-sub {
-      font-size:12px;
-      color:#b1c9be;
-    }
-
-    .hero-note {
-      font-size:12px;
-      color:var(--muted);
-      margin-bottom:18px;
-    }
-
-    .hero-actions {
+    .hero-cards{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
+      margin:14px 0 18px;
+    }
+    .mini{
+      border:1px solid rgba(28,42,58,.9);
+      background:rgba(10,16,24,.45);
+      border-radius:14px;
+      padding:10px 12px;
+      min-width: 190px;
+      flex:1;
+    }
+    .mini .k{
+      font-size:11px; color:var(--muted); margin-bottom:4px;
+      letter-spacing:.06em; text-transform:uppercase;
+    }
+    .mini .v{
+      font-weight:900;
+      font-size:15px;
+      color:#eafff6;
+    }
+    .mini .v span{
+      color:#bfffe6;
+      font-weight:800;
+      font-size:12px;
+      margin-left:6px;
+      opacity:.95;
     }
 
-    .btn {
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:8px;
+    }
+    .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:6px;
-      padding:10px 16px;
+      gap:8px;
+      padding:11px 16px;
       border-radius:999px;
       border:1px solid transparent;
-      font-size:13px;
       cursor:pointer;
-      font-weight:600;
+      font-weight:900;
+      font-size:13px;
+      letter-spacing:.02em;
       background:none;
       color:inherit;
     }
-
-    .btn-primary {
-      background:var(--accent);
+    .btn-primary{
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
       color:#002810;
-      border-color:transparent;
+      box-shadow: 0 12px 38px rgba(0,208,132,.20);
     }
-
-    .btn-primary:hover { opacity:.9; }
-
-    .btn-ghost {
-      border-color:#273646;
-      color:var(--muted);
-      background:rgba(7,11,17,.7);
-    }
-
-    .btn-ghost:hover {
-      border-color:var(--accent);
+    .btn-primary:hover{ opacity:.93 }
+    .btn-ghost{
+      border-color: rgba(38,56,78,.95);
+      background:rgba(7,11,17,.55);
       color:var(--text);
     }
-
-    .hero-media {
-      border-radius:20px;
-      background:radial-gradient(circle at 10% 0%, #1e2a35 0, transparent 55%), #05070b;
-      padding:18px;
-      border:1px solid rgba(31,46,63,.9);
-      box-shadow:0 24px 60px rgba(0,0,0,.55);
+    .btn-ghost:hover{
+      border-color: rgba(25,242,166,.55);
     }
 
-    .hero-media img {
-      width:100%;
-      height:auto;
-      border-radius:14px;
-      display:block;
-      object-fit:cover;
+    .hero-media{
+      border-radius: var(--radius2);
+      background:
+        radial-gradient(500px 280px at 20% 0%, rgba(25,242,166,.14), transparent 60%),
+        radial-gradient(400px 220px at 90% 20%, rgba(70,120,255,.12), transparent 60%),
+        rgba(10,16,24,.55);
+      border:1px solid rgba(28,42,58,.9);
+      padding:14px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-media .frame{
+      border-radius: 16px;
+      overflow:hidden;
+      border:1px solid rgba(28,42,58,.85);
       background:#05070b;
     }
-
-    .hero-media-caption {
+    .hero-media img{
+      width:100%;
+      height:auto;
+      aspect-ratio: 4 / 3;
+      object-fit:cover;
+    }
+    .hero-media .cap{
       margin-top:10px;
       font-size:11px;
       color:var(--muted);
-      text-align:right;
-    }
-
-    /* ENVÍO / BENEFICIOS */
-
-    .strip {
-      padding:14px 0 8px;
-    }
-
-    .strip-inner {
-      border-radius:14px;
-      background:linear-gradient(90deg,#10161d,#0b1218);
-      border:1px solid rgba(36,52,70,.9);
-      padding:10px 14px;
       display:flex;
+      justify-content:space-between;
+      gap:10px;
       flex-wrap:wrap;
+    }
+    .cap strong{ color:#dfffee }
+
+    /* STRIP */
+    .strip{
+      padding:14px 0 6px;
+    }
+    .strip-inner{
+      border:1px solid rgba(28,42,58,.9);
+      background:linear-gradient(90deg, rgba(15,22,32,.65), rgba(12,18,28,.65));
+      border-radius: 16px;
+      padding:12px 14px;
+      display:flex;
       gap:10px;
       justify-content:space-between;
+      flex-wrap:wrap;
+      color:var(--muted);
       font-size:12px;
-      color:var(--muted);
+    }
+    .strip-inner strong{ color:#eafff6 }
+    .strip-inner span{
+      display:flex; gap:8px; align-items:center;
+    }
+    .tick{
+      width:18px; height:18px;
+      border-radius:999px;
+      background:rgba(0,208,132,.16);
+      border:1px solid rgba(0,208,132,.35);
+      display:grid; place-items:center;
+      color:#baffea;
+      font-weight:900;
+      flex:0 0 auto;
     }
 
-    .strip-inner strong {
-      color:#e7fff4;
+    /* SECTION */
+    .section{
+      padding:34px 0 44px;
     }
-
-    /* SECTIONS */
-
-    .section {
-      padding:34px 0 42px;
+    .section-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
     }
-
-    .section-header {
-      text-align:center;
-      margin-bottom:20px;
-    }
-
-    .section-title {
-      font-size:clamp(22px,3vw,30px);
-      margin:0 0 4px;
-    }
-
-    .section-sub {
-      font-size:13px;
-      color:var(--muted);
+    .section-title{
       margin:0;
+      font-size:clamp(22px,3vw,32px);
+      letter-spacing:-.02em;
+    }
+    .section-sub{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      max-width:60ch;
+    }
+    .filters{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .chip{
+      border:1px solid rgba(38,56,78,.95);
+      background:rgba(7,11,17,.45);
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+      font-weight:800;
+    }
+    .chip.active{
+      background:rgba(0,208,132,.12);
+      border-color:rgba(25,242,166,.55);
+      color:#dfffee;
     }
 
-    /* CATÁLOGO */
-
-    .grid {
+    /* CATALOG */
+    .catalog{
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
-      gap:16px;
+      grid-template-columns: 1fr;
+      gap:18px;
+    }
+    .block{
+      border:1px solid rgba(28,42,58,.9);
+      background:rgba(10,16,24,.45);
+      border-radius: var(--radius2);
+      padding:16px;
+      overflow:hidden;
+    }
+    .block-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .block-title{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .block-title h3{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.01em;
+    }
+    .block-title p{
+      margin:0;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      border:1px solid rgba(25,242,166,.25);
+      background:rgba(0,208,132,.08);
+      color:#caffea;
+      width:max-content;
+    }
+    .badge.core{
+      border-color: rgba(70,120,255,.35);
+      background: rgba(70,120,255,.10);
+      color:#d6e4ff;
     }
 
-    .card {
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:16px;
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:14px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(18,26,36,.75), rgba(10,16,24,.75));
+      border:1px solid rgba(28,42,58,.9);
+      border-radius: 18px;
       overflow:hidden;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
       display:flex;
       flex-direction:column;
       min-height:100%;
     }
-
-    .card:hover {
-      transform:translateY(-4px);
-      box-shadow:0 14px 35px rgba(0,0,0,.5);
-      border-color:var(--accent-soft);
+    .card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(25,242,166,.35);
+      box-shadow: 0 16px 50px rgba(0,0,0,.55);
     }
 
-    .thumb {
+    .thumb{
+      position:relative;
       height:210px;
-      background:linear-gradient(180deg,#121a22,#0e151c);
-      display:grid;
-      place-items:center;
+      background: #05070b;
+      border-bottom:1px solid rgba(28,42,58,.8);
+      overflow:hidden;
     }
-
-    .thumb img {
+    .thumb img{
       width:100%;
       height:100%;
       object-fit:cover;
-      display:block;
+      transform: scale(1.02);
+      transition: transform .25s ease;
     }
+    .card:hover .thumb img{ transform: scale(1.06); }
 
-    .meta {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:12px 14px 10px;
-      gap:6px;
-    }
-
-    .meta h3 {
-      font-size:14px;
-      margin:0;
-    }
-
-    .price {
-      background:var(--accent);
-      color:#032e1a;
-      font-weight:900;
+    .label{
+      position:absolute;
+      top:12px; left:12px;
       padding:6px 10px;
-      border-radius:10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+      color:#eaf1ff;
+    }
+
+    .content{
+      padding:12px 14px 14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      flex:1;
+    }
+    .topline{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .content h4{
+      margin:0;
+      font-size:14px;
+      letter-spacing:-.01em;
+    }
+    .price{
+      padding:6px 10px;
+      border-radius:12px;
+      font-weight:900;
       font-size:13px;
       white-space:nowrap;
+      background: rgba(0,208,132,.16);
+      border:1px solid rgba(0,208,132,.35);
+      color:#dfffee;
     }
-
-    .card-note {
-      padding:0 14px 12px;
+    .note{
+      margin:0;
+      color:var(--muted);
       font-size:12px;
-      color:var(--muted);
     }
-
-    /* CONTACTO */
-
-    .contact-grid {
-      display:grid;
-      grid-template-columns:1.4fr 1fr;
-      gap:24px;
-      align-items:flex-start;
+    .buy{
+      margin-top:auto;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
     }
-
-    .contact-box {
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:var(--bg-alt);
-      padding:16px 18px;
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    .contact-box strong {
-      color:var(--text);
-    }
-
-    .contact-list {
-      list-style:none;
-      padding:0;
-      margin:10px 0 0;
-    }
-
-    .contact-list li {
-      margin-bottom:6px;
-    }
-
-    .contact-highlight {
-      margin-top:12px;
+    .btn-mini{
+      flex:1;
       padding:10px 12px;
-      border-radius:12px;
-      background:rgba(0,208,132,0.08);
-      border:1px solid rgba(0,208,132,0.35);
+      border-radius:999px;
+      border:1px solid rgba(38,56,78,.95);
+      background:rgba(7,11,17,.45);
+      color:var(--text);
       font-size:12px;
-      color:#d6ffed;
+      font-weight:900;
+      text-align:center;
+      cursor:pointer;
+      user-select:none;
     }
+    .btn-mini.primary{
+      border-color:transparent;
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color:#002810;
+    }
+    .btn-mini:hover{ opacity:.95 }
 
-    .mini-tag {
-      font-size:11px;
+    /* TRUST / FAQ / CONTACT */
+    .two{
+      display:grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap:18px;
+      align-items:start;
+    }
+    .panel{
+      border:1px solid rgba(28,42,58,.9);
+      background:rgba(10,16,24,.45);
+      border-radius: var(--radius2);
+      padding:16px 18px;
+    }
+    .panel h3{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    .panel p{
+      margin:0 0 10px;
       color:var(--muted);
-      margin-top:4px;
+      font-size:13px;
+    }
+    .steps{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .steps li{ margin:7px 0 }
+    .highlight{
+      margin-top:12px;
+      border-radius:16px;
+      padding:12px 12px;
+      border:1px solid rgba(0,208,132,.35);
+      background:rgba(0,208,132,.10);
+      color:#dfffee;
+      font-size:12px;
+    }
+    .highlight strong{ color:#eafff6 }
+    .faq details{
+      border-top:1px solid rgba(28,42,58,.7);
+      padding:10px 0;
+    }
+    .faq details:first-child{ border-top:none; padding-top:0 }
+    .faq summary{
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+      color:#eaf1ff;
+    }
+    .faq .ans{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
     }
 
     /* FOOTER */
-
-    .footer {
-      border-top:1px solid var(--border);
-      padding:18px 0 24px;
+    .footer{
+      border-top:1px solid rgba(28,42,58,.9);
+      padding:18px 0 26px;
       color:#9cb0c6;
       font-size:11px;
     }
-
-    .footer-inner {
+    .footer-inner{
       display:flex;
       flex-wrap:wrap;
       justify-content:space-between;
-      gap:8px;
+      gap:10px;
       align-items:center;
     }
-
-    .footer a {
-      color:var(--accent);
-    }
+    .footer a{ color: var(--accent2); font-weight:800 }
 
     /* RESPONSIVE */
-
-    @media (max-width: 900px) {
-      .hero-inner {
-        grid-template-columns:1fr;
-      }
-
-      .hero {
-        padding-top:32px;
-      }
-
-      .hero-media {
-        order:-1;
-      }
-
-      .header-inner {
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .nav {
-        justify-content:flex-start;
-      }
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .two{ grid-template-columns: 1fr; }
+      .header-inner{ flex-direction:column; align-items:flex-start; }
+      .nav{ justify-content:flex-start; }
     }
-
-    @media (max-width: 640px) {
-      .header-inner {
-        align-items:flex-start;
-      }
-
-      .hero-actions {
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .strip-inner {
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .contact-grid {
-        grid-template-columns:1fr;
-      }
+    @media (max-width: 560px){
+      .grid{ grid-template-columns: 1fr; }
+      .mini{ min-width: 100%; }
+      .actions{ flex-direction:column; align-items:stretch; }
+      .btn{ width:100%; }
+      .strip-inner{ flex-direction:column; align-items:flex-start; }
     }
   </style>
 </head>
-<body>
 
+<body>
   <header class="header">
     <div class="container header-inner">
-      <div>
-        <div class="logo">
-          <!-- Asegúrate de que exista este archivo -->
-          <img src="imagen/logo-nortepack.png" alt="Logo NORTEPACK">
-          <div>
-            <div class="tag">NORTEPACK</div>
-            <div class="logo-sub">Mochilas económicas para el día a día</div>
-          </div>
+      <div class="logo">
+        <img src="imagen/logo-nortepack.png" alt="Logo NORTEPACK">
+        <div class="brand">
+          <div class="name">NORTEPACK</div>
+          <div class="sub">Mochilas económicas · Entrega en Ourense + envíos 48 h</div>
         </div>
       </div>
 
       <nav class="nav">
         <a href="#catalogo">Catálogo</a>
         <a href="#envios">Envíos</a>
-        <a href="#contacto">Contacto</a>
-        <!-- WhatsApp con tu número -->
-        <a class="nav-cta" href="https://wa.me/34697625964" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        <a href="#como-comprar">Cómo comprar</a>
+        <a href="#faq">FAQ</a>
+        <a class="cta" href="https://wa.me/34697625964" target="_blank" rel="noopener">Pedir por WhatsApp</a>
       </nav>
     </div>
   </header>
@@ -519,192 +612,310 @@
     <section class="hero">
       <div class="container hero-inner">
         <div>
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Stock limitado · Proyecto local en Ourense
-          </div>
+          <div class="pill"><span class="dot"></span> Stock limitado · Proyecto local en Ourense</div>
 
-          <h1>Mochilas económicas para escuela, trabajo y bici.</h1>
-          <p class="hero-lead">
-            Modelos sencillos, cómodos y resistentes. Sin pagar marca, sin complicaciones.
-          </p>
-          <p class="hero-tagline">«No competimos por lujo, competimos por valor».</p>
-
-          <div class="hero-price-tag">
-            <span class="hero-price-main">Desde 15&nbsp;€</span>
-            <span class="hero-price-sub">Entrega especial en Ourense y envíos en 48&nbsp;h.</span>
-          </div>
-          <p class="hero-note">
-            Pago en efectivo o Bizum. Revisión de la mochila en el momento de la entrega.
+          <h1>Mochilas con buen precio,<br>sin pagar “marca”.</h1>
+          <p class="lead">
+            Modelos cómodos y resistentes para instituto, trabajo y día a día.
+            Compra directa por WhatsApp: rápido, claro y sin líos.
           </p>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="https://wa.me/34697625964" target="_blank" rel="noopener">
-              Pedir por WhatsApp
-            </a>
-            <a class="btn btn-ghost" href="#catalogo">
-              Ver todos los colores
-            </a>
+          <div class="hero-cards">
+            <div class="mini">
+              <div class="k">Entrega Ourense</div>
+              <div class="v">En mano <span>sin coste</span></div>
+            </div>
+            <div class="mini">
+              <div class="k">Envíos</div>
+              <div class="v">48 h <span>aprox.</span></div>
+            </div>
+            <div class="mini">
+              <div class="k">Pago</div>
+              <div class="v">Efectivo / Bizum</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+            <a class="btn btn-ghost" href="https://wa.me/34697625964" target="_blank" rel="noopener">Hablar por WhatsApp</a>
           </div>
         </div>
 
         <div class="hero-media">
-          <!-- Pon aquí tu foto “estrella” -->
-          <img src="imagen/prod-01.jpg" alt="Mochila NortePack negra">
-          <div class="hero-media-caption">
-            Foto real de una de nuestras mochilas básicas.
+          <div class="frame">
+            <img src="imagen/prod-01.jpg" alt="Mochila NortePack - foto real">
+          </div>
+          <div class="cap">
+            <span><strong>Foto real</strong> de una de nuestras mochilas</span>
+            <span>Revisa antes de pagar ✅</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TIRA ENVÍO / BENEFICIOS -->
+    <!-- STRIP -->
     <section id="envios" class="strip">
       <div class="container">
         <div class="strip-inner">
-          <span><strong>Entrega en Ourense ciudad:</strong> quedamos en un punto y te la llevamos sin coste extra.</span>
-          <span><strong>Envíos 48 h:</strong> resto de España con envío económico.</span>
-          <span><strong>Trato cercano:</strong> hablas directamente con la persona que prepara tu pedido.</span>
+          <span><span class="tick">✓</span><strong>Ourense ciudad:</strong> quedamos en punto acordado</span>
+          <span><span class="tick">✓</span><strong>Envíos 48 h:</strong> resto de España (económico)</span>
+          <span><span class="tick">✓</span><strong>Trato directo:</strong> hablas con quien prepara el pedido</span>
         </div>
       </div>
     </section>
 
-    <!-- CATÁLOGO -->
+    <!-- CATALOGO -->
     <section id="catalogo" class="section">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Catálogo de mochilas</h2>
-          <p class="section-sub">
-            Colores básicos y versiones premium. Elige tu favorita y haz tu pedido por WhatsApp.
-          </p>
+          <div>
+            <h2 class="section-title">Catálogo NORTEPACK</h2>
+            <p class="section-sub">Dos líneas claras: <b>BÁSICAS</b> (lo esencial) y <b>NORTEPACK CORE</b> (más “pro”).</p>
+          </div>
+
+          <div class="filters" aria-label="Filtros de catálogo">
+            <div class="chip active" data-filter="all">Ver todo</div>
+            <div class="chip" data-filter="basica">Básicas</div>
+            <div class="chip" data-filter="core">Nortepack Core</div>
+          </div>
         </div>
 
-        <div class="grid">
-          <!-- 4 básicas 15€ -->
-          <article class="card">
-            <div class="thumb">
-              <img src="imagen/prod-01.jpg" alt="Mochila básica A NortePack">
-            </div>
-            <div class="meta">
-              <h3>Básica Azul</h3>
-              <span class="price">14,99 €</span>
-            </div>
-            <p class="card-note">Mochila sencilla y versátil para uso diario.</p>
-          </article>
+        <div class="catalog">
 
-          <article class="card">
-            <div class="thumb">
-              <img src="imagen/prod-02.jpg" alt="Mochila básica B NortePack">
+          <!-- BLOQUE BASICAS -->
+          <div class="block" data-group="basica">
+            <div class="block-head">
+              <div class="block-title">
+                <div class="badge">LÍNEA BÁSICAS</div>
+                <h3>BÁSICAS · simples, cómodas y versátiles</h3>
+                <p>Para instituto, trabajo ligero y uso diario. Buen precio y cero complicaciones.</p>
+              </div>
             </div>
-            <div class="meta">
-              <h3>Básica Roja</h3>
-              <span class="price">14,99 €</span>
-            </div>
-            <p class="card-note">Ideal para instituto, trabajo ligero o paseo.</p>
-          </article>
 
-          <article class="card">
-            <div class="thumb">
-              <img src="imagen/prod-03.jpg" alt="Mochila básica C NortePack">
-            </div>
-            <div class="meta">
-              <h3>Básica Negra</h3>
-              <span class="price">14,99 €</span>
-            </div>
-            <p class="card-note">Diseño cómodo, bolsillos prácticos y peso ligero.</p>
-          </article>
+            <div class="grid">
+              <article class="card" data-type="basica" data-name="Básica Azul" data-price="14,99">
+                <div class="thumb">
+                  <span class="label">Básica</span>
+                  <img src="imagen/prod-01.jpg" alt="Mochila Básica Azul NortePack">
+                </div>
+                <div class="content">
+                  <div class="topline">
+                    <h4>Básica Azul</h4>
+                    <div class="price">14,99 €</div>
+                  </div>
+                  <p class="note">Sencilla, práctica y ligera.</p>
+                  <div class="buy">
+                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Azul" data-price="14,99">Pedir esta</a>
+                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
+                  </div>
+                </div>
+              </article>
 
-          <article class="card">
-            <div class="thumb">
-              <img src="imagen/prod-04.jpg" alt="Mochila básica D NortePack">
-            </div>
-            <div class="meta">
-              <h3>Básica Blanca</h3>
-              <span class="price">14,99 €</span>
-            </div>
-            <p class="card-note">Opción económica para el día a día.</p>
-          </article>
+              <article class="card" data-type="basica" data-name="Básica Roja" data-price="14,99">
+                <div class="thumb">
+                  <span class="label">Básica</span>
+                  <img src="imagen/prod-02.jpg" alt="Mochila Básica Roja NortePack">
+                </div>
+                <div class="content">
+                  <div class="topline">
+                    <h4>Básica Roja</h4>
+                    <div class="price">14,99 €</div>
+                  </div>
+                  <p class="note">Ideal para el día a día.</p>
+                  <div class="buy">
+                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Roja" data-price="14,99">Pedir esta</a>
+                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
+                  </div>
+                </div>
+              </article>
 
-          <!-- 4 premium 20€ -->
-          <article class="card">
-            <div class="thumb">
-              <img src="imagen/prod-05.jpg" alt="Mochila premium A NortePack">
-            </div>
-            <div class="meta">
-              <h3>Nortepack Core Rojo</h3>
-              <span class="price">14,99 €</span>
-            </div>
-            <p class="card-note">Acabados mejorados y más capacidad.</p>
-          </article>
+              <article class="card" data-type="basica" data-name="Básica Negra" data-price="14,99">
+                <div class="thumb">
+                  <span class="label">Básica</span>
+                  <img src="imagen/prod-03.jpg" alt="Mochila Básica Negra NortePack">
+                </div>
+                <div class="content">
+                  <div class="topline">
+                    <h4>Básica Negra</h4>
+                    <div class="price">14,99 €</div>
+                  </div>
+                  <p class="note">Comodidad + bolsillos prácticos.</p>
+                  <div class="buy">
+                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Negra" data-price="14,99">Pedir esta</a>
+                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
+                  </div>
+                </div>
+              </article>
 
-          <article class="card">
-            <div class="thumb">
-              <img src="imagen/prod-06.jpg" alt="Mochila premium B NortePack">
+              <article class="card" data-type="basica" data-name="Básica Blanca" data-price="14,99">
+                <div class="thumb">
+                  <span class="label">Básica</span>
+                  <img src="imagen/prod-04.jpg" alt="Mochila Básica Blanca NortePack">
+                </div>
+                <div class="content">
+                  <div class="topline">
+                    <h4>Básica Blanca</h4>
+                    <div class="price">14,99 €</div>
+                  </div>
+                  <p class="note">Opción económica y limpia.</p>
+                  <div class="buy">
+                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Blanca" data-price="14,99">Pedir esta</a>
+                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
+                  </div>
+                </div>
+              </article>
             </div>
-            <div class="meta">
-              <h3>Nortepack Core Negro</h3>
-              <span class="price">14,99 €</span>
-            </div>
-            <p class="card-note">Perfecta para combinar trabajo y ocio.</p>
-          </article>
+          </div>
 
-          <article class="card">
-            <div class="thumb">
-              <img src="imagen/prod-07.jpg" alt="Mochila premium C NortePack">
+          <!-- BLOQUE CORE -->
+          <div class="block" data-group="core">
+            <div class="block-head">
+              <div class="block-title">
+                <div class="badge core">LÍNEA NORTEPACK CORE</div>
+                <h3>NORTEPACK CORE · más estructura y más presencia</h3>
+                <p>Para quien quiere una mochila más “pro”, con mejor sensación y acabados.</p>
+              </div>
             </div>
-            <div class="meta">
-              <h3>Nortepack Core Beige </h3>
-              <span class="price">14,99 €</span>
-            </div>
-            <p class="card-note">Más estructura y sensación de mochila “pro”.</p>
-          </article>
 
-          <article class="card">
-            <div class="thumb">
-              <img src="imagen/prod-08.jpg" alt="Mochila premium D NortePack">
+            <div class="grid">
+              <article class="card" data-type="core" data-name="Nortepack Core Rojo" data-price="19,99">
+                <div class="thumb">
+                  <span class="label">CORE</span>
+                  <img src="imagen/prod-05.jpg" alt="Nortepack Core Rojo">
+                </div>
+                <div class="content">
+                  <div class="topline">
+                    <h4>Nortepack Core Rojo</h4>
+                    <div class="price">19,99 €</div>
+                  </div>
+                  <p class="note">Acabados mejorados y más capacidad.</p>
+                  <div class="buy">
+                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Rojo" data-price="19,99">Pedir esta</a>
+                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card" data-type="core" data-name="Nortepack Core Negro" data-price="19,99">
+                <div class="thumb">
+                  <span class="label">CORE</span>
+                  <img src="imagen/prod-06.jpg" alt="Nortepack Core Negro">
+                </div>
+                <div class="content">
+                  <div class="topline">
+                    <h4>Nortepack Core Negro</h4>
+                    <div class="price">19,99 €</div>
+                  </div>
+                  <p class="note">Perfecta para combinar trabajo y ocio.</p>
+                  <div class="buy">
+                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Negro" data-price="19,99">Pedir esta</a>
+                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card" data-type="core" data-name="Nortepack Core Beige" data-price="19,99">
+                <div class="thumb">
+                  <span class="label">CORE</span>
+                  <img src="imagen/prod-07.jpg" alt="Nortepack Core Beige">
+                </div>
+                <div class="content">
+                  <div class="topline">
+                    <h4>Nortepack Core Beige</h4>
+                    <div class="price">19,99 €</div>
+                  </div>
+                  <p class="note">Más estructura, look más “pro”.</p>
+                  <div class="buy">
+                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Beige" data-price="19,99">Pedir esta</a>
+                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card" data-type="core" data-name="Nortepack Core Amarillo" data-price="19,99">
+                <div class="thumb">
+                  <span class="label">CORE</span>
+                  <img src="imagen/prod-08.jpg" alt="Nortepack Core Amarillo">
+                </div>
+                <div class="content">
+                  <div class="topline">
+                    <h4>Nortepack Core Amarillo</h4>
+                    <div class="price">19,99 €</div>
+                  </div>
+                  <p class="note">Para quien quiere algo más que lo básico.</p>
+                  <div class="buy">
+                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Amarillo" data-price="19,99">Pedir esta</a>
+                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
+                  </div>
+                </div>
+              </article>
             </div>
-            <div class="meta">
-              <h3>Nortepack Core Amarrillo</h3>
-              <span class="price">14,99 €</span>
-            </div>
-            <p class="card-note">Para quien quiere algo más que lo básico.</p>
-          </article>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- CONTACTO / CÓMO COMPRAR -->
-    <section id="contacto" class="section">
-      <div class="container contact-grid">
-        <div class="contact-box">
-          <h3>Cómo comprar tu mochila NortePack</h3>
-          <p>
-            Hacer tu pedido es muy sencillo. Solo tienes que escribirnos por WhatsApp o Instagram
-            y te confirmamos stock, color y punto de entrega.
-          </p>
-          <ol class="contact-list">
-            <li>1. Elige el modelo y anota el nombre (Básica A, Premium B, etc.).</li>
-            <li>2. Escríbenos por WhatsApp indicando color, modelo y zona de Ourense.</li>
-            <li>3. Te damos hora y punto de entrega, o gestionamos envío a tu ciudad.</li>
-            <li>4. Revisas la mochila en persona y haces el pago en efectivo o Bizum.</li>
+    <!-- COMO COMPRAR + DATOS -->
+    <section id="como-comprar" class="section">
+      <div class="container two">
+        <div class="panel">
+          <h3>Cómo comprar tu mochila (rápido y sin líos)</h3>
+          <p>Escribe por WhatsApp indicando modelo + color. Te confirmamos stock y quedamos para entrega o envío.</p>
+          <ol class="steps">
+            <li>Elige una mochila del catálogo y pulsa <b>“Pedir esta”</b>.</li>
+            <li>Te abre WhatsApp con el mensaje ya preparado.</li>
+            <li>Confirmamos stock + punto/hora en Ourense o envío.</li>
+            <li>Revisas la mochila y pagas en efectivo o Bizum.</li>
           </ol>
-          <div class="contact-highlight">
+
+          <div class="highlight">
             <strong>WhatsApp:</strong> +34 697 62 59 64<br>
-            <strong>Instagram:</strong> @nortepack.es
-          </div>
-          <div class="mini-tag">
-            Proyecto gestionado por un joven emprendedor de Ourense. Gracias.
+            <strong>Instagram:</strong> @nortepack.es<br>
+            <strong>Entrega Ourense:</strong> sin coste extra
           </div>
         </div>
 
-        <div class="contact-box">
+        <div class="panel">
           <h3>Datos rápidos</h3>
-          <ul class="contact-list">
-            <li><strong>Ciudad base:</strong> Ourense</li>
-            <li><strong>Rango de precios:</strong> 15–20 € por mochila</li>
-            <li><strong>Entrega local:</strong> quedamos en punto acordado</li>
-            <li><strong>Envío:</strong> 48 h aprox. según destino</li>
+          <p>Transparencia y confianza: compra directa y trato cercano.</p>
+          <ul class="steps" style="margin:0; padding-left:18px;">
+            <li><b>Ciudad base:</b> Ourense</li>
+            <li><b>Pago:</b> Efectivo / Bizum</li>
+            <li><b>Entrega local:</b> punto acordado</li>
+            <li><b>Envío:</b> 48 h aprox. según destino</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Preguntas frecuentes</h2>
+            <p class="section-sub">Lo típico que te van a preguntar: aquí queda respondido y queda más pro.</p>
+          </div>
+        </div>
+
+        <div class="panel faq">
+          <details open>
+            <summary>¿Puedo revisar la mochila antes de pagar?</summary>
+            <p class="ans">Sí. En entrega en mano puedes revisarla en el momento. Queremos que te quedes tranquilo.</p>
+          </details>
+          <details>
+            <summary>¿Cuánto tarda el envío?</summary>
+            <p class="ans">Normalmente 48 h aprox. según destino (depende del transportista y la zona).</p>
+          </details>
+          <details>
+            <summary>¿Cómo sé si hay stock del color que quiero?</summary>
+            <p class="ans">Escríbenos por WhatsApp y te confirmamos stock al momento. Si se agota, te lo decimos claro.</p>
+          </details>
+          <details>
+            <summary>¿Cuál recomiendas: Básica o Core?</summary>
+            <p class="ans">Básica si quieres lo esencial al mejor precio. Core si quieres más presencia/estructura y sensación más “pro”.</p>
+          </details>
         </div>
       </div>
     </section>
@@ -713,14 +924,63 @@
   <footer class="footer">
     <div class="container footer-inner">
       <span>© <span id="year"></span> NORTEPACK · Todos los derechos reservados.</span>
-      <span>Web: nortepack.es · Instagram: 
-        <a href="https://www.instagram.com/nortepack.es" target="_blank" rel="noopener">@nortepack.es</a>
-      </span>
+      <span>Instagram: <a href="https://www.instagram.com/nortepack.es" target="_blank" rel="noopener">@nortepack.es</a></span>
     </div>
   </footer>
 
   <script>
+    // Año automático
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // WhatsApp pre-rellenado por producto
+    const phone = "34697625964";
+    const buyButtons = document.querySelectorAll(".buy-wa");
+    buyButtons.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const model = btn.getAttribute("data-model") || "Mochila NORTEPACK";
+        const price = btn.getAttribute("data-price") || "";
+        const msg = `Hola! Quiero pedir la ${model} (${price}€). Soy de ___ (Ourense / otra ciudad). ¿Hay stock?`;
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+        window.open(url, "_blank", "noopener");
+      });
+    });
+
+    // Filtros (Ver todo / Básicas / Core)
+    const chips = document.querySelectorAll(".chip");
+    const cards = document.querySelectorAll(".card");
+    const blocks = document.querySelectorAll(".block");
+
+    function setActiveChip(active){
+      chips.forEach(c => c.classList.toggle("active", c === active));
+    }
+
+    function applyFilter(type){
+      if(type === "all"){
+        blocks.forEach(b => b.style.display = "block");
+        cards.forEach(c => c.style.display = "flex");
+        return;
+      }
+      // Mostrar solo el bloque correspondiente y sus cards
+      blocks.forEach(b => {
+        const group = b.getAttribute("data-group");
+        b.style.display = (group === type) ? "block" : "none";
+      });
+      cards.forEach(c => {
+        const t = c.getAttribute("data-type");
+        c.style.display = (t === type) ? "flex" : "none";
+      });
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        const f = chip.getAttribute("data-filter");
+        setActiveChip(chip);
+        applyFilter(f);
+        // scroll suave al catálogo
+        document.getElementById("catalogo").scrollIntoView({ behavior:"smooth", block:"start" });
+      });
+    });
   </script>
 </body>
 </html>
