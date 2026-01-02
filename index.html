@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- ✅ viewport bien para móvil + evita zoom raro en iOS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>NORTEPACK | Mochilas económicas con entrega en Ourense</title>
   <meta name="description" content="Mochilas económicas y resistentes. Entrega a domicilio en Ourense y envíos en 48h. Pago en mano o Bizum.">
   <link rel="icon" type="image/png" href="imagen/logo-nortepack.png">
@@ -16,12 +17,10 @@
       --muted:#8da0b5;
       --border:#1c2a3a;
 
-      /* Accent (logo Nortepack) */
       --accent:#00d084;
       --accent2:#18e6ff;
       --accentSoft: rgba(0,208,132,.12);
 
-      /* Solana vibes */
       --sol-green:#14F195;
       --sol-purple:#9945FF;
       --sol-blue:#00C2FF;
@@ -30,13 +29,16 @@
       --shadow2: 0 26px 90px rgba(0,0,0,.62);
       --radius: 18px;
       --radius2: 24px;
-      --logoH: clamp(56px, 7vw, 92px);
+      --logoH: clamp(52px, 7vw, 88px);
+
+      /* ✅ alturas para evitar superposiciones (nav inferior + safe area) */
+      --bottomNavH: 76px;
+      --bottomPad: calc(var(--bottomNavH) + env(safe-area-inset-bottom, 0px) + 14px);
     }
 
     *{ box-sizing:border-box }
     html,body{ margin:0; padding:0; }
-
-    /* ✅ FONDO ABSTRACTO INTENSO + MOVIMIENTO (tipo Solana) */
+    html{ scroll-behavior:smooth; }
     body{
       background:
         radial-gradient(1200px 700px at 8% -10%, rgba(153,69,255,.34), transparent 62%),
@@ -48,6 +50,9 @@
       -webkit-font-smoothing:antialiased;
       line-height:1.35;
       overflow-x:hidden;
+
+      /* ✅ evita que la nav inferior pise contenido en móvil */
+      padding-bottom: var(--bottomPad);
     }
 
     /* Grid suave + brillo */
@@ -68,7 +73,7 @@
       z-index:-7;
     }
 
-    /* Grain / noise (sin imágenes) */
+    /* Grain / noise */
     body::after{
       content:"";
       position:fixed;
@@ -82,7 +87,7 @@
       z-index:-6;
     }
 
-    /* Aurora animada (más visible) */
+    /* Aurora animada */
     .bg-aurora{
       position:fixed;
       inset:-30%;
@@ -103,14 +108,13 @@
       100% { transform: translate3d(-1.5%, 2.5%, 0) scale(1.04); }
     }
 
-    /* Blobs extra (abstracto intenso) */
+    /* Blobs */
     .bg-blobs{
       position:fixed;
       inset:0;
       z-index:-9;
       pointer-events:none;
       opacity:.80;
-      filter: blur(0px);
     }
     .bg-blobs span{
       position:absolute;
@@ -151,7 +155,7 @@
       100% { transform: translate(3%, -2%) scale(1.12); }
     }
 
-    /* Sheen animado (onda abstracta suave) */
+    /* Sheen */
     .bg-sheen{
       position:fixed;
       inset:-25%;
@@ -175,7 +179,6 @@
       to{ transform: rotate(360deg) scale(1.06); }
     }
 
-    /* Vignette elegante */
     .bg-vignette{
       position:fixed;
       inset:0;
@@ -193,6 +196,12 @@
       margin:0 auto;
       padding:0 18px;
       position:relative;
+      min-width:0;
+    }
+
+    /* ✅ evita desbordes que generan “superposición”/saltos */
+    .header, .hero-inner, .two, .grid, .catalog, .block, .panel, .strip-inner, .footer-inner{
+      min-width:0;
     }
 
     /* HEADER */
@@ -209,24 +218,35 @@
       justify-content:space-between;
       gap:14px;
       padding:10px 0;
+      min-width:0;
     }
     .logo{
       display:flex; align-items:center; gap:12px;
-      min-width: 240px;
+      min-width:0; /* ✅ importantísimo en móvil */
+      flex: 1 1 auto;
     }
-    .logo img{ height:var(--logoH); width:auto }
+    .logo img{ height:var(--logoH); width:auto; flex:0 0 auto; }
     .brand{
       display:flex; flex-direction:column; gap:2px;
+      min-width:0;
     }
     .brand .name{
       font-weight:900;
       letter-spacing:.18em;
       text-transform:uppercase;
       font-size:clamp(13px,1.6vw,16px);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis; /* ✅ evita que se monte */
+      max-width: 100%;
     }
     .brand .sub{
       font-size:12px;
       color:var(--muted);
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      max-width: 100%;
     }
 
     .nav{
@@ -235,6 +255,8 @@
       align-items:center;
       flex-wrap:wrap;
       justify-content:flex-end;
+      min-width:0;
+      flex: 0 0 auto;
     }
     .nav a{
       padding:9px 14px;
@@ -295,6 +317,7 @@
       letter-spacing:.12em;
       text-transform:uppercase;
       width:max-content;
+      max-width: 100%;
     }
     .dot{
       width:8px;height:8px;border-radius:999px;
@@ -402,6 +425,7 @@
       box-shadow: var(--shadow2);
       overflow:hidden;
       position:relative;
+      min-width:0;
     }
     .hero-media::before{
       content:"";
@@ -543,10 +567,12 @@
       color:var(--muted);
       font-size:12px;
       box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset;
+      min-width:0;
     }
     .strip-inner strong{ color:#eafff6 }
     .strip-inner span{
       display:flex; gap:8px; align-items:center;
+      min-width:0;
     }
     .tick{
       width:18px; height:18px;
@@ -568,6 +594,7 @@
       gap:14px;
       flex-wrap:wrap;
       margin-bottom:16px;
+      min-width:0;
     }
     .section-title{
       margin:0;
@@ -619,6 +646,7 @@
       overflow:hidden;
       box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset, 0 24px 80px rgba(0,0,0,.30);
       position:relative;
+      min-width:0;
     }
     .block::before{
       content:"";
@@ -642,11 +670,13 @@
       gap:12px;
       flex-wrap:wrap;
       margin-bottom:12px;
+      min-width:0;
     }
     .block-title{
       display:flex;
       flex-direction:column;
       gap:4px;
+      min-width:0;
     }
     .block-title h3{
       margin:0;
@@ -683,6 +713,7 @@
       display:grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap:14px;
+      min-width:0;
     }
 
     .card{
@@ -696,6 +727,7 @@
       flex-direction:column;
       min-height:100%;
       box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset;
+      min-width:0;
     }
     .card::before{
       content:"";
@@ -786,17 +818,24 @@
       flex-direction:column;
       gap:10px;
       flex:1;
+      min-width:0;
     }
     .topline{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:10px;
+      min-width:0;
     }
     .content h4{
       margin:0;
       font-size:14px;
       letter-spacing:-.01em;
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      max-width:100%;
     }
     .price{
       padding:6px 10px;
@@ -807,6 +846,7 @@
       background: rgba(0,208,132,.14);
       border:1px solid rgba(0,208,132,.35);
       color:#dfffee;
+      flex:0 0 auto;
     }
     .note{
       margin:0;
@@ -820,6 +860,7 @@
       font-size:11px;
       color:#cfe6ff;
       opacity:.95;
+      flex-wrap:wrap;
     }
     .stars .s{
       letter-spacing:.06em;
@@ -846,6 +887,7 @@
       cursor:pointer;
       user-select:none;
       transition: transform .18s ease, opacity .18s ease, border-color .18s ease;
+      min-width: 0;
     }
     .btn-mini:hover{ transform: translateY(-1px); border-color: rgba(24,230,255,.35); }
     .btn-mini.primary{
@@ -878,6 +920,7 @@
       border-radius: var(--radius2);
       padding:16px;
       box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset;
+      min-width:0;
     }
     .compare h3{ margin:0 0 10px; font-size:16px; letter-spacing:-.01em; }
     .compare-grid{
@@ -890,10 +933,12 @@
       background: rgba(7,11,17,.35);
       border-radius: 18px;
       padding:12px 12px;
+      min-width:0;
     }
     .cmp .t{
       display:flex; align-items:center; justify-content:space-between; gap:10px;
       margin-bottom:8px;
+      flex-wrap:wrap;
     }
     .cmp .t b{ font-size:13px; }
     .cmp ul{ margin:0; padding-left:18px; color: var(--muted); font-size:12px; }
@@ -912,10 +957,12 @@
       border-radius: 18px;
       padding:12px 12px;
       box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset;
+      min-width:0;
     }
     .review .head{
       display:flex; justify-content:space-between; gap:10px; align-items:flex-start;
       margin-bottom:8px;
+      flex-wrap:wrap;
     }
     .review .name{ font-weight:900; font-size:13px; }
     .review .rate{ font-size:11px; color:#baffea; font-weight:900; }
@@ -927,6 +974,7 @@
       grid-template-columns: 1.3fr 1fr;
       gap:18px;
       align-items:start;
+      min-width:0;
     }
     .panel{
       border:1px solid rgba(28,42,58,.9);
@@ -934,6 +982,7 @@
       border-radius: var(--radius2);
       padding:16px 18px;
       box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset, 0 24px 80px rgba(0,0,0,.22);
+      min-width:0;
     }
     .panel h3{
       margin:0 0 8px;
@@ -1050,7 +1099,7 @@
     .wa-btn:hover::after{ opacity:.9 }
     .wa-btn:hover{ opacity:.95 }
 
-    /* ✅ MOVIL: NAV FIJA ABAJO + MÁS COMPACTO (100% usable) */
+    /* ✅ TABLET/MÓVIL: compacta y sin montarse */
     @media (max-width: 980px){
       .hero-inner{ grid-template-columns: 1fr; }
       .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -1058,19 +1107,22 @@
       .reviews{ grid-template-columns: 1fr; }
       .compare-grid{ grid-template-columns: 1fr; }
 
-      .header-inner{ flex-direction:column; align-items:flex-start; }
-      .nav{ justify-content:flex-start; }
-
+      /* ✅ header NO en columna: así no “apila” raro */
+      .header-inner{ flex-direction:row; align-items:center; }
+      .nav{ justify-content:flex-end; }
       .wa-pill{ display:block; }
     }
 
+    /* ✅ MÓVIL: nav inferior tipo app + header compacto + sin superposiciones */
     @media (max-width: 640px){
-      /* más aire arriba porque el menú irá abajo */
-      body{ padding-bottom: 76px; }
+      /* ✅ header más compacto */
+      .container{ padding:0 14px; }
+      .logo img{ height: 52px; }
+      .brand .sub{ display:none; } /* ✅ quita texto largo que se montaba */
+      .brand .name{ letter-spacing:.14em; }
 
-      .brand .sub{ font-size:11px; }
-      .hero{ padding:22px 0 10px; }
-      .hero h1{ font-size: clamp(26px, 8vw, 36px); }
+      .hero{ padding:20px 0 10px; }
+      .hero h1{ font-size: clamp(24px, 8vw, 34px); }
       .lead{ font-size: 14px; }
 
       .mini{ min-width: 100%; }
@@ -1081,12 +1133,12 @@
       .grid{ grid-template-columns: 1fr; }
       .thumb{ height: 220px; }
 
-      /* ✅ Menú inferior tipo “app” */
+      /* ✅ NAV INFERIOR */
       .nav{
         position:fixed;
         left:10px;
         right:10px;
-        bottom:10px;
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
         z-index:70;
         background: rgba(5,7,11,.78);
         border:1px solid rgba(28,42,58,.9);
@@ -1105,24 +1157,26 @@
         border-radius: 14px;
         background: rgba(10,16,24,.35);
       }
-      .nav a:nth-child(4){ display:none; } /* oculta FAQ en móvil para que no quede apretado */
+      .nav a:nth-child(4){ display:none; } /* oculta FAQ en móvil */
       .nav .cta{
         flex:1.2;
         font-size:12px;
       }
 
-      /* Whatsapp flotante un pelín más arriba para no chocar con la nav inferior */
-      .wa-float{ bottom: 92px; right: 14px; }
+      /* ✅ Whatsapp flotante por encima del menú inferior */
+      .wa-float{
+        bottom: calc(var(--bottomNavH) + env(safe-area-inset-bottom, 0px) + 18px);
+        right: 14px;
+      }
       .wa-pill{ display:none; }
     }
 
-    /* Menos movimiento si el usuario lo pide en el sistema */
+    /* Menos movimiento si el usuario lo pide */
     @media (prefers-reduced-motion: reduce){
       .bg-aurora, .bg-blobs span, .bg-sheen{ animation: none !important; }
       .card, .panel, .block, .hero-media, .strip-inner, .compare, .review{ animation:none !important; }
     }
 
-    /* Entrada suave */
     @media (prefers-reduced-motion: no-preference){
       .card, .panel, .block, .hero-media, .strip-inner, .compare, .review{
         animation: fadeUp .55s ease both;
@@ -1156,7 +1210,7 @@
         </div>
       </div>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="Navegación principal">
         <a href="#catalogo">Catálogo</a>
         <a href="#envios">Envíos</a>
         <a href="#como-comprar">Comprar</a>
@@ -1228,7 +1282,6 @@
               </div>
             </div>
           </div>
-
         </div>
 
         <div class="hero-media">
@@ -1467,7 +1520,6 @@
                 <p>Me recomendaron color y acertaron. Muy top para el día a día. Repetiré.</p>
               </div>
             </div>
-
           </div>
         </div>
       </div>
