@@ -2,1400 +2,709 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NORTEPACK | Mochilas económicas con entrega en Ourense</title>
-  <meta name="description" content="Mochilas económicas y resistentes. Entrega a domicilio en Ourense y envíos en 48h. Pago en mano o Bizum.">
-  <link rel="icon" type="image/png" href="imagen/logo-nortepack.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>NORTEPACK | Mochilas en Ourense (pago en mano) y envíos 48h</title>
+  <meta name="description" content="Mochilas resistentes y económicas. Entrega en Ourense con pago en mano y envíos en 48h. Compra directa por WhatsApp." />
+  <meta name="theme-color" content="#0b0f17" />
+  <link rel="icon" type="image/png" href="imagen/logo-nortepack.png" />
 
   <style>
     :root{
-      /* Apple-like (limpio + blanco) */
-      --bg:#ffffff;
-      --bg2:#f5f5f7;
-      --card:#ffffff;
-      --text:#1d1d1f;
-      --muted:#6e6e73;
-      --line:rgba(0,0,0,.12);
-
-      /* Acento NORTEPACK */
+      --bg:#0b0f17;
+      --bg2:#0e1624;
+      --card:#121a2a;
+      --text:#eaf1ff;
+      --muted:#9db0c7;
+      --border:rgba(255,255,255,.10);
       --accent:#00d084;
       --accent2:#18e6ff;
-
-      --shadow: 0 12px 30px rgba(0,0,0,.10);
-      --shadow2: 0 24px 60px rgba(0,0,0,.12);
-
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius: 18px;
-      --radius2: 28px;
-
-      --container: 1080px;
-      --pad: clamp(16px, 3vw, 28px);
-
-      --h1: clamp(34px, 6vw, 64px);
-      --h2: clamp(22px, 3.5vw, 36px);
-      --p: clamp(15px, 2.2vw, 18px);
-      --small: 13px;
-
-      --navH: 58px;
-      --logoH: 34px;
+      --max: 1100px;
     }
 
     *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; }
-    html{ scroll-behavior:smooth; }
+    html{ -webkit-text-size-adjust:100%; }
     body{
-      font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-      -webkit-font-smoothing:antialiased;
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
       color:var(--text);
       background:
-        radial-gradient(900px 420px at 15% -10%, rgba(24,230,255,.18), transparent 55%),
-        radial-gradient(900px 420px at 85% 0%, rgba(0,208,132,.16), transparent 55%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 55%, var(--bg) 100%);
-      overflow-x:hidden;
+        radial-gradient(900px 500px at 15% 10%, rgba(0,208,132,.18), transparent 60%),
+        radial-gradient(700px 450px at 85% 20%, rgba(24,230,255,.14), transparent 62%),
+        radial-gradient(700px 500px at 70% 85%, rgba(138,67,255,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x:hidden; /* evita “barras” laterales por algo que sobresalga */
     }
 
-    a{ color:inherit; text-decoration:none; }
-    img{ display:block; max-width:100%; height:auto; }
-
-    .container{
-      max-width: var(--container);
+    /* Contenedor seguro: sin anchos fijos, todo con max-width */
+    .wrap{
+      width: min(var(--max), calc(100% - 32px));
       margin: 0 auto;
-      padding: 0 var(--pad);
     }
 
-    /* ---------- Header (Apple-like) ---------- */
-    .header{
+    /* Header */
+    header{
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255,255,255,.82);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,23,.72);
+      border-bottom: 1px solid var(--border);
     }
-    .header-inner{
-      height: var(--navH);
+    .nav{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
+      gap:14px;
+      padding: 14px 0;
     }
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
       min-width: 0;
     }
-    .brand img{ height: var(--logoH); width:auto; }
-    .brand .txt{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      min-width: 0;
+    .brand img{
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+      flex: 0 0 auto;
     }
-    .brand .name{
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-size: 12px;
-      line-height: 1;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+    .brand strong{
+      font-size: 15px;
+      letter-spacing: .6px;
+      white-space: nowrap;
     }
-    .brand .sub{
-      font-size: 12px;
+    .brand span{
+      display:block;
+      font-size:12px;
       color: var(--muted);
-      white-space:nowrap;
+      margin-top:2px;
+      white-space: nowrap;
       overflow:hidden;
-      text-overflow:ellipsis;
+      text-overflow: ellipsis;
+      max-width: 240px;
     }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .nav-links a{
+    nav a{
+      color: var(--muted);
+      text-decoration:none;
       font-size: 13px;
-      color: var(--muted);
       padding: 8px 10px;
-      border-radius: 999px;
-      transition: background .15s ease, color .15s ease;
+      border-radius: 12px;
     }
-    .nav-links a:hover{
+    nav a:hover{
+      background: rgba(255,255,255,.06);
       color: var(--text);
-      background: rgba(0,0,0,.04);
+    }
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex: 0 0 auto;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
+      gap:10px;
       padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-weight: 800;
-      font-size: 13px;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
-      white-space:nowrap;
-    }
-    .btn:active{ transform: scale(.98); }
-    .btn-primary{
-      color:#012a19;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 10px 22px rgba(0,208,132,.18);
-    }
-    .btn-primary:hover{ opacity:.95; box-shadow: 0 14px 30px rgba(0,208,132,.22); }
-    .btn-ghost{
-      background: rgba(255,255,255,.75);
-      border-color: var(--line);
-      color: var(--text);
-    }
-    .btn-ghost:hover{ background: rgba(0,0,0,.04); }
-
-    .burger{
-      display:none;
-      width: 42px; height: 42px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.75);
-      cursor:pointer;
-      position:relative;
-    }
-    .burger span{
-      position:absolute;
-      left: 11px; right: 11px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 99px;
-      top: 14px;
-      transition: transform .15s ease, top .15s ease, opacity .15s ease;
-    }
-    .burger span:nth-child(2){ top: 20px; opacity: .85; }
-    .burger span:nth-child(3){ top: 26px; opacity: .7; }
-
-    .mobile-menu{
-      display:none;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(14px);
-    }
-    .mobile-menu .container{
-      padding-top: 10px;
-      padding-bottom: 12px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .mobile-menu a{
-      padding: 10px 12px;
       border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.02);
+      border: 1px solid var(--border);
       color: var(--text);
-      font-weight: 800;
+      text-decoration:none;
+      background: rgba(255,255,255,.06);
+      box-shadow: none;
+      font-weight: 650;
       font-size: 13px;
+      line-height: 1;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{ background: rgba(255,255,255,.09); }
+    .btn.primary{
+      border-color: rgba(0,208,132,.35);
+      background: linear-gradient(135deg, rgba(0,208,132,.20), rgba(24,230,255,.12));
+    }
+    .btn.primary:hover{
+      background: linear-gradient(135deg, rgba(0,208,132,.26), rgba(24,230,255,.16));
     }
 
-    /* ---------- Hero ---------- */
+    /* Hero */
     .hero{
-      padding: clamp(26px, 5vw, 52px) 0 14px;
+      padding: 34px 0 18px;
     }
     .hero-grid{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
-      gap: clamp(16px, 4vw, 34px);
-      align-items:center;
+      gap: 18px;
+      align-items: stretch;
     }
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(0,208,132,.10);
-      border: 1px solid rgba(0,208,132,.18);
-      color: #0b4a33;
-      font-weight: 800;
-      font-size: 12px;
-      width: max-content;
-    }
-    .eyebrow .dot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 0 6px rgba(0,208,132,.10);
-      flex: 0 0 auto;
-    }
-    h1{
-      margin: 14px 0 10px;
-      font-size: var(--h1);
-      line-height: 1.02;
-      letter-spacing: -0.02em;
-    }
-    .lead{
-      margin: 0 0 16px;
-      font-size: var(--p);
-      color: var(--muted);
-      max-width: 60ch;
-    }
-    .hero-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin: 12px 0 14px;
-    }
-
-    .hero-stats{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .stat{
-      background: rgba(255,255,255,.78);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px;
-      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+    .panel{
+      background: rgba(18,26,42,.66);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      overflow:hidden;
+      position: relative;
       min-width: 0;
     }
-    .stat .k{
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
+    .panel::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(600px 220px at 25% 0%, rgba(0,208,132,.22), transparent 60%),
+                  radial-gradient(520px 220px at 80% 10%, rgba(24,230,255,.16), transparent 62%);
+      pointer-events:none;
+      opacity:.8;
     }
-    .stat .v{
-      font-weight: 900;
-      font-size: 14px;
-      letter-spacing: -.01em;
-    }
+    .panel > *{ position:relative; z-index:1; }
 
-    .hero-media{
-      border-radius: var(--radius2);
-      background: rgba(255,255,255,.80);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow2);
-      overflow:hidden;
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 3.2vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
     }
-    .hero-media .img{
-      aspect-ratio: 4 / 3;
-      background: #fff;
-      overflow:hidden;
+    .lead{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.55;
+      max-width: 60ch;
     }
-    .hero-media .img img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      transform: scale(1.01);
-    }
-    .hero-media .cap{
-      padding: 12px 14px;
+    .badges{
       display:flex;
-      justify-content:space-between;
+      flex-wrap:wrap;
       gap:10px;
-      flex-wrap:wrap;
-      border-top: 1px solid var(--line);
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .hero-media .cap strong{ color: var(--text); }
-
-    /* ---------- Best sellers (Apple-like horizontal cards) ---------- */
-    .best{
-      padding: 12px 0 0;
-    }
-    .best-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      margin: 10px 0;
-    }
-    .best-head h3{
-      margin:0;
-      font-size: 12px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .best-controls{ display:flex; gap:8px; }
-    .iconbtn{
-      width:40px; height:40px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.82);
-      cursor:pointer;
-      font-weight: 900;
-      color: var(--text);
-      transition: transform .12s ease, background .12s ease;
-    }
-    .iconbtn:hover{ background: rgba(0,0,0,.03); }
-    .iconbtn:active{ transform: scale(.98); }
-
-    .carousel{
-      display:flex;
-      gap: 12px;
-      overflow:auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 6px;
-      -webkit-overflow-scrolling: touch;
-    }
-    .carousel::-webkit-scrollbar{ height: 8px; }
-    .carousel::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.18); border-radius: 999px; }
-
-    .slide{
-      scroll-snap-align: start;
-      min-width: 240px;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.82);
-      box-shadow: 0 10px 22px rgba(0,0,0,.08);
-      overflow:hidden;
-    }
-    .slide .img{
-      height: 148px;
-      background: #fff;
-      overflow:hidden;
-      border-bottom: 1px solid var(--line);
-    }
-    .slide .img img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      transform: scale(1.02);
-    }
-    .slide .txt{
-      padding: 10px 12px 12px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-start;
-    }
-    .slide .txt b{ font-size: 13px; }
-    .tag{
-      font-size: 11px;
-      font-weight: 900;
-      padding: 6px 10px;
-      border-radius: 999px;
-      color:#012a19;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      white-space: nowrap;
-    }
-
-    /* ---------- Strip info ---------- */
-    .strip{
-      padding: 18px 0 4px;
-    }
-    .stripbox{
-      border-radius: var(--radius2);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.85);
-      box-shadow: var(--shadow);
-      padding: 14px;
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .stripbox strong{ color: var(--text); }
-    .tick{
-      width:18px;height:18px;border-radius:999px;
-      display:inline-grid;place-items:center;
-      background: rgba(0,208,132,.12);
-      border: 1px solid rgba(0,208,132,.18);
-      color:#0b4a33;
-      font-weight: 900;
-      margin-right: 8px;
-      flex: 0 0 auto;
-    }
-    .strip small{
-      display:block;
-      margin: 10px 4px 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* ---------- Sections ---------- */
-    .section{
-      padding: clamp(26px, 5vw, 52px) 0;
-    }
-    .section-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom: 16px;
-    }
-    .section-title{
-      margin:0;
-      font-size: var(--h2);
-      letter-spacing: -0.02em;
-    }
-    .section-sub{
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 72ch;
-    }
-
-    .filters{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .chip{
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.85);
-      color: var(--muted);
-      padding: 9px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      cursor:pointer;
-      user-select:none;
-      font-weight: 900;
-      transition: background .12s ease, color .12s ease, transform .12s ease;
-    }
-    .chip:hover{ transform: translateY(-1px); background: rgba(0,0,0,.03); color: var(--text); }
-    .chip.active{
-      background: rgba(0,208,132,.10);
-      border-color: rgba(0,208,132,.18);
-      color:#0b4a33;
-    }
-
-    /* ---------- Catalog blocks ---------- */
-    .catalog{
-      display:flex;
-      flex-direction:column;
-      gap: 18px;
-    }
-
-    .block{
-      border-radius: var(--radius2);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.88);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .block-head{
-      padding: 16px 16px 0;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-      flex-wrap:wrap;
+      margin-top: 12px;
     }
     .badge{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding: 7px 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      padding: 9px 10px;
       border-radius: 999px;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      border: 1px solid rgba(0,208,132,.18);
-      background: rgba(0,208,132,.10);
-      color:#0b4a33;
-      width: max-content;
+      font-size: 12px;
+      color: var(--text);
+      white-space: nowrap;
     }
-    .badge.core{
-      border-color: rgba(24,230,255,.22);
-      background: rgba(24,230,255,.10);
-      color:#063245;
+    .dot{
+      width: 10px; height: 10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(0,208,132,.12);
+      flex: 0 0 auto;
     }
-    .block-title h3{
-      margin: 10px 0 6px;
-      font-size: 18px;
-      letter-spacing: -0.01em;
+
+    .hero-cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 14px;
     }
-    .block-title p{
-      margin: 0 0 10px;
+
+    .mini{
+      display:grid;
+      gap:12px;
+    }
+    .mini .box{
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    .mini h3{
+      margin: 0 0 8px;
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+    .mini p{
+      margin:0;
       color: var(--muted);
       font-size: 13px;
-      max-width: 70ch;
+      line-height: 1.5;
     }
 
-    .grid{
-      padding: 16px;
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .card{
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      overflow:hidden;
-      background: #fff;
-      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+    /* Secciones */
+    section{ padding: 18px 0; }
+    .section-title{
       display:flex;
-      flex-direction:column;
-      min-height:100%;
-      transition: transform .14s ease, box-shadow .14s ease;
-    }
-    .card:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 18px 40px rgba(0,0,0,.12);
-    }
-
-    .thumb{
-      position:relative;
-      background:#fff;
-      aspect-ratio: 4 / 3;
-      overflow:hidden;
-      border-bottom: 1px solid var(--line);
-    }
-    .thumb img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      transform: scale(1.01);
-      transition: transform .18s ease;
-    }
-    .card:hover .thumb img{ transform: scale(1.06); }
-
-    .label{
-      position:absolute;
-      top:12px; left:12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      background: rgba(255,255,255,.92);
-      border: 1px solid var(--line);
-      color: var(--text);
-      backdrop-filter: blur(10px);
-    }
-    .ribbon{
-      position:absolute;
-      top:12px; right:12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      background: rgba(0,208,132,.10);
-      border: 1px solid rgba(0,208,132,.18);
-      color:#0b4a33;
-      backdrop-filter: blur(10px);
-    }
-    .ribbon.hot{
-      background: rgba(255,200,0,.14);
-      border-color: rgba(255,200,0,.28);
-      color:#5a4200;
-    }
-    .ribbon.low{
-      background: rgba(255,90,90,.12);
-      border-color: rgba(255,90,90,.22);
-      color:#6a0a0a;
-    }
-
-    .content{
-      padding: 12px 14px 14px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-      flex: 1;
-    }
-    .topline{
-      display:flex;
-      align-items:flex-start;
+      align-items:flex-end;
       justify-content:space-between;
-      gap:10px;
+      gap: 14px;
+      margin-bottom: 12px;
     }
-    .content h4{
-      margin: 0;
-      font-size: 14px;
-      letter-spacing: -0.01em;
+    .section-title h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Catálogo */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .card{
+      background: rgba(18,26,42,.62);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .card .img{
+      aspect-ratio: 4 / 3;
+      background:
+        radial-gradient(420px 220px at 30% 20%, rgba(0,208,132,.16), transparent 60%),
+        radial-gradient(420px 220px at 70% 15%, rgba(24,230,255,.12), transparent 62%),
+        rgba(255,255,255,.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-bottom: 1px solid var(--border);
+      padding: 10px;
+    }
+    .card .img img{
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transform: translateZ(0); /* evita flicker */
+    }
+    .card .body{
+      padding: 14px;
+      display:grid;
+      gap: 10px;
+    }
+    .card h3{
+      margin:0;
+      font-size: 14.5px;
     }
     .price{
-      padding: 7px 10px;
-      border-radius: 12px;
-      font-weight: 900;
-      font-size: 13px;
-      white-space:nowrap;
-      background: rgba(0,208,132,.12);
-      border: 1px solid rgba(0,208,132,.18);
-      color:#0b4a33;
-    }
-    .note{
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .stars{
       display:flex;
-      align-items:center;
-      gap:6px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .stars .s{
-      letter-spacing: .06em;
-      color: #0b4a33;
-      font-weight: 900;
-    }
-
-    .buy{
-      margin-top:auto;
-      display:flex;
-      gap:8px;
+      align-items:baseline;
+      gap:10px;
       flex-wrap:wrap;
     }
-    .btn-mini{
-      flex: 1;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 900;
-      text-align:center;
-      cursor:pointer;
-      user-select:none;
-      transition: background .12s ease, transform .12s ease;
-    }
-    .btn-mini:hover{ background: rgba(0,0,0,.03); transform: translateY(-1px); }
-    .btn-mini.primary{
-      border-color: transparent;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color:#012a19;
-    }
-    .btn-mini.primary:hover{ opacity:.95; }
-
-    /* Compare + Reviews */
-    .compare{
-      margin: 0 16px 16px;
-      border-radius: var(--radius2);
-      border: 1px solid var(--line);
-      background: rgba(245,245,247,.65);
-      padding: 16px;
-    }
-    .compare h3{
-      margin: 0 0 10px;
-      font-size: 16px;
-      letter-spacing: -0.01em;
-    }
-    .compare-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .cmp{
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.85);
-      padding: 12px;
-    }
-    .cmp .t{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom: 8px;
-    }
-    .cmp .t b{ font-size: 13px; }
-    .cmp ul{
-      margin: 0;
-      padding-left: 18px;
+    .price .old{
       color: var(--muted);
+      text-decoration: line-through;
       font-size: 13px;
     }
-    .cmp li{ margin: 6px 0; }
-
-    .reviews{
-      margin: 0 16px 18px;
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .review{
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.88);
-      padding: 12px;
-      box-shadow: 0 10px 22px rgba(0,0,0,.06);
-    }
-    .review .head{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-start;
-      margin-bottom: 8px;
-    }
-    .review .name{ font-weight: 900; font-size: 13px; }
-    .review .rate{ font-size: 12px; color:#0b4a33; font-weight: 900; }
-    .review p{ margin:0; color: var(--muted); font-size: 13px; }
-
-    /* Panels + FAQ */
-    .two{
-      display:grid;
-      grid-template-columns: 1.25fr .95fr;
-      gap: 18px;
-      align-items:start;
-    }
-    .panel{
-      border-radius: var(--radius2);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.88);
-      box-shadow: var(--shadow);
-      padding: 16px;
-    }
-    .panel h3{
-      margin: 0 0 8px;
+    .price .new{
       font-size: 18px;
-      letter-spacing: -0.01em;
+      font-weight: 800;
+      letter-spacing: .2px;
     }
-    .panel p{
-      margin: 0 0 10px;
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .chip{
+      font-size: 12px;
       color: var(--muted);
-      font-size: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      padding: 7px 9px;
+      border-radius: 999px;
     }
-    .steps{
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 14px;
+    .card .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 2px;
     }
-    .steps li{ margin: 7px 0; }
+    .btn.small{ padding: 9px 12px; border-radius: 12px; font-size: 12.5px; }
 
-    .highlight{
-      margin-top: 12px;
-      border-radius: 18px;
-      padding: 12px;
-      border: 1px solid rgba(0,208,132,.18);
-      background: rgba(0,208,132,.08);
-      color: #0b4a33;
-      font-size: 13px;
+    /* FAQ */
+    details{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      border-radius: 16px;
+      padding: 12px 14px;
     }
-    .highlight strong{ color: var(--text); }
-
-    .faq details{
-      border-top: 1px solid var(--line);
-      padding: 10px 0;
-    }
-    .faq details:first-child{ border-top:none; padding-top: 0; }
-    .faq summary{
+    details + details{ margin-top: 10px; }
+    summary{
       cursor:pointer;
-      font-weight: 900;
-      font-size: 14px;
-      color: var(--text);
       list-style:none;
+      font-weight: 700;
+      font-size: 13.5px;
     }
-    .faq summary::-webkit-details-marker{ display:none; }
-    .faq .ans{
-      margin: 8px 0 0;
+    summary::-webkit-details-marker{ display:none; }
+    details p{
+      margin: 10px 0 0;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
+      line-height: 1.55;
     }
 
     /* Footer */
-    .footer{
-      border-top: 1px solid var(--line);
-      background: rgba(255,255,255,.85);
-      padding: 18px 0 26px;
+    footer{
+      padding: 20px 0 76px; /* espacio por barra móvil */
       color: var(--muted);
-      font-size: 12px;
+      font-size: 12.5px;
     }
-    .footer-inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:10px;
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      padding: 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
     }
-    .footer a{ color: #0b4a33; font-weight: 900; }
+    .footer-grid strong{ color: var(--text); }
+    .footer-grid a{ color: var(--text); text-decoration:none; border-bottom: 1px dashed rgba(255,255,255,.25); }
+    .footer-grid a:hover{ border-bottom-color: rgba(255,255,255,.5); }
 
-    /* WhatsApp floating */
-    .wa-float{
-      position:fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 80;
-      display:flex;
-      gap: 10px;
-      align-items:center;
-    }
-    .wa-pill{
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 900;
-      box-shadow: 0 18px 40px rgba(0,0,0,.10);
-      backdrop-filter: blur(12px);
-      white-space: nowrap;
+    /* Barra fija móvil */
+    .mobilebar{
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 60;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: rgba(11,15,23,.78);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(10px);
       display:none;
     }
-    .wa-btn{
-      width: 56px; height: 56px;
-      border-radius: 18px;
-      border: 1px solid rgba(0,208,132,.18);
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color:#012a19;
-      font-weight: 900;
-      display:grid;
-      place-items:center;
-      box-shadow: 0 18px 40px rgba(0,208,132,.16);
-      position:relative;
-      overflow:hidden;
+    .mobilebar .inner{
+      width: min(var(--max), calc(100% - 16px));
+      margin: 0 auto;
+      display:flex;
+      gap:10px;
     }
-    .wa-btn:hover{ opacity:.95; }
+    .mobilebar .inner a{ flex: 1; }
 
-    /* ---------- Responsive ---------- */
-    @media (max-width: 980px){
+    /* Responsive */
+    @media (max-width: 920px){
       .hero-grid{ grid-template-columns: 1fr; }
-      .two{ grid-template-columns: 1fr; }
-      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .reviews{ grid-template-columns: 1fr; }
-      .compare-grid{ grid-template-columns: 1fr; }
-      .wa-pill{ display:block; }
-      .brand .sub{ display:none; } /* evita que se descuadre en móvil */
+      .mini{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+      .footer-grid{ grid-template-columns: 1fr; }
+      nav{ display:none; } /* menú simple, sin líos en móvil */
     }
-
-    @media (max-width: 720px){
-      .nav-links{ display:none; }
-      .burger{ display:inline-block; }
-      .mobile-menu.show{ display:block; }
-      .hero-stats{ grid-template-columns: 1fr; }
-      .wa-pill{ display:none; }
-    }
-
-    @media (max-width: 560px){
+    @media (max-width: 520px){
       .grid{ grid-template-columns: 1fr; }
-      .hero-actions{ flex-direction:column; align-items:stretch; }
-      .hero-actions .btn{ width:100%; }
-      .stripbox{ flex-direction:column; align-items:flex-start; }
+      .brand span{ max-width: 170px; }
+      .mobilebar{ display:block; }
     }
 
-    /* Reduce motion */
-    @media (prefers-reduced-motion: no-preference){
-      .card, .panel, .block, .hero-media, .stripbox, .compare, .review{
-        animation: fadeUp .45s ease both;
-      }
-    }
-    @keyframes fadeUp{
-      from{ transform: translateY(8px); opacity: 0; }
-      to{ transform: translateY(0); opacity: 1; }
+    /* Evita que cosas “salten” por animaciones */
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior: auto !important; }
     }
   </style>
 </head>
 
 <body>
-  <header class="header">
-    <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Ir al inicio">
-        <img src="imagen/logo-nortepack.png" alt="Logo NORTEPACK">
-        <div class="txt">
-          <div class="name">NORTEPACK</div>
-          <div class="sub">Mochilas económicas · Ourense + envíos 48 h</div>
-        </div>
-      </a>
-
+  <!-- HEADER -->
+  <header>
+    <div class="wrap">
       <div class="nav">
-        <nav class="nav-links" aria-label="Navegación">
+        <div class="brand">
+          <img src="imagen/logo-nortepack.png" alt="Logo Nortepack" />
+          <div style="min-width:0;">
+            <strong>NORTEPACK</strong>
+            <span>Mochilas en Ourense · Pago en mano · Envíos 48h</span>
+          </div>
+        </div>
+
+        <nav aria-label="Secciones">
           <a href="#catalogo">Catálogo</a>
-          <a href="#envios">Envíos</a>
-          <a href="#como-comprar">Cómo comprar</a>
-          <a href="#faq">FAQ</a>
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="#preguntas">Preguntas</a>
+          <a href="#contacto">Contacto</a>
         </nav>
 
-        <a class="btn btn-primary" href="https://wa.me/34697625964" target="_blank" rel="noopener">Pedir por WhatsApp</a>
-
-        <button class="burger" type="button" id="burger" aria-label="Abrir menú">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="mobile-menu" id="mobileMenu" aria-label="Menú móvil">
-      <div class="container">
-        <a href="#catalogo">Catálogo</a>
-        <a href="#envios">Envíos</a>
-        <a href="#como-comprar">Cómo comprar</a>
-        <a href="#faq">FAQ</a>
+        <div class="nav-right">
+          <a class="btn" href="https://instagram.com/nortepack.es" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn primary" id="btn-whatsapp-top" href="#" rel="nofollow">Comprar por WhatsApp</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <main id="top">
-    <!-- HERO -->
+  <!-- HERO -->
+  <main class="wrap">
     <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow"><span class="dot"></span> Stock limitado · Proyecto local en Ourense</div>
-          <h1>Mochilas prácticas<br>y con buen precio.</h1>
+      <div class="hero-grid">
+        <div class="panel">
+          <h1>Mochilas resistentes y económicas.<br/>Entrega rápida en Ourense.</h1>
           <p class="lead">
-            Modelos cómodos y resistentes para instituto, trabajo y uso diario.
-            Compra directa por WhatsApp con atención rápida, clara y cercana.
+            Compra directa por WhatsApp. Si eres de Ourense, <b>paga en mano al recibir</b>.
+            Si no, envío en <b>48h</b>. Trato cercano y sin complicaciones.
           </p>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
-            <a class="btn btn-ghost" href="https://wa.me/34697625964" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+          <div class="hero-cta">
+            <a class="btn primary" id="btn-whatsapp-hero" href="#" rel="nofollow">Quiero mi mochila</a>
+            <a class="btn" href="#catalogo">Ver catálogo</a>
           </div>
 
-          <div class="hero-stats">
-            <div class="stat"><div class="k">Entrega en Ourense</div><div class="v">A domicilio</div></div>
-            <div class="stat"><div class="k">Envíos</div><div class="v">48 h aprox.</div></div>
-            <div class="stat"><div class="k">Pago</div><div class="v">Efectivo / Bizum</div></div>
-          </div>
-
-          <!-- Best sellers -->
-          <div class="best">
-            <div class="best-head">
-              <h3>Más vendidos</h3>
-              <div class="best-controls">
-                <button class="iconbtn" type="button" id="prev" aria-label="Anterior">‹</button>
-                <button class="iconbtn" type="button" id="next" aria-label="Siguiente">›</button>
-              </div>
-            </div>
-
-            <div class="carousel" id="carousel">
-              <div class="slide">
-                <div class="img"><img src="imagen/prod-08.jpg" alt="Nortepack Core Amarillo"></div>
-                <div class="txt"><b>Core Amarillo</b><span class="tag">TOP</span></div>
-              </div>
-              <div class="slide">
-                <div class="img"><img src="imagen/prod-03.jpg" alt="Básica Negra"></div>
-                <div class="txt"><b>Básica Negra</b><span class="tag">TOP</span></div>
-              </div>
-              <div class="slide">
-                <div class="img"><img src="imagen/prod-07.jpg" alt="Nortepack Core Beige"></div>
-                <div class="txt"><b>Core Beige</b><span class="tag">TOP</span></div>
-              </div>
-              <div class="slide">
-                <div class="img"><img src="imagen/prod-02.jpg" alt="Básica Roja"></div>
-                <div class="txt"><b>Básica Roja</b><span class="tag">TOP</span></div>
-              </div>
-            </div>
+          <div class="badges" aria-label="Ventajas">
+            <div class="badge"><span class="dot"></span>Pago en mano (Ourense)</div>
+            <div class="badge"><span class="dot"></span>Envíos 48h</div>
+            <div class="badge"><span class="dot"></span>Atención por WhatsApp</div>
+            <div class="badge"><span class="dot"></span>Calidad/precio</div>
           </div>
         </div>
 
-        <div class="hero-media">
-          <div class="img">
-            <img src="imagen/prod-01.jpg" alt="Mochila NORTEPACK - foto real">
+        <div class="mini">
+          <div class="box">
+            <h3>Oferta y disponibilidad</h3>
+            <p>Actualiza aquí tus precios y colores. La web se adapta sola al móvil sin zoom raro.</p>
           </div>
-          <div class="cap">
-            <span><strong>Foto real</strong> de una de nuestras mochilas</span>
-            <span>Compra simple y segura ✅</span>
+          <div class="box">
+            <h3>Entrega en Ourense</h3>
+            <p>Reparto rápido y trato cercano. Ideal para instituto, trabajo, bici y el día a día.</p>
+          </div>
+          <div class="box">
+            <h3>Compra sin líos</h3>
+            <p>Te abro WhatsApp con el mensaje ya preparado. Solo eliges modelo y color.</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- STRIP ENVÍO -->
-    <section id="envios" class="strip">
-      <div class="container">
-        <div class="stripbox">
-          <span><span class="tick">✓</span><strong>Ourense ciudad:</strong> entrega a domicilio sin coste adicional*</span>
-          <span><span class="tick">✓</span><strong>Envíos 48 h:</strong> resto de España (económico)</span>
-          <span><span class="tick">✓</span><strong>Atención directa:</strong> hablamos contigo en todo momento</span>
-        </div>
-        <small>*Entrega a domicilio sujeta a disponibilidad de horario y zona. Te lo confirmamos por WhatsApp.</small>
       </div>
     </section>
 
     <!-- CATÁLOGO -->
-    <section id="catalogo" class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">Catálogo NORTEPACK</h2>
-            <p class="section-sub">
-              Elige tu modelo. Si lo deseas, podemos recomendarte el color ideal según tu estilo y el uso previsto.
-            </p>
-          </div>
-          <div class="filters" aria-label="Filtros de catálogo">
-            <div class="chip active" data-filter="all">Ver todo</div>
-            <div class="chip" data-filter="basica">Básicas</div>
-            <div class="chip" data-filter="core">Nortepack Core</div>
-          </div>
+    <section id="catalogo">
+      <div class="section-title">
+        <div>
+          <h2>Catálogo</h2>
+          <p>Modelos destacados (puedes duplicar tarjetas o cambiar fotos).</p>
         </div>
+      </div>
 
-        <div class="catalog">
-          <!-- BASICAS -->
-          <div class="block" data-group="basica">
-            <div class="block-head">
-              <div class="block-title">
-                <div class="badge">LÍNEA BÁSICAS</div>
-                <h3>BÁSICAS · sencillas, cómodas y versátiles</h3>
-                <p>Una opción excelente si buscas lo esencial al mejor precio.</p>
-              </div>
+      <div class="grid">
+        <!-- Producto 1 -->
+        <article class="card">
+          <div class="img">
+            <!-- Cambia la ruta por tu foto real -->
+            <img src="imagen/mochila-1.png" alt="Mochila Nortepack Core" onerror="this.style.display='none'" />
+          </div>
+          <div class="body">
+            <h3>NORTEPACK Core</h3>
+            <div class="price">
+              <span class="old">14,99€</span>
+              <span class="new">10,99€</span>
             </div>
-
-            <div class="grid">
-              <article class="card" data-type="basica">
-                <div class="thumb">
-                  <span class="label">Básica</span>
-                  <span class="ribbon hot">Más vendida</span>
-                  <img src="imagen/prod-01.jpg" alt="Mochila Básica Azul NORTEPACK">
-                </div>
-                <div class="content">
-                  <div class="topline"><h4>Básica Azul</h4><div class="price">14,99 €</div></div>
-                  <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
-                  <p class="note">Ligera y práctica para el día a día.</p>
-                  <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Azul" data-price="14,99">Pedir esta</a>
-                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="card" data-type="basica">
-                <div class="thumb">
-                  <span class="label">Básica</span>
-                  <img src="imagen/prod-02.jpg" alt="Mochila Básica Roja NORTEPACK">
-                </div>
-                <div class="content">
-                  <div class="topline"><h4>Básica Roja</h4><div class="price">14,99 €</div></div>
-                  <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
-                  <p class="note">Ideal para instituto o trabajo ligero.</p>
-                  <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Roja" data-price="14,99">Pedir esta</a>
-                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="card" data-type="basica">
-                <div class="thumb">
-                  <span class="label">Básica</span>
-                  <span class="ribbon">Recomendada</span>
-                  <img src="imagen/prod-03.jpg" alt="Mochila Básica Negra NORTEPACK">
-                </div>
-                <div class="content">
-                  <div class="topline"><h4>Básica Negra</h4><div class="price">14,99 €</div></div>
-                  <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
-                  <p class="note">Combina con todo. Opción segura.</p>
-                  <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Negra" data-price="14,99">Pedir esta</a>
-                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="card" data-type="basica">
-                <div class="thumb">
-                  <span class="label">Básica</span>
-                  <img src="imagen/prod-04.jpg" alt="Mochila Básica Blanca NORTEPACK">
-                </div>
-                <div class="content">
-                  <div class="topline"><h4>Básica Blanca</h4><div class="price">14,99 €</div></div>
-                  <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
-                  <p class="note">Estilo limpio y moderno.</p>
-                  <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Blanca" data-price="14,99">Pedir esta</a>
-                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
-                  </div>
-                </div>
-              </article>
+            <div class="chips">
+              <span class="chip">Cómoda</span>
+              <span class="chip">Resistente</span>
+              <span class="chip">Uso diario</span>
+            </div>
+            <div class="actions">
+              <a class="btn small primary buy" href="#" data-product="NORTEPACK Core" data-price="10,99€">Comprar</a>
+              <a class="btn small" href="#como-funciona">Cómo llega</a>
             </div>
           </div>
+        </article>
 
-          <!-- CORE -->
-          <div class="block" data-group="core">
-            <div class="block-head">
-              <div class="block-title">
-                <div class="badge core">LÍNEA NORTEPACK CORE</div>
-                <h3>NORTEPACK CORE · más estructura y presencia</h3>
-                <p>Recomendada si deseas una mochila con un acabado más premium.</p>
-              </div>
+        <!-- Producto 2 -->
+        <article class="card">
+          <div class="img">
+            <img src="imagen/mochila-2.png" alt="Mochila Básica" onerror="this.style.display='none'" />
+          </div>
+          <div class="body">
+            <h3>Básica (ligera)</h3>
+            <div class="price">
+              <span class="old">14,99€</span>
+              <span class="new">10,99€</span>
             </div>
-
-            <div class="grid">
-              <article class="card" data-type="core">
-                <div class="thumb">
-                  <span class="label">CORE</span>
-                  <span class="ribbon">Nueva</span>
-                  <img src="imagen/prod-05.jpg" alt="Nortepack Core Rojo">
-                </div>
-                <div class="content">
-                  <div class="topline"><h4>Nortepack Core Rojo</h4><div class="price">19,99 €</div></div>
-                  <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Acabados mejorados y más capacidad.</p>
-                  <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Rojo" data-price="19,99">Pedir esta</a>
-                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="card" data-type="core">
-                <div class="thumb">
-                  <span class="label">CORE</span>
-                  <img src="imagen/prod-06.jpg" alt="Nortepack Core Negro">
-                </div>
-                <div class="content">
-                  <div class="topline"><h4>Nortepack Core Negro</h4><div class="price">19,99 €</div></div>
-                  <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Elegante y muy combinable.</p>
-                  <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Negro" data-price="19,99">Pedir esta</a>
-                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="card" data-type="core">
-                <div class="thumb">
-                  <span class="label">CORE</span>
-                  <span class="ribbon hot">Más vendida</span>
-                  <img src="imagen/prod-07.jpg" alt="Nortepack Core Beige">
-                </div>
-                <div class="content">
-                  <div class="topline"><h4>Nortepack Core Beige</h4><div class="price">19,99 €</div></div>
-                  <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Estilo sobrio y actual.</p>
-                  <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Beige" data-price="19,99">Pedir esta</a>
-                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
-                  </div>
-                </div>
-              </article>
-
-              <article class="card" data-type="core">
-                <div class="thumb">
-                  <span class="label">CORE</span>
-                  <span class="ribbon">Recomendada</span>
-                  <img src="imagen/prod-08.jpg" alt="Nortepack Core Amarillo">
-                </div>
-                <div class="content">
-                  <div class="topline"><h4>Nortepack Core Amarillo</h4><div class="price">19,99 €</div></div>
-                  <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Para destacar con buen gusto.</p>
-                  <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Amarillo" data-price="19,99">Pedir esta</a>
-                    <a class="btn-mini" href="#como-comprar">Cómo comprar</a>
-                  </div>
-                </div>
-              </article>
+            <div class="chips">
+              <span class="chip">Ligera</span>
+              <span class="chip">Espaciosa</span>
+              <span class="chip">Cole / trabajo</span>
             </div>
-
-            <!-- COMPARADOR -->
-            <div class="compare">
-              <h3>Comparativa rápida: Básicas vs Core</h3>
-              <div class="compare-grid">
-                <div class="cmp">
-                  <div class="t"><b>Básicas</b><span class="badge">Mejor precio</span></div>
-                  <ul>
-                    <li>Ideal para uso diario sencillo</li>
-                    <li>Ligera y práctica</li>
-                    <li>Opción más económica</li>
-                  </ul>
-                </div>
-                <div class="cmp">
-                  <div class="t"><b>Nortepack Core</b><span class="badge core">Acabado premium</span></div>
-                  <ul>
-                    <li>Más estructura y presencia</li>
-                    <li>Mejor sensación de “mochila pro”</li>
-                    <li>Recomendada para trabajo y uso intensivo</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <!-- RESEÑAS -->
-            <div class="reviews">
-              <div class="review">
-                <div class="head"><span class="name">Laura</span><span class="rate">★★★★★</span></div>
-                <p>Muy cómoda y mejor de lo que esperaba por el precio. La entrega fue rápida y muy amable.</p>
-              </div>
-              <div class="review">
-                <div class="head"><span class="name">Iván</span><span class="rate">★★★★★</span></div>
-                <p>La Core se nota más “premium”. Buen tamaño y acabados. Atención por WhatsApp perfecta.</p>
-              </div>
-              <div class="review">
-                <div class="head"><span class="name">Noa</span><span class="rate">★★★★★</span></div>
-                <p>Me recomendaron color y acertaron. Muy top para el día a día. Repetiré.</p>
-              </div>
+            <div class="actions">
+              <a class="btn small primary buy" href="#" data-product="Básica (ligera)" data-price="10,99€">Comprar</a>
+              <a class="btn small" href="#preguntas">Dudas</a>
             </div>
           </div>
-        </div>
+        </article>
+
+        <!-- Producto 3 -->
+        <article class="card">
+          <div class="img">
+            <img src="imagen/mochila-3.png" alt="Mochila (otro color)" onerror="this.style.display='none'" />
+          </div>
+          <div class="body">
+            <h3>Color edición (top ventas)</h3>
+            <div class="price">
+              <span class="old">14,99€</span>
+              <span class="new">10,99€</span>
+            </div>
+            <div class="chips">
+              <span class="chip">Gran capacidad</span>
+              <span class="chip">Acabado premium</span>
+              <span class="chip">Cremalleras fuertes</span>
+            </div>
+            <div class="actions">
+              <a class="btn small primary buy" href="#" data-product="Color edición (top ventas)" data-price="10,99€">Comprar</a>
+              <a class="btn small" href="#contacto">Contacto</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- CÓMO COMPRAR -->
-    <section id="como-comprar" class="section">
-      <div class="container two">
-        <div class="panel">
-          <h3>Cómo comprar tu mochila</h3>
-          <p>
-            Puedes hacer tu pedido de forma sencilla por WhatsApp. Te confirmamos stock, precio y el método de entrega
-            (a domicilio en Ourense o envío a tu ciudad).
-          </p>
-          <ol class="steps">
-            <li>Selecciona el modelo que te guste y pulsa <b>“Pedir esta”</b>.</li>
-            <li>Se abrirá WhatsApp con un mensaje ya preparado para ti.</li>
-            <li>Te confirmamos disponibilidad y coordinamos la entrega.</li>
-            <li>En Ourense, realizamos <b>entrega a domicilio</b>. En otras zonas, gestionamos el envío.</li>
-          </ol>
+    <!-- CÓMO FUNCIONA -->
+    <section id="como-funciona">
+      <div class="section-title">
+        <div>
+          <h2>Cómo funciona</h2>
+          <p>Simple, rápido y sin mareos.</p>
+        </div>
+      </div>
 
-          <div class="highlight">
-            <strong>WhatsApp:</strong> +34 697 62 59 64<br>
-            <strong>Instagram:</strong> @nortepack.es<br>
-            <strong>Ourense:</strong> entrega a domicilio (según zona y horario)
+      <div class="grid" style="grid-template-columns:repeat(3, 1fr);">
+        <div class="card">
+          <div class="body">
+            <h3>1) Elige modelo y color</h3>
+            <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55;">
+              Entra al catálogo y dime cuál quieres. Si dudas, te asesoro por WhatsApp.
+            </p>
           </div>
         </div>
-
-        <div class="panel">
-          <h3>Información rápida</h3>
-          <p>Atención cercana, compra fácil y transparencia en todo el proceso.</p>
-          <ul class="steps" style="margin:0; padding-left:18px;">
-            <li><b>Ciudad base:</b> Ourense</li>
-            <li><b>Pago:</b> Efectivo / Bizum</li>
-            <li><b>Entrega local:</b> A domicilio</li>
-            <li><b>Envíos:</b> 48 h aprox. según destino</li>
-          </ul>
+        <div class="card">
+          <div class="body">
+            <h3>2) Confirmamos entrega</h3>
+            <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55;">
+              Ourense: reparto rápido y pago en mano. Fuera: envío 48h.
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="body">
+            <h3>3) La recibes y listo</h3>
+            <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.55;">
+              Trato cercano. Si algo no cuadra, lo hablamos y lo resolvemos.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">Preguntas frecuentes</h2>
-            <p class="section-sub">Respuestas claras y formales para que el cliente se sienta seguro.</p>
-          </div>
+    <section id="preguntas">
+      <div class="section-title">
+        <div>
+          <h2>Preguntas frecuentes</h2>
+          <p>Lo típico que te van a preguntar por DM.</p>
         </div>
+      </div>
 
-        <div class="panel faq">
-          <details open>
-            <summary>¿Cómo se realiza la entrega en Ourense?</summary>
-            <p class="ans">La entrega se realiza <b>a domicilio</b>, coordinando previamente la zona y el horario por WhatsApp.</p>
-          </details>
-          <details>
-            <summary>¿Cuánto tarda el envío fuera de Ourense?</summary>
-            <p class="ans">Habitualmente, el envío tarda <b>aprox. 48 horas</b> (puede variar según destino).</p>
-          </details>
-          <details>
-            <summary>¿Cómo confirmo si hay stock del color que quiero?</summary>
-            <p class="ans">Escríbenos por WhatsApp y te confirmamos disponibilidad al momento.</p>
-          </details>
-          <details>
-            <summary>¿Qué modelo recomendáis?</summary>
-            <p class="ans">Si buscas el mejor precio, recomendamos <b>Básicas</b>. Si quieres un acabado más premium, <b>Nortepack Core</b>.</p>
-          </details>
+      <details>
+        <summary>¿Puedo pagar en mano en Ourense?</summary>
+        <p>Sí. Te la llevo y pagas al recibir (zona Ourense y alrededores, según punto).</p>
+      </details>
+      <details>
+        <summary>¿Cuánto tarda el envío fuera de Ourense?</summary>
+        <p>Normalmente 48h (según destino y mensajería).</p>
+      </details>
+      <details>
+        <summary>¿Cómo pido por WhatsApp?</summary>
+        <p>Botón “Comprar” y ya te sale el mensaje listo. Solo envías y confirmamos.</p>
+      </details>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="section-title">
+        <div>
+          <h2>Contacto</h2>
+          <p>Respuesta rápida por WhatsApp.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="body">
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <a class="btn primary" id="btn-whatsapp-contact" href="#" rel="nofollow">Hablar por WhatsApp</a>
+            <a class="btn" href="https://instagram.com/nortepack.es" target="_blank" rel="noopener">@nortepack.es</a>
+            <span style="color:var(--muted);font-size:13px;">Tel: <b style="color:var(--text);">697 625 964</b></span>
+          </div>
+          <p style="margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.55;">
+            Consejo: en WhatsApp dime <b>modelo + color + si eres de Ourense</b> (para pago en mano) o tu ciudad (para envío).
+          </p>
         </div>
       </div>
     </section>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <strong>NORTEPACK</strong><br/>
+          Mochilas económicas · Entrega en Ourense · Envíos 48h
+        </div>
+        <div>
+          Instagram: <a href="https://instagram.com/nortepack.es" target="_blank" rel="noopener">@nortepack.es</a><br/>
+          WhatsApp: <a id="wa-footer" href="#" rel="nofollow">697 625 964</a>
+        </div>
+      </div>
+      <div style="margin-top:10px; opacity:.85;">
+        © <span id="year"></span> Nortepack. Todos los derechos reservados.
+      </div>
+    </footer>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>© <span id="year"></span> NORTEPACK · Todos los derechos reservados.</span>
-      <span>Instagram: <a href="https://www.instagram.com/nortepack.es" target="_blank" rel="noopener">@nortepack.es</a></span>
+  <!-- BARRA FIJA MÓVIL -->
+  <div class="mobilebar" role="navigation" aria-label="Acciones rápidas">
+    <div class="inner">
+      <a class="btn" href="https://instagram.com/nortepack.es" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn primary" id="btn-whatsapp-mobile" href="#" rel="nofollow">Comprar</a>
     </div>
-  </footer>
-
-  <!-- WhatsApp flotante -->
-  <div class="wa-float" aria-label="Contacto rápido">
-    <div class="wa-pill">¿Te ayudo a elegir color? Escríbenos</div>
-    <a class="wa-btn" href="https://wa.me/34697625964" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
-      WA
-    </a>
   </div>
 
   <script>
-    // Año
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // ✅ WhatsApp (cambia aquí si algún día cambias número)
+    const PHONE = "34697625964"; // formato internacional sin +
+    const DEFAULT_MSG = "Hola! Quiero una mochila NORTEPACK. Modelo: ____. Color: ____. Soy de Ourense? (sí/no): ____.";
 
-    // Menú móvil
-    const burger = document.getElementById("burger");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const mobileLinks = mobileMenu.querySelectorAll("a");
+    function waLink(message){
+      const text = encodeURIComponent(message);
+      return `https://wa.me/${PHONE}?text=${text}`;
+    }
 
-    burger.addEventListener("click", () => {
-      mobileMenu.classList.toggle("show");
-    });
-    mobileLinks.forEach(a => a.addEventListener("click", () => mobileMenu.classList.remove("show")));
+    // Botones principales
+    const btns = [
+      "btn-whatsapp-top",
+      "btn-whatsapp-hero",
+      "btn-whatsapp-contact",
+      "btn-whatsapp-mobile",
+      "wa-footer"
+    ].map(id => document.getElementById(id)).filter(Boolean);
 
-    // WhatsApp pre-rellenado por producto
-    const phone = "34697625964";
-    document.querySelectorAll(".buy-wa").forEach(btn => {
-      btn.addEventListener("click", (e) => {
+    btns.forEach(b => b.href = waLink(DEFAULT_MSG));
+
+    // Botones "Comprar" por producto
+    document.querySelectorAll(".buy").forEach(btn=>{
+      btn.addEventListener("click", (e)=>{
         e.preventDefault();
-        const model = btn.getAttribute("data-model") || "Mochila NORTEPACK";
-        const price = btn.getAttribute("data-price") || "";
-        const msg = `Hola, me gustaría pedir la ${model} (${price}€). Soy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.`;
-        const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-        window.open(url, "_blank", "noopener");
+        const product = btn.dataset.product || "Mochila";
+        const price = btn.dataset.price || "";
+        const msg = `Hola! Quiero la mochila: ${product} (${price}). Color: ____. Soy de Ourense? (sí/no): ____.`;
+        window.open(waLink(msg), "_blank", "noopener");
       });
+      btn.href = waLink(DEFAULT_MSG);
     });
 
-    // Filtros catálogo
-    const chips = document.querySelectorAll(".chip");
-    const cards = document.querySelectorAll(".card");
-    const blocks = document.querySelectorAll(".block");
-
-    function setActiveChip(active){
-      chips.forEach(c => c.classList.toggle("active", c === active));
-    }
-    function applyFilter(type){
-      if(type === "all"){
-        blocks.forEach(b => b.style.display = "block");
-        cards.forEach(c => c.style.display = "flex");
-        return;
-      }
-      blocks.forEach(b => {
-        const group = b.getAttribute("data-group");
-        b.style.display = (group === type) ? "block" : "none";
-      });
-      cards.forEach(c => {
-        const t = c.getAttribute("data-type");
-        c.style.display = (t === type) ? "flex" : "none";
-      });
-    }
-
-    chips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        const f = chip.getAttribute("data-filter");
-        setActiveChip(chip);
-        applyFilter(f);
-        document.getElementById("catalogo").scrollIntoView({ behavior:"smooth", block:"start" });
-      });
-    });
-
-    // Slider
-    const carousel = document.getElementById("carousel");
-    const prev = document.getElementById("prev");
-    const next = document.getElementById("next");
-
-    function scrollByCards(dir){
-      const card = carousel.querySelector(".slide");
-      const step = (card ? card.offsetWidth : 240) + 12;
-      carousel.scrollBy({ left: dir * step, behavior: "smooth" });
-    }
-    prev.addEventListener("click", () => scrollByCards(-1));
-    next.addEventListener("click", () => scrollByCards(1));
-
-    // Cierre menú móvil si se cambia a desktop (por si el usuario rota pantalla)
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 720) mobileMenu.classList.remove("show");
-    });
+    // Año automático
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
