@@ -361,6 +361,88 @@
       overflow:hidden;
     }
     .wa-btn:hover{ opacity:.96; }
+
+    /* ==================================================
+       📱 Apple Mobile Mode (solo móvil)
+       - Carrusel horizontal por bloque
+       - Scrollbar visible
+       - Snap por tarjeta (tipo Apple Store)
+       ================================================== */
+    @media (max-width: 768px){
+
+      /* Header compacto en móvil */
+      :root{ --pad: 14px; --navH: 58px; --logoH: 30px; }
+
+      .brand .sub{ display:none; } /* más limpio en móvil */
+      .nav-links{ display:none; }  /* quitamos “Catálogo” arriba */
+      .btn.btn-primary{ padding: 10px 12px; font-size: 12px; }
+
+      .section{ padding: 22px 0 36px; }
+      .section-title{ font-size: 26px; }
+      .section-sub{ font-size: 13px; }
+
+      /* Chips con scroll horizontal si no caben */
+      .filters{
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 6px;
+      }
+      .filters::-webkit-scrollbar{ height: 6px; }
+      .filters::-webkit-scrollbar-track{ background: rgba(0,0,0,.06); border-radius: 999px; }
+      .filters::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.20); border-radius: 999px; }
+
+      /* ✅ CARRUSEL APPLE POR CADA .grid */
+      .grid{
+        display: flex !important;
+        gap: 14px !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        padding: 14px 14px 12px !important;
+
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+
+        /* Esto evita “saltos” en iOS */
+        scroll-padding-left: 14px;
+      }
+
+      /* Barra de desplazamiento del carrusel (abajo) */
+      .grid::-webkit-scrollbar{ height: 7px; }
+      .grid::-webkit-scrollbar-track{
+        background: rgba(0,0,0,.08);
+        border-radius: 999px;
+      }
+      .grid::-webkit-scrollbar-thumb{
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        border-radius: 999px;
+      }
+
+      /* ✅ 1 mochila por vista (premium Apple) */
+      .card{
+        flex: 0 0 auto !important;
+        min-width: 84% !important;     /* ancho tipo Apple Store */
+        scroll-snap-align: start;
+      }
+
+      /* Ajustes de contenido para que no se corte */
+      .thumb{ aspect-ratio: 4 / 3; }
+      .content h4{
+        font-size: 15px;
+        line-height: 1.15;
+      }
+      .note{ font-size: 12px; }
+
+      /* Botón siempre grande */
+      .btn-mini{
+        width: 100%;
+        padding: 12px 14px;
+        font-size: 13px;
+      }
+
+      /* WhatsApp flotante sin tapar */
+      .wa-pill{ display:none; }
+      .wa-btn{ width: 58px; height: 58px; border-radius: 18px; }
+    }
   </style>
 </head>
 
