@@ -106,9 +106,6 @@
 
     /* ==================================================
        ✅ BARRA PRO "Apple-like" (rotación)
-       - 1 mensaje visible
-       - Transición suave
-       - Pausa al hover
        ================================================== */
     .promo-rotator{
       border-bottom: 1px solid var(--line);
@@ -159,13 +156,6 @@
       transform: translateX(-50%) translateY(-6px);
     }
 
-    /* En móvil: un poquito más pequeño */
-    @media (max-width: 768px){
-      .promo-rotator .container{ min-height: 40px; padding: 10px 14px; }
-      .promo-item{ font-size: 11px; letter-spacing: .09em; }
-      .promo-item .icon{ width: 20px; height: 20px; font-size: 11px; }
-    }
-
     /* ---------- Section ---------- */
     .section{ padding: 34px 0 48px; }
     .section-head{
@@ -179,6 +169,62 @@
       color: var(--muted);
       font-size: 14px;
       max-width: 78ch;
+    }
+
+    /* ✅ TITULOS DE MARCA (PRO) */
+    .brand-lines{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .brand-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 10px 26px rgba(0,0,0,.06);
+      backdrop-filter: blur(12px);
+      position:relative;
+      overflow:hidden;
+    }
+    .brand-pill::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(420px 120px at 20% 0%, rgba(24,230,255,.18), transparent 55%),
+                  radial-gradient(420px 120px at 80% 100%, rgba(0,208,132,.14), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .brand-pill > *{ position:relative; z-index:1; }
+
+    .brand-icon{
+      width: 22px; height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(0,0,0,.03);
+      display:grid;
+      place-items:center;
+      font-size: 12px;
+      flex: 0 0 auto;
+    }
+    .brand-text{
+      font-weight: 950;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .brand-accent{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .filters{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
@@ -433,9 +479,17 @@
       .nav-links{ display:none; }
       .btn.btn-primary{ padding: 10px 12px; font-size: 12px; }
 
+      .promo-rotator .container{ min-height: 40px; padding: 10px 14px; }
+      .promo-item{ font-size: 11px; letter-spacing: .09em; }
+      .promo-item .icon{ width: 20px; height: 20px; font-size: 11px; }
+
       .section{ padding: 22px 0 34px; }
       .section-title{ font-size: 26px; }
       .section-sub{ font-size: 13px; }
+
+      /* ✅ Brand pills en móvil: full width */
+      .brand-pill{ width:100%; justify-content:center; text-align:center; }
+      .brand-text{ font-size: 11px; letter-spacing: .11em; }
 
       .filters{
         overflow-x: auto;
@@ -509,7 +563,7 @@
 
       <div class="promo-item" data-i="1">
         <span class="icon">📍</span>
-        <span>Entrega en España (según zona/horario)</span>
+        <span>Entrega en Ourense (según zona/horario)</span>
       </div>
 
       <div class="promo-item" data-i="2">
@@ -529,7 +583,21 @@
             <p class="section-sub">
               Elige tu modelo y pide por WhatsApp. Entrega en Ourense (según zona/horario) y envíos aprox. 48 h.
             </p>
+
+            <!-- ✅ TITULOS DE MARCA (2 FRASES) -->
+            <div class="brand-lines" aria-label="Frases de marca">
+              <div class="brand-pill">
+                <span class="brand-icon">🎨</span>
+                <span class="brand-text">¿Cuál es tu <span class="brand-accent">color favorito</span>?</span>
+              </div>
+
+              <div class="brand-pill">
+                <span class="brand-icon">🚀</span>
+                <span class="brand-text"><span class="brand-accent">Sueña</span> · Carga · Avanza</span>
+              </div>
+            </div>
           </div>
+
           <div class="filters" aria-label="Filtros de catálogo">
             <div class="chip active" data-filter="all">Ver todo</div>
             <div class="chip" data-filter="basica">Básicas</div>
@@ -809,11 +877,9 @@
         current.classList.remove("active");
         current.classList.add("exiting");
 
-        // activar el siguiente
         nxt.classList.add("active");
         nxt.classList.remove("exiting");
 
-        // limpiar exiting después del fade
         setTimeout(() => current.classList.remove("exiting"), 500);
 
         i = next;
@@ -837,7 +903,6 @@
       wrap.addEventListener("mouseenter", () => { paused = true; });
       wrap.addEventListener("mouseleave", () => { paused = false; });
 
-      // Si el usuario cambia de pestaña, no gastamos recursos
       document.addEventListener("visibilitychange", () => {
         if(document.hidden) stop();
         else start();
