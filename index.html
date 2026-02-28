@@ -30,6 +30,25 @@
 
       --navH: 62px;
       --logoH: 34px;
+
+      color-scheme: light;
+    }
+
+    /* ==============================
+       ✅ THEME (Light/Dark) PRO
+       ============================== */
+    :root[data-theme="dark"]{
+      color-scheme: dark;
+
+      --bg:#0b0c10;
+      --bg2:#10131a;
+      --card: rgba(20,22,28,.92);
+      --text:#f2f4f8;
+      --muted: rgba(242,244,248,.72);
+      --line: rgba(255,255,255,.10);
+
+      --shadow: 0 10px 26px rgba(0,0,0,.55);
+      --shadow2: 0 18px 60px rgba(0,0,0,.65);
     }
 
     *{ box-sizing:border-box; }
@@ -57,6 +76,10 @@
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--line);
     }
+    :root[data-theme="dark"] .header{
+      background: rgba(14,16,22,.72);
+    }
+
     .header-inner{
       height: var(--navH);
       display:flex; align-items:center; justify-content:space-between;
@@ -86,6 +109,7 @@
       transition: background .15s ease, color .15s ease, transform .15s ease;
     }
     .nav-links a:hover{ color: var(--text); background: rgba(0,0,0,.04); transform: translateY(-1px); }
+    :root[data-theme="dark"] .nav-links a:hover{ background: rgba(255,255,255,.06); }
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
@@ -104,16 +128,40 @@
     }
     .btn-primary:hover{ opacity:.96; box-shadow: 0 16px 36px rgba(0,208,132,.22); }
 
+    /* ✅ Theme toggle */
+    .theme-toggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.80);
+      backdrop-filter: blur(12px);
+      font-weight: 950;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, background .12s ease, opacity .12s ease;
+      white-space:nowrap;
+    }
+    :root[data-theme="dark"] .theme-toggle{
+      background: rgba(0,0,0,.35);
+    }
+    .theme-toggle:active{ transform: scale(.98); }
+
     /* ==================================================
        ✅ BARRA PRO "Apple-like" (rotación)
-       - 1 mensaje visible
-       - Transición suave
-       - Pausa al hover
        ================================================== */
     .promo-rotator{
       border-bottom: 1px solid var(--line);
       background: rgba(255,255,255,.86);
       backdrop-filter: blur(12px);
+    }
+    :root[data-theme="dark"] .promo-rotator{
+      background: rgba(14,16,22,.60);
     }
     .promo-rotator .container{
       position:relative;
@@ -140,7 +188,6 @@
       pointer-events:none;
       transition: opacity .45s ease, transform .45s ease;
     }
-    /* ✅ icon eliminado: ya no hay .promo-item .icon */
     .promo-item.active{
       opacity:1;
       pointer-events:auto;
@@ -187,6 +234,10 @@
       position:relative;
       overflow:hidden;
     }
+    :root[data-theme="dark"] .brand-pill{
+      background: rgba(0,0,0,.28);
+      box-shadow: 0 10px 26px rgba(0,0,0,.38);
+    }
     .brand-pill::before{
       content:"";
       position:absolute;
@@ -225,12 +276,15 @@
       font-weight: 950;
       transition: background .12s ease, color .12s ease, transform .12s ease, box-shadow .12s ease;
     }
+    :root[data-theme="dark"] .chip{ background: rgba(0,0,0,.22); }
     .chip:hover{ transform: translateY(-1px); background: rgba(0,0,0,.03); color: var(--text); box-shadow: 0 10px 20px rgba(0,0,0,.06); }
+    :root[data-theme="dark"] .chip:hover{ background: rgba(255,255,255,.06); }
     .chip.active{
       background: rgba(0,208,132,.10);
       border-color: rgba(0,208,132,.18);
       color:#0b4a33;
     }
+    :root[data-theme="dark"] .chip.active{ color:#bfffe6; }
 
     /* ---------- Catalog blocks ---------- */
     .catalog{ display:flex; flex-direction:column; gap: 18px; }
@@ -242,6 +296,10 @@
       box-shadow: var(--shadow);
       overflow:hidden;
     }
+    :root[data-theme="dark"] .block{
+      background: rgba(0,0,0,.22);
+    }
+
     .block-head{
       padding: 16px 16px 0;
       display:flex;
@@ -260,11 +318,15 @@
       color:#0b4a33;
       width: max-content;
     }
+    :root[data-theme="dark"] .badge{ color:#bfffe6; }
+
     .badge.core{
       border-color: rgba(24,230,255,.22);
       background: rgba(24,230,255,.10);
       color:#063245;
     }
+    :root[data-theme="dark"] .badge.core{ color:#c9f4ff; }
+
     .block-title h3{
       margin: 10px 0 6px;
       font-size: 18px;
@@ -296,7 +358,12 @@
       transition: transform .14s ease, box-shadow .14s ease;
       min-width:0;
     }
+    :root[data-theme="dark"] .card{
+      background: rgba(12,14,18,.85);
+      box-shadow: 0 10px 22px rgba(0,0,0,.50);
+    }
     .card:hover{ transform: translateY(-4px); box-shadow: 0 18px 44px rgba(0,0,0,.14); }
+    :root[data-theme="dark"] .card:hover{ box-shadow: 0 18px 44px rgba(0,0,0,.70); }
 
     .thumb{
       position:relative;
@@ -305,6 +372,8 @@
       overflow:hidden;
       border-bottom: 1px solid var(--line);
     }
+    :root[data-theme="dark"] .thumb{ background: rgba(0,0,0,.25); }
+
     .thumb img{
       width:100%;
       height:100%;
@@ -329,6 +398,10 @@
       color: var(--text);
       backdrop-filter: blur(10px);
     }
+    :root[data-theme="dark"] .label{
+      background: rgba(0,0,0,.45);
+    }
+
     .ribbon{
       position:absolute;
       top:12px; right:12px;
@@ -343,6 +416,7 @@
       color:#0b4a33;
       backdrop-filter: blur(10px);
     }
+    :root[data-theme="dark"] .ribbon{ color:#bfffe6; }
     .ribbon.hot{ background: rgba(255,200,0,.14); border-color: rgba(255,200,0,.28); color:#5a4200; }
 
     .content{
@@ -376,9 +450,12 @@
       color:#0b4a33;
       flex: 0 0 auto;
     }
+    :root[data-theme="dark"] .price{ color:#bfffe6; }
+
     .note{ margin: 0; color: var(--muted); font-size: 12px; }
     .stars{ display:flex; align-items:center; gap:6px; font-size: 12px; color: var(--muted); }
     .stars .s{ letter-spacing: .06em; color: #0b4a33; font-weight: 950; }
+    :root[data-theme="dark"] .stars .s{ color:#bfffe6; }
 
     .buy{ margin-top:auto; display:flex; gap:8px; flex-wrap:wrap; }
     .btn-mini{
@@ -395,7 +472,9 @@
       user-select:none;
       transition: background .12s ease, transform .12s ease, box-shadow .12s ease;
     }
+    :root[data-theme="dark"] .btn-mini{ background: rgba(0,0,0,.25); }
     .btn-mini:hover{ background: rgba(0,0,0,.03); transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,.06); }
+    :root[data-theme="dark"] .btn-mini:hover{ background: rgba(255,255,255,.06); }
     .btn-mini.primary{
       border-color: transparent;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -411,6 +490,7 @@
       color: var(--muted);
       font-size: 12px;
     }
+    :root[data-theme="dark"] .footer{ background: rgba(14,16,22,.60); }
     .footer-inner{
       display:flex;
       justify-content:space-between;
@@ -419,6 +499,7 @@
       gap:10px;
     }
     .footer a{ color: #0b4a33; font-weight: 950; }
+    :root[data-theme="dark"] .footer a{ color:#bfffe6; }
 
     /* WhatsApp floating */
     .wa-float{
@@ -442,6 +523,8 @@
       backdrop-filter: blur(12px);
       white-space: nowrap;
     }
+    :root[data-theme="dark"] .wa-pill{ background: rgba(0,0,0,.25); box-shadow: 0 18px 40px rgba(0,0,0,.45); }
+
     .wa-btn{
       width: 56px; height: 56px;
       border-radius: 18px;
@@ -471,7 +554,6 @@
       .section-title{ font-size: 26px; }
       .section-sub{ font-size: 13px; }
 
-      /* ✅ Brand pills en móvil: full width */
       .brand-pill{ width:100%; justify-content:center; text-align:center; }
       .brand-text{ font-size: 11px; letter-spacing: .11em; }
 
@@ -513,6 +595,8 @@
 
       .wa-pill{ display:none; }
       .wa-btn{ width: 58px; height: 58px; border-radius: 18px; }
+
+      .theme-toggle{ padding: 10px 10px; font-size: 11px; }
     }
   </style>
 </head>
@@ -532,6 +616,10 @@
         <nav class="nav-links" aria-label="Navegación">
           <a href="#catalogo">Catálogo</a>
         </nav>
+
+        <!-- ✅ BOTÓN TEMA -->
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">Tema</button>
+
         <a class="btn btn-primary" href="https://wa.me/34697625964" target="_blank" rel="noopener">Pedir por WhatsApp</a>
       </div>
     </div>
@@ -562,7 +650,7 @@
           <div>
             <h2 class="section-title">Catálogo NORTEPACK</h2>
             <p class="section-sub">
-              Elige tu modelo y pide por WhatsApp. Entrega en España (según zona/horario) y envíos aprox. 48 h.
+              Elige tu modelo y pide por WhatsApp. Entrega en Ourense (según zona/horario) y envíos aprox. 48 h.
             </p>
 
             <!-- ✅ TITULOS DE MARCA (2 FRASES) - SIN ICONOS -->
@@ -888,6 +976,38 @@
       });
 
       start();
+    })();
+
+    /* ==============================
+       ✅ Theme toggle (Light/Dark)
+       - Recuerda elección
+       - Respeta preferencia del sistema
+       ============================== */
+    (function(){
+      const root = document.documentElement;
+      const btn = document.getElementById("themeToggle");
+      if(!btn) return;
+
+      const saved = localStorage.getItem("np-theme");
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      function setTheme(t){
+        if(t === "dark") root.setAttribute("data-theme","dark");
+        else root.removeAttribute("data-theme");
+        localStorage.setItem("np-theme", t);
+        btn.textContent = (t === "dark") ? "Claro" : "Oscuro";
+      }
+
+      if(saved){
+        setTheme(saved);
+      }else{
+        setTheme(prefersDark ? "dark" : "light");
+      }
+
+      btn.addEventListener("click", () => {
+        const isDark = root.getAttribute("data-theme") === "dark";
+        setTheme(isDark ? "light" : "dark");
+      });
     })();
   </script>
 </body>
