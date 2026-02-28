@@ -104,6 +104,68 @@
     }
     .btn-primary:hover{ opacity:.96; box-shadow: 0 16px 36px rgba(0,208,132,.22); }
 
+    /* ==================================================
+       ✅ BARRA PRO "Apple-like" (rotación)
+       - 1 mensaje visible
+       - Transición suave
+       - Pausa al hover
+       ================================================== */
+    .promo-rotator{
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.86);
+      backdrop-filter: blur(12px);
+    }
+    .promo-rotator .container{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px var(--pad);
+      min-height: 42px;
+    }
+    .promo-item{
+      position:absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+      font-weight: 950;
+      font-size: 12px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .promo-item .icon{
+      width: 22px; height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(0,0,0,.03);
+      display:grid; place-items:center;
+      font-size: 12px;
+      flex: 0 0 auto;
+    }
+    .promo-item.active{
+      opacity:1;
+      pointer-events:auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .promo-item.exiting{
+      opacity:0;
+      transform: translateX(-50%) translateY(-6px);
+    }
+
+    /* En móvil: un poquito más pequeño */
+    @media (max-width: 768px){
+      .promo-rotator .container{ min-height: 40px; padding: 10px 14px; }
+      .promo-item{ font-size: 11px; letter-spacing: .09em; }
+      .promo-item .icon{ width: 20px; height: 20px; font-size: 11px; }
+    }
+
     /* ---------- Section ---------- */
     .section{ padding: 34px 0 48px; }
     .section-head{
@@ -364,15 +426,9 @@
     }
     .wa-btn:hover{ opacity:.96; }
 
-    /* ==================================================
-       ✅ MOBILE FINAL (Apple limpio y estable)
-       - Básicas 2 por fila
-       - Core 1 por fila
-       ================================================== */
     @media (max-width: 768px){
       :root{ --pad: 14px; --navH: 58px; --logoH: 30px; }
 
-      /* Header compacto */
       .brand .sub{ display:none; }
       .nav-links{ display:none; }
       .btn.btn-primary{ padding: 10px 12px; font-size: 12px; }
@@ -381,7 +437,6 @@
       .section-title{ font-size: 26px; }
       .section-sub{ font-size: 13px; }
 
-      /* Chips: scroll si no caben */
       .filters{
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -390,27 +445,19 @@
       }
       .chip{ flex: 0 0 auto; }
 
-      /* Espaciados */
       .block-head{ padding: 14px 14px 0; }
       .grid{ padding: 14px; gap: 12px; }
 
-      /* Básicas: 2 columnas */
       .block[data-group="basica"] .grid{
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
-      /* Core: 1 columna premium */
       .block[data-group="core"] .grid{
         grid-template-columns: 1fr;
       }
 
-      /* Cards */
       .card{ border-radius: 22px; }
-
-      /* Imagen más “Apple” (más panorámica en móvil) */
       .thumb{ aspect-ratio: 16 / 10; }
 
-      /* Títulos sin cortar feo */
       .content h4{
         font-size: 14px;
         line-height: 1.15;
@@ -420,14 +467,12 @@
         overflow: hidden;
       }
 
-      /* Botón cómodo */
       .btn-mini{
         width: 100%;
         padding: 12px 12px;
         font-size: 13px;
       }
 
-      /* WA flotante sin molestar */
       .wa-pill{ display:none; }
       .wa-btn{ width: 58px; height: 58px; border-radius: 18px; }
     }
@@ -453,6 +498,26 @@
       </div>
     </div>
   </header>
+
+  <!-- ✅ BARRA PRO (rotación Apple-like) -->
+  <div class="promo-rotator" aria-label="Anuncios NORTEPACK">
+    <div class="container" id="promoRotator">
+      <div class="promo-item active" data-i="0">
+        <span class="icon">🚚</span>
+        <span>Envíos aprox. 48 h</span>
+      </div>
+
+      <div class="promo-item" data-i="1">
+        <span class="icon">📍</span>
+        <span>Entrega en Ourense (según zona/horario)</span>
+      </div>
+
+      <div class="promo-item" data-i="2">
+        <span class="icon">💬</span>
+        <span>Pedido directo por WhatsApp</span>
+      </div>
+    </div>
+  </div>
 
   <main>
     <!-- CATÁLOGO -->
@@ -622,7 +687,6 @@
                 </div>
               </article>
 
-              <!-- ✅ NUEVA · CORE VERDE CLARITO -->
               <article class="card" data-type="core">
                 <div class="thumb">
                   <span class="label">CORE</span>
@@ -639,7 +703,6 @@
                 </div>
               </article>
 
-              <!-- ✅ NUEVA · CORE ROSA -->
               <article class="card" data-type="core">
                 <div class="thumb">
                   <span class="label">CORE</span>
@@ -671,7 +734,6 @@
     </div>
   </footer>
 
-  <!-- WhatsApp flotante -->
   <div class="wa-float" aria-label="Contacto rápido">
     <div class="wa-pill">¿Te ayudo a elegir color? Escríbenos</div>
     <a class="wa-btn" href="https://wa.me/34697625964" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
@@ -727,6 +789,62 @@
         document.getElementById("catalogo").scrollIntoView({ behavior:"smooth", block:"start" });
       });
     });
+
+    /* ✅ Rotador PRO */
+    (function(){
+      const wrap = document.getElementById("promoRotator");
+      if(!wrap) return;
+
+      const items = Array.from(wrap.querySelectorAll(".promo-item"));
+      if(items.length <= 1) return;
+
+      let i = 0;
+      let timer = null;
+      let paused = false;
+
+      function show(next){
+        const current = items[i];
+        const nxt = items[next];
+
+        current.classList.remove("active");
+        current.classList.add("exiting");
+
+        // activar el siguiente
+        nxt.classList.add("active");
+        nxt.classList.remove("exiting");
+
+        // limpiar exiting después del fade
+        setTimeout(() => current.classList.remove("exiting"), 500);
+
+        i = next;
+      }
+
+      function tick(){
+        if(paused) return;
+        const next = (i + 1) % items.length;
+        show(next);
+      }
+
+      function start(){
+        stop();
+        timer = setInterval(tick, 2600);
+      }
+      function stop(){
+        if(timer) clearInterval(timer);
+        timer = null;
+      }
+
+      wrap.addEventListener("mouseenter", () => { paused = true; });
+      wrap.addEventListener("mouseleave", () => { paused = false; });
+
+      // Si el usuario cambia de pestaña, no gastamos recursos
+      document.addEventListener("visibilitychange", () => {
+        if(document.hidden) stop();
+        else start();
+      });
+
+      start();
+    })();
   </script>
 </body>
 </html>
