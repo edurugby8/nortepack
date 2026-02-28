@@ -106,6 +106,9 @@
 
     /* ==================================================
        ✅ BARRA PRO "Apple-like" (rotación)
+       - 1 mensaje visible
+       - Transición suave
+       - Pausa al hover
        ================================================== */
     .promo-rotator{
       border-bottom: 1px solid var(--line);
@@ -137,15 +140,7 @@
       pointer-events:none;
       transition: opacity .45s ease, transform .45s ease;
     }
-    .promo-item .icon{
-      width: 22px; height: 22px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,.10);
-      background: rgba(0,0,0,.03);
-      display:grid; place-items:center;
-      font-size: 12px;
-      flex: 0 0 auto;
-    }
+    /* ✅ icon eliminado: ya no hay .promo-item .icon */
     .promo-item.active{
       opacity:1;
       pointer-events:auto;
@@ -203,16 +198,6 @@
     }
     .brand-pill > *{ position:relative; z-index:1; }
 
-    .brand-icon{
-      width: 22px; height: 22px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,.10);
-      background: rgba(0,0,0,.03);
-      display:grid;
-      place-items:center;
-      font-size: 12px;
-      flex: 0 0 auto;
-    }
     .brand-text{
       font-weight: 950;
       font-size: 12px;
@@ -481,7 +466,6 @@
 
       .promo-rotator .container{ min-height: 40px; padding: 10px 14px; }
       .promo-item{ font-size: 11px; letter-spacing: .09em; }
-      .promo-item .icon{ width: 20px; height: 20px; font-size: 11px; }
 
       .section{ padding: 22px 0 34px; }
       .section-title{ font-size: 26px; }
@@ -553,21 +537,18 @@
     </div>
   </header>
 
-  <!-- ✅ BARRA PRO (rotación Apple-like) -->
+  <!-- ✅ BARRA PRO (rotación Apple-like) - SIN ICONOS -->
   <div class="promo-rotator" aria-label="Anuncios NORTEPACK">
     <div class="container" id="promoRotator">
       <div class="promo-item active" data-i="0">
-        <span class="icon"></span>
         <span>Envíos aprox. 48 h</span>
       </div>
 
       <div class="promo-item" data-i="1">
-        <span class="icon">📍</span>
         <span>Entrega en Ourense (según zona/horario)</span>
       </div>
 
       <div class="promo-item" data-i="2">
-        <span class="icon">💬</span>
         <span>Pedido directo por WhatsApp</span>
       </div>
     </div>
@@ -584,15 +565,13 @@
               Elige tu modelo y pide por WhatsApp. Entrega en Ourense (según zona/horario) y envíos aprox. 48 h.
             </p>
 
-            <!-- ✅ TITULOS DE MARCA (2 FRASES) -->
+            <!-- ✅ TITULOS DE MARCA (2 FRASES) - SIN ICONOS -->
             <div class="brand-lines" aria-label="Frases de marca">
               <div class="brand-pill">
-                <span class="brand-icon"></span>
                 <span class="brand-text">¿Cuál es tu <span class="brand-accent">color favorito</span>?</span>
               </div>
 
               <div class="brand-pill">
-                <span class="brand-icon"></span>
                 <span class="brand-text"><span class="brand-accent">Sueña</span> · Carga · Avanza</span>
               </div>
             </div>
