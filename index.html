@@ -34,9 +34,6 @@
       color-scheme: light;
     }
 
-    /* ==============================
-       ✅ THEME (Light/Dark) PRO
-       ============================== */
     :root[data-theme="dark"]{
       color-scheme: dark;
 
@@ -127,6 +124,14 @@
       box-shadow: 0 12px 26px rgba(0,208,132,.18);
     }
     .btn-primary:hover{ opacity:.96; box-shadow: 0 16px 36px rgba(0,208,132,.22); }
+
+    .btn-ghost{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.86);
+      color: var(--text);
+    }
+    :root[data-theme="dark"] .btn-ghost{ background: rgba(0,0,0,.22); }
+    .btn-ghost:hover{ transform: translateY(-1px); box-shadow: 0 12px 26px rgba(0,0,0,.08); }
 
     /* ✅ Theme toggle */
     .theme-toggle{
@@ -285,6 +290,137 @@
       color:#0b4a33;
     }
     :root[data-theme="dark"] .chip.active{ color:#bfffe6; }
+
+    /* ---------- NUEVO: Sobre nosotros (premium) ---------- */
+    .about-wrap{
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 14px;
+    }
+
+    .about-card{
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.90);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+    :root[data-theme="dark"] .about-card{
+      background: rgba(0,0,0,.22);
+      box-shadow: var(--shadow2);
+    }
+    .about-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(520px 220px at 15% 10%, rgba(24,230,255,.16), transparent 55%),
+        radial-gradient(520px 220px at 85% 90%, rgba(0,208,132,.14), transparent 55%);
+      pointer-events:none;
+      opacity:.95;
+    }
+    .about-card > *{ position:relative; z-index:1; }
+
+    .about-inner{
+      padding: 18px 18px 16px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .about-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      width:max-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      border: 1px solid rgba(0,208,132,.18);
+      background: rgba(0,208,132,.10);
+      color:#0b4a33;
+    }
+    :root[data-theme="dark"] .about-kicker{ color:#bfffe6; }
+
+    .about-title{
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .about-text{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 90ch;
+    }
+
+    .about-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 8px;
+    }
+
+    .about-side{
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap: 12px;
+      min-height: 100%;
+    }
+    .about-stat{
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.70);
+      padding: 12px 12px;
+    }
+    :root[data-theme="dark"] .about-stat{ background: rgba(0,0,0,.20); }
+    .about-stat .t{
+      font-weight: 950;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .about-stat .v{
+      font-weight: 950;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .about-astro{
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.70);
+      padding: 12px 12px;
+    }
+    :root[data-theme="dark"] .about-astro{ background: rgba(0,0,0,.20); }
+    .about-astro .big{
+      font-weight: 950;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+    }
+    .about-astro .small{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 900px){
+      .about-wrap{ grid-template-columns: 1fr; }
+    }
 
     /* ---------- Catalog blocks ---------- */
     .catalog{ display:flex; flex-direction:column; gap: 18px; }
@@ -614,10 +750,10 @@
 
       <div class="nav">
         <nav class="nav-links" aria-label="Navegación">
+          <a href="#nosotros">Sobre nosotros</a>
           <a href="#catalogo">Catálogo</a>
         </nav>
 
-        <!-- ✅ BOTÓN TEMA -->
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">Tema</button>
 
         <a class="btn btn-primary" href="https://wa.me/34697625964" target="_blank" rel="noopener">Pedir por WhatsApp</a>
@@ -625,7 +761,6 @@
     </div>
   </header>
 
-  <!-- ✅ BARRA PRO (rotación Apple-like) - SIN ICONOS -->
   <div class="promo-rotator" aria-label="Anuncios NORTEPACK">
     <div class="container" id="promoRotator">
       <div class="promo-item active" data-i="0">
@@ -643,6 +778,69 @@
   </div>
 
   <main>
+    <!-- ✅ SOBRE NOSOTROS -->
+    <section id="nosotros" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Sobre NORTEPACK</h2>
+            <p class="section-sub">
+              Marca local nacida en Ourense. Mochilas con estilo, resistentes y a precio justo.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-wrap" aria-label="Información sobre NORTEPACK">
+          <div class="about-card">
+            <div class="about-inner">
+              <div class="about-kicker">Ourense · Envíos · Atención cercana</div>
+              <h3 class="about-title">
+                NORTEPACK nace en Ourense para acompañarte en tu día a día — y en tus objetivos.
+              </h3>
+              <p class="about-text">
+                Somos una marca de mochilas pensada para lo importante: comodidad, resistencia y estilo sin pagar de más.
+                Queremos que comprar sea fácil y claro: puedes pedir desde la web, recibir tu mochila con entrega en Ourense
+                (según zona/horario) o con envíos aprox. 48 h, y hablar con nosotros directamente por WhatsApp.
+              </p>
+              <p class="about-text">
+                Nuestro símbolo es un <strong>astronauta</strong> porque representa a la gente con metas: la que estudia,
+                trabaja, entrena o viaja y no se detiene. Una mochila no es solo un accesorio: es lo que llevas contigo mientras
+                avanzas. En NORTEPACK, te acompañamos… <strong>hasta la luna</strong>.
+              </p>
+
+              <div class="about-actions">
+                <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+                <a class="btn btn-ghost" href="https://wa.me/34697625964" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-card">
+            <div class="about-side">
+              <div class="about-stat">
+                <div class="t">Entrega</div>
+                <div class="v">Ourense (según zona/horario)</div>
+              </div>
+              <div class="about-stat">
+                <div class="t">Envíos</div>
+                <div class="v">Aprox. 48 h</div>
+              </div>
+              <div class="about-stat">
+                <div class="t">Pago</div>
+                <div class="v">Efectivo / Bizum</div>
+              </div>
+
+              <div class="about-astro">
+                <p class="big">Sueña · Carga · Avanza</p>
+                <p class="small">La mochila de los que van a por más. NORTEPACK.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- CATÁLOGO -->
     <section id="catalogo" class="section">
       <div class="container">
@@ -653,7 +851,6 @@
               Elige tu modelo y pide por WhatsApp. Entrega en Ourense (según zona/horario) y envíos aprox. 48 h.
             </p>
 
-            <!-- ✅ TITULOS DE MARCA (2 FRASES) - SIN ICONOS -->
             <div class="brand-lines" aria-label="Frases de marca">
               <div class="brand-pill">
                 <span class="brand-text">¿Cuál es tu <span class="brand-accent">color favorito</span>?</span>
@@ -978,11 +1175,7 @@
       start();
     })();
 
-    /* ==============================
-       ✅ Theme toggle (Light/Dark)
-       - Recuerda elección
-       - Respeta preferencia del sistema
-       ============================== */
+    /* ✅ Theme toggle */
     (function(){
       const root = document.documentElement;
       const btn = document.getElementById("themeToggle");
