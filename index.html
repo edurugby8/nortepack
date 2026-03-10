@@ -65,6 +65,7 @@
 
     a{ color:inherit; text-decoration:none; }
     img{ display:block; max-width:100%; height:auto; }
+    button{ font-family:inherit; }
     .container{ max-width: var(--container); margin: 0 auto; padding: 0 var(--pad); }
 
     /* ---------- Header ---------- */
@@ -111,6 +112,7 @@
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
       padding: 10px 14px; border-radius: 999px;
       border: 1px solid transparent;
       font-weight: 900; font-size: 13px;
@@ -148,7 +150,6 @@
     }
     .btn-dark:hover{ transform: translateY(-1px); }
 
-    /* Theme toggle */
     .theme-toggle{
       display:inline-flex;
       align-items:center;
@@ -303,7 +304,7 @@
     }
     :root[data-theme="dark"] .chip.active{ color:#bfffe6; }
 
-    /* ---------- Catalog blocks ---------- */
+    /* ---------- Catalog ---------- */
     .catalog{ display:flex; flex-direction:column; gap: 18px; }
 
     .block{
@@ -415,6 +416,7 @@
       border: 1px solid var(--line);
       color: var(--text);
       backdrop-filter: blur(10px);
+      z-index:2;
     }
     :root[data-theme="dark"] .label{
       background: rgba(0,0,0,.45);
@@ -433,9 +435,30 @@
       border: 1px solid rgba(0,208,132,.18);
       color:#0b4a33;
       backdrop-filter: blur(10px);
+      z-index:2;
     }
     :root[data-theme="dark"] .ribbon{ color:#bfffe6; }
     .ribbon.hot{ background: rgba(255,200,0,.14); border-color: rgba(255,200,0,.28); color:#5a4200; }
+
+    .product-count{
+      position:absolute;
+      right:12px;
+      bottom:12px;
+      min-width:34px;
+      height:34px;
+      padding:0 10px;
+      border-radius:999px;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      font-weight:950;
+      font-size:12px;
+      color:#012a19;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 12px 24px rgba(0,208,132,.22);
+      z-index:2;
+    }
+    .product-count.show{ display:flex; }
 
     .content{
       padding: 12px 14px 14px;
@@ -567,14 +590,38 @@
       cursor:pointer;
       box-shadow: 0 18px 40px rgba(0,208,132,.16);
       transition: transform .12s ease, opacity .12s ease;
+      position:relative;
     }
     .cart-toggle:hover{ opacity:.96; transform: translateY(-1px); }
+    .cart-toggle svg{ width:22px; height:22px; }
+
+    .cart-toggle-badge{
+      position:absolute;
+      top:-6px;
+      right:-6px;
+      min-width:24px;
+      height:24px;
+      padding:0 6px;
+      border-radius:999px;
+      background:#101113;
+      color:#fff;
+      font-size:11px;
+      font-weight:950;
+      display:grid;
+      place-items:center;
+      border:2px solid #fff;
+    }
+    :root[data-theme="dark"] .cart-toggle-badge{
+      background:#f2f4f8;
+      color:#0b0c10;
+      border-color:#10131a;
+    }
 
     .cart-panel{
       position: fixed;
       right: 16px;
       bottom: 84px;
-      width: min(380px, calc(100vw - 24px));
+      width: min(390px, calc(100vw - 24px));
       max-height: min(72vh, 650px);
       border-radius: 26px;
       border: 1px solid var(--line);
@@ -622,7 +669,7 @@
     .cart-body{
       padding: 12px 12px 4px;
       overflow:auto;
-      max-height: calc(72vh - 160px);
+      max-height: calc(72vh - 178px);
     }
     .cart-empty{
       color: var(--muted);
@@ -731,6 +778,96 @@
     }
     .cart-actions .btn{
       flex:1;
+    }
+
+    /* ---------- Sticky final button ---------- */
+    .checkout-bar{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:16px;
+      z-index:84;
+      width:min(640px, calc(100vw - 32px));
+      display:none;
+    }
+    .checkout-bar.show{ display:block; }
+
+    .checkout-inner{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 44px rgba(0,0,0,.12);
+      border-radius: 999px;
+      padding: 8px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    :root[data-theme="dark"] .checkout-inner{
+      background: rgba(14,16,22,.90);
+      box-shadow: 0 18px 44px rgba(0,0,0,.40);
+    }
+
+    .checkout-meta{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      padding-left:8px;
+    }
+    .checkout-meta strong{
+      font-size:13px;
+      letter-spacing:.04em;
+    }
+    .checkout-meta span{
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .checkout-btn{
+      flex:0 0 auto;
+    }
+
+    /* ---------- Toast ---------- */
+    .toast-wrap{
+      position:fixed;
+      top:88px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:95;
+      width:min(440px, calc(100vw - 24px));
+      pointer-events:none;
+    }
+    .toast{
+      display:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:12px 14px;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 44px rgba(0,0,0,.12);
+      pointer-events:auto;
+    }
+    :root[data-theme="dark"] .toast{
+      background: rgba(14,16,22,.94);
+      box-shadow: 0 18px 44px rgba(0,0,0,.40);
+    }
+    .toast.show{ display:flex; }
+    .toast strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:2px;
+    }
+    .toast small{
+      color:var(--muted);
+      font-size:12px;
     }
 
     /* ---------- About ---------- */
@@ -864,7 +1001,7 @@
     .footer{
       border-top: 1px solid var(--line);
       background: rgba(255,255,255,.88);
-      padding: 18px 0 26px;
+      padding: 18px 0 110px;
       color: var(--muted);
       font-size: 12px;
     }
@@ -949,8 +1086,25 @@
         right: 8px;
         left: 8px;
         width: auto;
-        bottom: 80px;
+        bottom: 88px;
         max-height: 74vh;
+      }
+
+      .checkout-bar{
+        width: calc(100vw - 16px);
+        bottom: 10px;
+      }
+      .checkout-inner{
+        border-radius: 24px;
+        padding:8px;
+      }
+      .checkout-meta{
+        display:none;
+      }
+
+      .toast-wrap{
+        top:74px;
+        width: calc(100vw - 16px);
       }
     }
   </style>
@@ -974,7 +1128,14 @@
         </nav>
 
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">Tema</button>
-        <button class="btn btn-dark" type="button" id="openCartTop">Ver carrito</button>
+        <button class="btn btn-dark" type="button" id="openCartTop">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:16px;height:16px;">
+            <path d="M3 4h2l2.2 9.2a1 1 0 0 0 .97.8h8.98a1 1 0 0 0 .97-.76L20 7H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="10" cy="19" r="1.5" fill="currentColor"/>
+            <circle cx="17" cy="19" r="1.5" fill="currentColor"/>
+          </svg>
+          Ver carrito
+        </button>
       </div>
     </div>
   </header>
@@ -984,14 +1145,22 @@
       <div class="promo-item active" data-i="0">
         <span>Envíos aprox. 48 h</span>
       </div>
-
       <div class="promo-item" data-i="1">
         <span>Entrega en España (según zona/horario)</span>
       </div>
-
       <div class="promo-item" data-i="2">
         <span>Añade varias mochilas y pide todo junto por WhatsApp</span>
       </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap">
+    <div class="toast" id="cartToast">
+      <div>
+        <strong id="toastTitle">Añadido al carrito</strong>
+        <small id="toastText">Producto añadido correctamente.</small>
+      </div>
+      <button class="btn btn-ghost" type="button" id="toastOpenCart">Ver carrito</button>
     </div>
   </div>
 
@@ -1010,7 +1179,6 @@
               <div class="brand-pill">
                 <span class="brand-text">¿Cuál es tu <span class="brand-accent">color favorito</span>?</span>
               </div>
-
               <div class="brand-pill">
                 <span class="brand-text"><span class="brand-accent">Sueña</span> · Carga · Avanza</span>
               </div>
@@ -1036,11 +1204,12 @@
             </div>
 
             <div class="grid">
-              <article class="card" data-type="basica">
+              <article class="card" data-type="basica" data-model-card="Básica Azul">
                 <div class="thumb">
                   <span class="label">Básica</span>
                   <span class="ribbon hot">Más vendida</span>
                   <img src="imagen/prod-01.jpg" alt="Mochila Básica Azul NORTEPACK">
+                  <div class="product-count" data-count-for="Básica Azul">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Básica Azul</h4><div class="price">14,99 €</div></div>
@@ -1052,10 +1221,11 @@
                 </div>
               </article>
 
-              <article class="card" data-type="basica">
+              <article class="card" data-type="basica" data-model-card="Básica Roja">
                 <div class="thumb">
                   <span class="label">Básica</span>
                   <img src="imagen/prod-02.jpg" alt="Mochila Básica Roja NORTEPACK">
+                  <div class="product-count" data-count-for="Básica Roja">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Básica Roja</h4><div class="price">14,99 €</div></div>
@@ -1067,11 +1237,12 @@
                 </div>
               </article>
 
-              <article class="card" data-type="basica">
+              <article class="card" data-type="basica" data-model-card="Básica Negra">
                 <div class="thumb">
                   <span class="label">Básica</span>
                   <span class="ribbon">Recomendada</span>
                   <img src="imagen/prod-03.jpg" alt="Mochila Básica Negra NORTEPACK">
+                  <div class="product-count" data-count-for="Básica Negra">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Básica Negra</h4><div class="price">14,99 €</div></div>
@@ -1083,10 +1254,11 @@
                 </div>
               </article>
 
-              <article class="card" data-type="basica">
+              <article class="card" data-type="basica" data-model-card="Básica Blanca">
                 <div class="thumb">
                   <span class="label">Básica</span>
                   <img src="imagen/prod-04.jpg" alt="Mochila Básica Blanca NORTEPACK">
+                  <div class="product-count" data-count-for="Básica Blanca">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Básica Blanca</h4><div class="price">14,99 €</div></div>
@@ -1111,11 +1283,12 @@
             </div>
 
             <div class="grid">
-              <article class="card" data-type="core">
+              <article class="card" data-type="core" data-model-card="Nortepack Core Rojo">
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon">Nueva</span>
                   <img src="imagen/prod-05.jpg" alt="Nortepack Core Rojo">
+                  <div class="product-count" data-count-for="Nortepack Core Rojo">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Rojo</h4><div class="price">19,99 €</div></div>
@@ -1127,10 +1300,11 @@
                 </div>
               </article>
 
-              <article class="card" data-type="core">
+              <article class="card" data-type="core" data-model-card="Nortepack Core Negro">
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <img src="imagen/prod-06.jpg" alt="Nortepack Core Negro">
+                  <div class="product-count" data-count-for="Nortepack Core Negro">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Negro</h4><div class="price">19,99 €</div></div>
@@ -1142,11 +1316,12 @@
                 </div>
               </article>
 
-              <article class="card" data-type="core">
+              <article class="card" data-type="core" data-model-card="Nortepack Core Beige">
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon hot">Más vendida</span>
                   <img src="imagen/prod-07.jpg" alt="Nortepack Core Beige">
+                  <div class="product-count" data-count-for="Nortepack Core Beige">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Beige</h4><div class="price">19,99 €</div></div>
@@ -1158,11 +1333,12 @@
                 </div>
               </article>
 
-              <article class="card" data-type="core">
+              <article class="card" data-type="core" data-model-card="Nortepack Core Amarillo">
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon">Recomendada</span>
                   <img src="imagen/prod-08.jpg" alt="Nortepack Core Amarillo">
+                  <div class="product-count" data-count-for="Nortepack Core Amarillo">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Amarillo</h4><div class="price">19,99 €</div></div>
@@ -1174,11 +1350,12 @@
                 </div>
               </article>
 
-              <article class="card" data-type="core">
+              <article class="card" data-type="core" data-model-card="Nortepack Core Verde Clarito">
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon">Nueva</span>
                   <img src="imagen/core-verde-clarito.jpg" alt="Nortepack Core Verde Clarito">
+                  <div class="product-count" data-count-for="Nortepack Core Verde Clarito">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Verde Clarito</h4><div class="price">19,99 €</div></div>
@@ -1190,11 +1367,12 @@
                 </div>
               </article>
 
-              <article class="card" data-type="core">
+              <article class="card" data-type="core" data-model-card="Nortepack Core Rosa">
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon">Nueva</span>
                   <img src="imagen/core-rosa.jpg" alt="Nortepack Core Rosa">
+                  <div class="product-count" data-count-for="Nortepack Core Rosa">0</div>
                 </div>
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Rosa</h4><div class="price">19,99 €</div></div>
@@ -1287,8 +1465,26 @@
       <div class="cart-count" id="cartCount">0</div>
     </div>
     <button class="cart-toggle" type="button" id="cartToggle" aria-label="Abrir carrito">
-      🛒
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 4h2l2.2 9.2a1 1 0 0 0 .97.8h8.98a1 1 0 0 0 .97-.76L20 7H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="10" cy="19" r="1.6" fill="currentColor"/>
+        <circle cx="17" cy="19" r="1.6" fill="currentColor"/>
+      </svg>
+      <div class="cart-toggle-badge" id="cartToggleBadge">0</div>
     </button>
+  </div>
+
+  <!-- Barra fija finalizar -->
+  <div class="checkout-bar" id="checkoutBar">
+    <div class="checkout-inner">
+      <div class="checkout-meta">
+        <strong id="checkoutStrong">Tu carrito está listo</strong>
+        <span id="checkoutText">0 productos añadidos</span>
+      </div>
+      <button class="btn btn-primary checkout-btn" type="button" id="checkoutNow">
+        Finalizar pedido por WhatsApp
+      </button>
+    </div>
   </div>
 
   <!-- Panel del carrito -->
@@ -1328,6 +1524,7 @@
     function setActiveChip(active){
       chips.forEach(c => c.classList.toggle("active", c === active));
     }
+
     function applyFilter(type){
       if(type === "all"){
         blocks.forEach(b => b.style.display = "block");
@@ -1437,6 +1634,7 @@
     // Carrito
     const phone = "34697625964";
     const cart = [];
+
     const cartPanel = document.getElementById("cartPanel");
     const cartToggle = document.getElementById("cartToggle");
     const cartClose = document.getElementById("cartClose");
@@ -1447,9 +1645,21 @@
     const cartKinds = document.getElementById("cartKinds");
     const clearCart = document.getElementById("clearCart");
     const sendWhatsApp = document.getElementById("sendWhatsApp");
+    const cartToggleBadge = document.getElementById("cartToggleBadge");
+
+    const checkoutBar = document.getElementById("checkoutBar");
+    const checkoutNow = document.getElementById("checkoutNow");
+    const checkoutText = document.getElementById("checkoutText");
+
+    const cartToast = document.getElementById("cartToast");
+    const toastTitle = document.getElementById("toastTitle");
+    const toastText = document.getElementById("toastText");
+    const toastOpenCart = document.getElementById("toastOpenCart");
+
+    let toastTimer = null;
 
     function formatPrice(num){
-      return num.toFixed(2).replace(".", ",") + " €";
+      return Number(num).toFixed(2).replace(".", ",") + " €";
     }
 
     function openCart(){
@@ -1467,6 +1677,7 @@
     function loadCart(){
       const saved = localStorage.getItem("nortepack-cart");
       if(!saved) return;
+
       try{
         const parsed = JSON.parse(saved);
         if(Array.isArray(parsed)){
@@ -1485,10 +1696,33 @@
 
     function getTotals(){
       const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
-      return {
-        totalQty,
-        totalKinds: cart.length
-      };
+      const totalKinds = cart.length;
+      return { totalQty, totalKinds };
+    }
+
+    function getItemQty(model){
+      const found = cart.find(item => item.model === model);
+      return found ? found.qty : 0;
+    }
+
+    function updateProductBadges(){
+      document.querySelectorAll(".product-count").forEach(badge => {
+        const model = badge.getAttribute("data-count-for");
+        const qty = getItemQty(model);
+        badge.textContent = qty;
+        badge.classList.toggle("show", qty > 0);
+      });
+    }
+
+    function updateStickyCheckout(totalQty){
+      if(totalQty > 0){
+        checkoutBar.classList.add("show");
+        checkoutText.textContent = totalQty === 1
+          ? "1 mochila añadida"
+          : `${totalQty} mochilas añadidas`;
+      }else{
+        checkoutBar.classList.remove("show");
+      }
     }
 
     function renderCart(){
@@ -1497,6 +1731,10 @@
       cartCount.textContent = totalQty;
       cartQty.textContent = totalQty;
       cartKinds.textContent = totalKinds;
+      cartToggleBadge.textContent = totalQty;
+
+      updateProductBadges();
+      updateStickyCheckout(totalQty);
 
       if(cart.length === 0){
         cartItems.innerHTML = '<div class="cart-empty">Todavía no has añadido ninguna mochila.</div>';
@@ -1550,34 +1788,61 @@
       });
     }
 
+    function showToast(model, qty){
+      toastTitle.textContent = "Añadido al carrito";
+      toastText.textContent = qty === 1
+        ? `${model} ya está en tu carrito.`
+        : `${model} ahora tiene cantidad ${qty}.`;
+
+      cartToast.classList.add("show");
+
+      if(toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        cartToast.classList.remove("show");
+      }, 2600);
+    }
+
     function addToCart(model, price){
       const existing = cart.find(item => item.model === model);
+
       if(existing){
         existing.qty += 1;
+        showToast(model, existing.qty);
       }else{
         cart.push({
           model,
           price: Number(price),
           qty: 1
         });
+        showToast(model, 1);
       }
+
       saveCart();
       renderCart();
-      openCart();
     }
 
     function buildWhatsAppMessage(){
-      if(cart.length === 0){
-        return "";
-      }
+      if(cart.length === 0) return "";
 
-      let msg = "Hola, me gustaría pedir estas mochilas:%0A%0A";
+      let msg = "Hola, me gustaría pedir estas mochilas:\n\n";
+
       cart.forEach(item => {
-        msg += `• ${item.model} — Cantidad: ${item.qty} — Precio: ${formatPrice(item.price)}%0A`;
+        msg += `• ${item.model} — Cantidad: ${item.qty} — Precio: ${formatPrice(item.price)}\n`;
       });
 
-      msg += "%0ASoy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.";
+      msg += "\nSoy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.";
       return msg;
+    }
+
+    function sendOrderToWhatsApp(){
+      if(cart.length === 0){
+        alert("Tu carrito está vacío.");
+        return;
+      }
+
+      const msg = buildWhatsAppMessage();
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank", "noopener");
     }
 
     document.querySelectorAll(".add-cart").forEach(btn => {
@@ -1590,6 +1855,10 @@
 
     cartToggle.addEventListener("click", openCart);
     openCartTop.addEventListener("click", openCart);
+    toastOpenCart.addEventListener("click", () => {
+      openCart();
+      cartToast.classList.remove("show");
+    });
     cartClose.addEventListener("click", closeCart);
 
     clearCart.addEventListener("click", () => {
@@ -1598,21 +1867,16 @@
       renderCart();
     });
 
-    sendWhatsApp.addEventListener("click", () => {
-      if(cart.length === 0){
-        alert("Tu carrito está vacío.");
-        return;
-      }
-      const msg = buildWhatsAppMessage();
-      const url = `https://wa.me/${phone}?text=${msg}`;
-      window.open(url, "_blank", "noopener");
-    });
+    sendWhatsApp.addEventListener("click", sendOrderToWhatsApp);
+    checkoutNow.addEventListener("click", sendOrderToWhatsApp);
 
     document.addEventListener("click", (e) => {
       const clickedInsidePanel = cartPanel.contains(e.target);
       const clickedToggle = cartToggle.contains(e.target);
       const clickedTopBtn = openCartTop.contains(e.target);
-      if(!clickedInsidePanel && !clickedToggle && !clickedTopBtn && cartPanel.classList.contains("open")){
+      const clickedToast = cartToast.contains(e.target);
+
+      if(!clickedInsidePanel && !clickedToggle && !clickedTopBtn && !clickedToast && cartPanel.classList.contains("open")){
         closeCart();
       }
     });
