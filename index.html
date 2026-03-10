@@ -19,6 +19,7 @@
       --accent:#00d084;
       --accent2:#18e6ff;
       --danger:#ff5c5c;
+      --gold:#ffcc4d;
 
       --shadow: 0 10px 26px rgba(0,0,0,.10);
       --shadow2: 0 18px 60px rgba(0,0,0,.14);
@@ -281,6 +282,64 @@
       color: transparent;
     }
 
+    .family-banner{
+      margin-top: 16px;
+      border: 1px solid rgba(255,200,0,.28);
+      background:
+        radial-gradient(420px 120px at 10% 0%, rgba(255,200,0,.16), transparent 58%),
+        radial-gradient(420px 120px at 90% 100%, rgba(0,208,132,.12), transparent 58%),
+        rgba(255,255,255,.92);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    :root[data-theme="dark"] .family-banner{
+      background:
+        radial-gradient(420px 120px at 10% 0%, rgba(255,200,0,.14), transparent 58%),
+        radial-gradient(420px 120px at 90% 100%, rgba(0,208,132,.10), transparent 58%),
+        rgba(15,18,24,.92);
+    }
+    .family-banner-inner{
+      padding: 16px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .family-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      background: rgba(255,200,0,.14);
+      border: 1px solid rgba(255,200,0,.24);
+      color: #5a4200;
+      width:max-content;
+    }
+    :root[data-theme="dark"] .family-kicker{ color:#ffe8a6; }
+    .family-title{
+      margin: 8px 0 4px;
+      font-size: 20px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+    .family-text{
+      margin:0;
+      color:var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 72ch;
+    }
+    .family-banner .btn{
+      flex: 0 0 auto;
+    }
+
     .filters{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
     .chip{
       border: 1px solid var(--line);
@@ -440,6 +499,24 @@
     :root[data-theme="dark"] .ribbon{ color:#bfffe6; }
     .ribbon.hot{ background: rgba(255,200,0,.14); border-color: rgba(255,200,0,.28); color:#5a4200; }
 
+    .family-tag{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255,200,0,.14);
+      border: 1px solid rgba(255,200,0,.26);
+      color:#5a4200;
+      backdrop-filter: blur(10px);
+      z-index:2;
+    }
+    :root[data-theme="dark"] .family-tag{ color:#ffe8a6; }
+
     .product-count{
       position:absolute;
       right:12px;
@@ -524,14 +601,6 @@
       box-shadow: 0 10px 24px rgba(0,208,132,.16);
     }
     .btn-mini.primary:hover{ opacity:.96; }
-
-    .btn-mini.secondary{
-      border-color: var(--line);
-      background: rgba(255,255,255,.92);
-    }
-    :root[data-theme="dark"] .btn-mini.secondary{
-      background: rgba(255,255,255,.05);
-    }
 
     /* ---------- Cart ---------- */
     .cart-dock{
@@ -621,8 +690,8 @@
       position: fixed;
       right: 16px;
       bottom: 84px;
-      width: min(390px, calc(100vw - 24px));
-      max-height: min(72vh, 650px);
+      width: min(400px, calc(100vw - 24px));
+      max-height: min(76vh, 700px);
       border-radius: 26px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.96);
@@ -669,7 +738,7 @@
     .cart-body{
       padding: 12px 12px 4px;
       overflow:auto;
-      max-height: calc(72vh - 178px);
+      max-height: calc(76vh - 250px);
     }
     .cart-empty{
       color: var(--muted);
@@ -771,6 +840,56 @@
       font-size:13px;
       font-weight:900;
     }
+
+    .cart-promo-box{
+      border:1px solid rgba(255,200,0,.24);
+      background: rgba(255,200,0,.08);
+      border-radius:18px;
+      padding:10px 12px;
+    }
+    .cart-promo-title{
+      font-weight:950;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#5a4200;
+      margin-bottom:4px;
+    }
+    :root[data-theme="dark"] .cart-promo-title{ color:#ffe8a6; }
+    .cart-promo-text{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.45;
+      margin:0;
+    }
+
+    .price-breakdown{
+      display:grid;
+      gap:8px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:12px;
+      background: rgba(255,255,255,.66);
+    }
+    :root[data-theme="dark"] .price-breakdown{ background: rgba(255,255,255,.03); }
+
+    .price-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-size:13px;
+    }
+    .price-row span:first-child{ color:var(--muted); }
+    .price-row strong{ font-weight:950; }
+    .price-row.discount strong{ color:#0b7d55; }
+    :root[data-theme="dark"] .price-row.discount strong{ color:#8ff5c8; }
+    .price-row.total{
+      padding-top:6px;
+      border-top:1px solid var(--line);
+      font-size:14px;
+    }
+
     .cart-actions{
       display:flex;
       gap:8px;
@@ -787,7 +906,7 @@
       transform:translateX(-50%);
       bottom:16px;
       z-index:84;
-      width:min(640px, calc(100vw - 32px));
+      width:min(700px, calc(100vw - 32px));
       display:none;
     }
     .checkout-bar.show{ display:block; }
@@ -839,7 +958,7 @@
       left:50%;
       transform:translateX(-50%);
       z-index:95;
-      width:min(440px, calc(100vw - 24px));
+      width:min(460px, calc(100vw - 24px));
       pointer-events:none;
     }
     .toast{
@@ -1018,6 +1137,7 @@
 
     @media (max-width: 900px){
       .about-wrap{ grid-template-columns: 1fr; }
+      .family-banner-inner{ flex-direction:column; align-items:flex-start; }
     }
 
     @media (max-width: 768px){
@@ -1130,7 +1250,7 @@
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">Tema</button>
         <button class="btn btn-dark" type="button" id="openCartTop">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" style="width:16px;height:16px;">
-            <path d="M3 4h2l2.2 9.2a1 1 0 0 0 .97.8h8.98a1 1 0 0 0 .97-.76L20 7H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 4h2l2.2 9.2a1 1 0 0 0 .97.8h8.98a1 1.0 0 0 0 .97-.76L20 7H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="10" cy="19" r="1.5" fill="currentColor"/>
             <circle cx="17" cy="19" r="1.5" fill="currentColor"/>
           </svg>
@@ -1143,12 +1263,15 @@
   <div class="promo-rotator" aria-label="Anuncios NORTEPACK">
     <div class="container" id="promoRotator">
       <div class="promo-item active" data-i="0">
-        <span>Envíos aprox. 48 h</span>
+        <span>Promo Familia 2x1 · Comprando 2 mochilas del mismo precio, pagas 1</span>
       </div>
       <div class="promo-item" data-i="1">
-        <span>Entrega en España (según zona/horario)</span>
+        <span>Envíos aprox. 48 h</span>
       </div>
       <div class="promo-item" data-i="2">
+        <span>Entrega en España (según zona/horario)</span>
+      </div>
+      <div class="promo-item" data-i="3">
         <span>Añade varias mochilas y pide todo junto por WhatsApp</span>
       </div>
     </div>
@@ -1183,6 +1306,20 @@
                 <span class="brand-text"><span class="brand-accent">Sueña</span> · Carga · Avanza</span>
               </div>
             </div>
+
+            <div class="family-banner" aria-label="Promo Familia 2x1">
+              <div class="family-banner-inner">
+                <div>
+                  <div class="family-kicker">Promo Familia 2x1</div>
+                  <h3 class="family-title">Si compras 2 mochilas del mismo precio, pagas solo 1.</h3>
+                  <p class="family-text">
+                    Oferta ideal para familias con más de un hijo. El descuento se aplica automáticamente en el carrito
+                    cuando añades 2, 4, 6… mochilas del mismo precio.
+                  </p>
+                </div>
+                <a class="btn btn-primary" href="#catalogo">Aprovechar promo</a>
+              </div>
+            </div>
           </div>
 
           <div class="filters" aria-label="Filtros de catálogo">
@@ -1208,6 +1345,7 @@
                 <div class="thumb">
                   <span class="label">Básica</span>
                   <span class="ribbon hot">Más vendida</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/prod-01.jpg" alt="Mochila Básica Azul NORTEPACK">
                   <div class="product-count" data-count-for="Básica Azul">0</div>
                 </div>
@@ -1224,6 +1362,7 @@
               <article class="card" data-type="basica" data-model-card="Básica Roja">
                 <div class="thumb">
                   <span class="label">Básica</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/prod-02.jpg" alt="Mochila Básica Roja NORTEPACK">
                   <div class="product-count" data-count-for="Básica Roja">0</div>
                 </div>
@@ -1241,6 +1380,7 @@
                 <div class="thumb">
                   <span class="label">Básica</span>
                   <span class="ribbon">Recomendada</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/prod-03.jpg" alt="Mochila Básica Negra NORTEPACK">
                   <div class="product-count" data-count-for="Básica Negra">0</div>
                 </div>
@@ -1257,6 +1397,7 @@
               <article class="card" data-type="basica" data-model-card="Básica Blanca">
                 <div class="thumb">
                   <span class="label">Básica</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/prod-04.jpg" alt="Mochila Básica Blanca NORTEPACK">
                   <div class="product-count" data-count-for="Básica Blanca">0</div>
                 </div>
@@ -1287,6 +1428,7 @@
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon">Nueva</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/prod-05.jpg" alt="Nortepack Core Rojo">
                   <div class="product-count" data-count-for="Nortepack Core Rojo">0</div>
                 </div>
@@ -1303,6 +1445,7 @@
               <article class="card" data-type="core" data-model-card="Nortepack Core Negro">
                 <div class="thumb">
                   <span class="label">CORE</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/prod-06.jpg" alt="Nortepack Core Negro">
                   <div class="product-count" data-count-for="Nortepack Core Negro">0</div>
                 </div>
@@ -1320,6 +1463,7 @@
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon hot">Más vendida</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/prod-07.jpg" alt="Nortepack Core Beige">
                   <div class="product-count" data-count-for="Nortepack Core Beige">0</div>
                 </div>
@@ -1337,6 +1481,7 @@
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon">Recomendada</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/prod-08.jpg" alt="Nortepack Core Amarillo">
                   <div class="product-count" data-count-for="Nortepack Core Amarillo">0</div>
                 </div>
@@ -1354,6 +1499,7 @@
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon">Nueva</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/core-verde-clarito.jpg" alt="Nortepack Core Verde Clarito">
                   <div class="product-count" data-count-for="Nortepack Core Verde Clarito">0</div>
                 </div>
@@ -1371,6 +1517,7 @@
                 <div class="thumb">
                   <span class="label">CORE</span>
                   <span class="ribbon">Nueva</span>
+                  <span class="family-tag">2x1 familia</span>
                   <img src="imagen/core-rosa.jpg" alt="Nortepack Core Rosa">
                   <div class="product-count" data-count-for="Nortepack Core Rosa">0</div>
                 </div>
@@ -1411,6 +1558,10 @@
               <p class="about-text">
                 Somos una marca de mochilas pensada para lo importante: comodidad, resistencia y estilo sin pagar de más.
                 Queremos que comprar sea fácil y claro: eliges tus modelos, los añades al carrito y nos envías tu pedido completo por WhatsApp.
+              </p>
+              <p class="about-text">
+                Además, ahora contamos con nuestra <strong>Promo Familia 2x1</strong>: comprando 2 mochilas del mismo precio,
+                pagas solo 1. Ideal para familias con más de un hijo.
               </p>
               <p class="about-text">
                 Nuestro símbolo es un <strong>astronauta</strong> porque representa a la gente con metas: la que estudia,
@@ -1492,7 +1643,7 @@
     <div class="cart-head">
       <div>
         <h3>Tu carrito</h3>
-        <p>Añade varias mochilas y envía todo junto por WhatsApp.</p>
+        <p>Añade varias mochilas y la Promo Familia 2x1 se aplicará automáticamente si corresponde.</p>
       </div>
       <button class="cart-close" type="button" id="cartClose">Cerrar</button>
     </div>
@@ -1506,6 +1657,29 @@
         <span>Total de unidades: <span id="cartQty">0</span></span>
         <span>Productos distintos: <span id="cartKinds">0</span></span>
       </div>
+
+      <div class="cart-promo-box">
+        <div class="cart-promo-title">Promo Familia 2x1</div>
+        <p class="cart-promo-text" id="promoStatusText">
+          Comprando 2 mochilas del mismo precio, pagas solo 1.
+        </p>
+      </div>
+
+      <div class="price-breakdown">
+        <div class="price-row">
+          <span>Subtotal</span>
+          <strong id="subtotalAmount">0,00 €</strong>
+        </div>
+        <div class="price-row discount">
+          <span>Descuento promo</span>
+          <strong id="discountAmount">-0,00 €</strong>
+        </div>
+        <div class="price-row total">
+          <span>Total estimado</span>
+          <strong id="finalAmount">0,00 €</strong>
+        </div>
+      </div>
+
       <div class="cart-actions">
         <button class="btn btn-ghost" type="button" id="clearCart">Vaciar carrito</button>
         <button class="btn btn-primary" type="button" id="sendWhatsApp">Enviar por WhatsApp</button>
@@ -1573,7 +1747,6 @@
         nxt.classList.remove("exiting");
 
         setTimeout(() => current.classList.remove("exiting"), 500);
-
         i = next;
       }
 
@@ -1585,7 +1758,7 @@
 
       function start(){
         stop();
-        timer = setInterval(tick, 2600);
+        timer = setInterval(tick, 2800);
       }
       function stop(){
         if(timer) clearInterval(timer);
@@ -1647,6 +1820,11 @@
     const sendWhatsApp = document.getElementById("sendWhatsApp");
     const cartToggleBadge = document.getElementById("cartToggleBadge");
 
+    const subtotalAmount = document.getElementById("subtotalAmount");
+    const discountAmount = document.getElementById("discountAmount");
+    const finalAmount = document.getElementById("finalAmount");
+    const promoStatusText = document.getElementById("promoStatusText");
+
     const checkoutBar = document.getElementById("checkoutBar");
     const checkoutNow = document.getElementById("checkoutNow");
     const checkoutText = document.getElementById("checkoutText");
@@ -1705,6 +1883,37 @@
       return found ? found.qty : 0;
     }
 
+    function getPromoData(){
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+      const groupedByPrice = {};
+      cart.forEach(item => {
+        const key = item.price.toFixed(2);
+        if(!groupedByPrice[key]){
+          groupedByPrice[key] = { price: item.price, qty: 0 };
+        }
+        groupedByPrice[key].qty += item.qty;
+      });
+
+      let discount = 0;
+      let freeUnits = 0;
+
+      Object.values(groupedByPrice).forEach(group => {
+        const pairs = Math.floor(group.qty / 2);
+        freeUnits += pairs;
+        discount += pairs * group.price;
+      });
+
+      const finalTotal = Math.max(0, subtotal - discount);
+
+      return {
+        subtotal,
+        discount,
+        finalTotal,
+        freeUnits
+      };
+    }
+
     function updateProductBadges(){
       document.querySelectorAll(".product-count").forEach(badge => {
         const model = badge.getAttribute("data-count-for");
@@ -1714,12 +1923,16 @@
       });
     }
 
-    function updateStickyCheckout(totalQty){
+    function updateStickyCheckout(totalQty, promoData){
       if(totalQty > 0){
         checkoutBar.classList.add("show");
-        checkoutText.textContent = totalQty === 1
-          ? "1 mochila añadida"
-          : `${totalQty} mochilas añadidas`;
+        if(promoData.discount > 0){
+          checkoutText.textContent = `${totalQty} mochilas añadidas · ahorro ${formatPrice(promoData.discount)}`;
+        }else{
+          checkoutText.textContent = totalQty === 1
+            ? "1 mochila añadida"
+            : `${totalQty} mochilas añadidas`;
+        }
       }else{
         checkoutBar.classList.remove("show");
       }
@@ -1727,14 +1940,25 @@
 
     function renderCart(){
       const { totalQty, totalKinds } = getTotals();
+      const promoData = getPromoData();
 
       cartCount.textContent = totalQty;
       cartQty.textContent = totalQty;
       cartKinds.textContent = totalKinds;
       cartToggleBadge.textContent = totalQty;
 
+      subtotalAmount.textContent = formatPrice(promoData.subtotal);
+      discountAmount.textContent = "-" + formatPrice(promoData.discount);
+      finalAmount.textContent = formatPrice(promoData.finalTotal);
+
+      if(promoData.discount > 0){
+        promoStatusText.textContent = `Promo aplicada correctamente. Tienes ${promoData.freeUnits} mochila${promoData.freeUnits > 1 ? "s" : ""} bonificada${promoData.freeUnits > 1 ? "s" : ""} por la Promo Familia 2x1.`;
+      }else{
+        promoStatusText.textContent = "Comprando 2 mochilas del mismo precio, pagas solo 1.";
+      }
+
       updateProductBadges();
-      updateStickyCheckout(totalQty);
+      updateStickyCheckout(totalQty, promoData);
 
       if(cart.length === 0){
         cartItems.innerHTML = '<div class="cart-empty">Todavía no has añadido ninguna mochila.</div>';
@@ -1824,11 +2048,22 @@
     function buildWhatsAppMessage(){
       if(cart.length === 0) return "";
 
+      const promoData = getPromoData();
+
       let msg = "Hola, me gustaría pedir estas mochilas:\n\n";
 
       cart.forEach(item => {
-        msg += `• ${item.model} — Cantidad: ${item.qty} — Precio: ${formatPrice(item.price)}\n`;
+        msg += `• ${item.model} — Cantidad: ${item.qty} — Precio unidad: ${formatPrice(item.price)}\n`;
       });
+
+      msg += "\nResumen del pedido:\n";
+      msg += `• Subtotal: ${formatPrice(promoData.subtotal)}\n`;
+      msg += `• Descuento Promo Familia 2x1: -${formatPrice(promoData.discount)}\n`;
+      msg += `• Total estimado: ${formatPrice(promoData.finalTotal)}\n`;
+
+      if(promoData.freeUnits > 0){
+        msg += `• Mochilas bonificadas por promo: ${promoData.freeUnits}\n`;
+      }
 
       msg += "\nSoy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.";
       return msg;
