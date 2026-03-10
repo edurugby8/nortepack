@@ -18,6 +18,7 @@
 
       --accent:#00d084;
       --accent2:#18e6ff;
+      --danger:#ff5c5c;
 
       --shadow: 0 10px 26px rgba(0,0,0,.10);
       --shadow2: 0 18px 60px rgba(0,0,0,.14);
@@ -68,7 +69,7 @@
 
     /* ---------- Header ---------- */
     .header{
-      position: sticky; top:0; z-index:50;
+      position: sticky; top:0; z-index:70;
       background: rgba(255,255,255,.84);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--line);
@@ -114,10 +115,11 @@
       border: 1px solid transparent;
       font-weight: 900; font-size: 13px;
       cursor:pointer; user-select:none;
-      transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
+      transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease, background .12s ease;
       white-space:nowrap;
     }
     .btn:active{ transform: scale(.98); }
+
     .btn-primary{
       color:#012a19;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -133,7 +135,20 @@
     :root[data-theme="dark"] .btn-ghost{ background: rgba(0,0,0,.22); }
     .btn-ghost:hover{ transform: translateY(-1px); box-shadow: 0 12px 26px rgba(0,0,0,.08); }
 
-    /* ✅ Theme toggle */
+    .btn-dark{
+      color:#fff;
+      background:#101113;
+      border:1px solid #101113;
+      box-shadow: 0 12px 26px rgba(0,0,0,.16);
+    }
+    :root[data-theme="dark"] .btn-dark{
+      color:#0b0c10;
+      background:#f2f4f8;
+      border-color:#f2f4f8;
+    }
+    .btn-dark:hover{ transform: translateY(-1px); }
+
+    /* Theme toggle */
     .theme-toggle{
       display:inline-flex;
       align-items:center;
@@ -157,9 +172,7 @@
     }
     .theme-toggle:active{ transform: scale(.98); }
 
-    /* ==================================================
-       ✅ BARRA PRO "Apple-like" (rotación)
-       ================================================== */
+    /* ---------- Promo rotator ---------- */
     .promo-rotator{
       border-bottom: 1px solid var(--line);
       background: rgba(255,255,255,.86);
@@ -218,7 +231,6 @@
       max-width: 78ch;
     }
 
-    /* ✅ TITULOS DE MARCA (PRO) */
     .brand-lines{
       margin-top: 14px;
       display:flex;
@@ -291,7 +303,437 @@
     }
     :root[data-theme="dark"] .chip.active{ color:#bfffe6; }
 
-    /* ---------- NUEVO: Sobre nosotros (premium) ---------- */
+    /* ---------- Catalog blocks ---------- */
+    .catalog{ display:flex; flex-direction:column; gap: 18px; }
+
+    .block{
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.90);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    :root[data-theme="dark"] .block{
+      background: rgba(0,0,0,.22);
+    }
+
+    .block-head{
+      padding: 16px 16px 0;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px; border-radius: 999px;
+      font-size: 11px; font-weight: 950;
+      letter-spacing: .10em; text-transform: uppercase;
+      border: 1px solid rgba(0,208,132,.18);
+      background: rgba(0,208,132,.10);
+      color:#0b4a33;
+      width: max-content;
+    }
+    :root[data-theme="dark"] .badge{ color:#bfffe6; }
+
+    .badge.core{
+      border-color: rgba(24,230,255,.22);
+      background: rgba(24,230,255,.10);
+      color:#063245;
+    }
+    :root[data-theme="dark"] .badge.core{ color:#c9f4ff; }
+
+    .block-title h3{
+      margin: 10px 0 6px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .block-title p{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 80ch;
+    }
+
+    .grid{
+      padding: 16px;
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow:hidden;
+      background: #fff;
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+      transition: transform .14s ease, box-shadow .14s ease;
+      min-width:0;
+      position:relative;
+    }
+    :root[data-theme="dark"] .card{
+      background: rgba(12,14,18,.85);
+      box-shadow: 0 10px 22px rgba(0,0,0,.50);
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow: 0 18px 44px rgba(0,0,0,.14); }
+    :root[data-theme="dark"] .card:hover{ box-shadow: 0 18px 44px rgba(0,0,0,.70); }
+
+    .thumb{
+      position:relative;
+      background:#fff;
+      aspect-ratio: 4 / 3;
+      overflow:hidden;
+      border-bottom: 1px solid var(--line);
+    }
+    :root[data-theme="dark"] .thumb{ background: rgba(0,0,0,.25); }
+
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.01);
+      transition: transform .18s ease;
+    }
+    .card:hover .thumb img{ transform: scale(1.06); }
+
+    .label{
+      position:absolute;
+      top:12px; left:12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--line);
+      color: var(--text);
+      backdrop-filter: blur(10px);
+    }
+    :root[data-theme="dark"] .label{
+      background: rgba(0,0,0,.45);
+    }
+
+    .ribbon{
+      position:absolute;
+      top:12px; right:12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(0,208,132,.10);
+      border: 1px solid rgba(0,208,132,.18);
+      color:#0b4a33;
+      backdrop-filter: blur(10px);
+    }
+    :root[data-theme="dark"] .ribbon{ color:#bfffe6; }
+    .ribbon.hot{ background: rgba(255,200,0,.14); border-color: rgba(255,200,0,.28); color:#5a4200; }
+
+    .content{
+      padding: 12px 14px 14px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      flex: 1;
+      min-width:0;
+    }
+    .topline{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .content h4{
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      min-width:0;
+    }
+    .price{
+      padding: 7px 10px;
+      border-radius: 12px;
+      font-weight: 950;
+      font-size: 13px;
+      white-space:nowrap;
+      background: rgba(0,208,132,.12);
+      border: 1px solid rgba(0,208,132,.18);
+      color:#0b4a33;
+      flex: 0 0 auto;
+    }
+    :root[data-theme="dark"] .price{ color:#bfffe6; }
+
+    .note{ margin: 0; color: var(--muted); font-size: 12px; }
+    .stars{ display:flex; align-items:center; gap:6px; font-size: 12px; color: var(--muted); }
+    .stars .s{ letter-spacing: .06em; color: #0b4a33; font-weight: 950; }
+    :root[data-theme="dark"] .stars .s{ color:#bfffe6; }
+
+    .buy{ margin-top:auto; display:flex; gap:8px; flex-wrap:wrap; }
+    .btn-mini{
+      flex: 1;
+      padding: 11px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.94);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 950;
+      text-align:center;
+      cursor:pointer;
+      user-select:none;
+      transition: background .12s ease, transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+    }
+    :root[data-theme="dark"] .btn-mini{ background: rgba(0,0,0,.25); }
+    .btn-mini:hover{ background: rgba(0,0,0,.03); transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,.06); }
+    :root[data-theme="dark"] .btn-mini:hover{ background: rgba(255,255,255,.06); }
+
+    .btn-mini.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#012a19;
+      box-shadow: 0 10px 24px rgba(0,208,132,.16);
+    }
+    .btn-mini.primary:hover{ opacity:.96; }
+
+    .btn-mini.secondary{
+      border-color: var(--line);
+      background: rgba(255,255,255,.92);
+    }
+    :root[data-theme="dark"] .btn-mini.secondary{
+      background: rgba(255,255,255,.05);
+    }
+
+    /* ---------- Cart ---------- */
+    .cart-dock{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:85;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .cart-mini{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 18px 40px rgba(0,0,0,.10);
+      backdrop-filter: blur(12px);
+      padding: 10px 12px;
+    }
+    :root[data-theme="dark"] .cart-mini{
+      background: rgba(0,0,0,.35);
+      box-shadow: 0 18px 40px rgba(0,0,0,.45);
+    }
+
+    .cart-mini strong{
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .cart-count{
+      min-width: 28px;
+      height: 28px;
+      padding: 0 8px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#012a19;
+      font-weight:950;
+      font-size:12px;
+    }
+
+    .cart-toggle{
+      width:56px; height:56px;
+      border-radius:18px;
+      border:1px solid rgba(0,208,132,.18);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#012a19;
+      font-weight:950;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      box-shadow: 0 18px 40px rgba(0,208,132,.16);
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .cart-toggle:hover{ opacity:.96; transform: translateY(-1px); }
+
+    .cart-panel{
+      position: fixed;
+      right: 16px;
+      bottom: 84px;
+      width: min(380px, calc(100vw - 24px));
+      max-height: min(72vh, 650px);
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 24px 70px rgba(0,0,0,.18);
+      backdrop-filter: blur(18px);
+      z-index: 90;
+      display:none;
+      overflow:hidden;
+    }
+    :root[data-theme="dark"] .cart-panel{
+      background: rgba(14,16,22,.94);
+      box-shadow: 0 24px 70px rgba(0,0,0,.60);
+    }
+    .cart-panel.open{ display:block; }
+
+    .cart-head{
+      padding: 16px 16px 12px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .cart-head h3{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-0.01em;
+    }
+    .cart-head p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .cart-close{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--text);
+      border-radius:999px;
+      padding:8px 10px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .cart-body{
+      padding: 12px 12px 4px;
+      overflow:auto;
+      max-height: calc(72vh - 160px);
+    }
+    .cart-empty{
+      color: var(--muted);
+      font-size: 13px;
+      text-align:center;
+      padding: 24px 12px 28px;
+    }
+    .cart-item{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:12px;
+      margin-bottom:10px;
+      background: rgba(255,255,255,.70);
+    }
+    :root[data-theme="dark"] .cart-item{
+      background: rgba(255,255,255,.04);
+    }
+    .cart-item-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .cart-item-title{
+      font-weight:900;
+      font-size:14px;
+      margin:0;
+    }
+    .cart-item-price{
+      font-size:12px;
+      font-weight:900;
+      color:#0b4a33;
+      background: rgba(0,208,132,.10);
+      border: 1px solid rgba(0,208,132,.18);
+      padding: 6px 8px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+    :root[data-theme="dark"] .cart-item-price{ color:#bfffe6; }
+
+    .qty-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .qty-controls{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .qty-btn{
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    :root[data-theme="dark"] .qty-btn{
+      background: rgba(255,255,255,.06);
+    }
+    .qty-num{
+      min-width: 26px;
+      text-align:center;
+      font-weight: 900;
+      font-size: 14px;
+    }
+    .remove-btn{
+      border:none;
+      background:transparent;
+      color:var(--danger);
+      font-weight:900;
+      cursor:pointer;
+      padding:6px 0;
+    }
+
+    .cart-foot{
+      border-top:1px solid var(--line);
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      background: rgba(255,255,255,.86);
+    }
+    :root[data-theme="dark"] .cart-foot{
+      background: rgba(0,0,0,.20);
+    }
+    .cart-summary{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      font-size:13px;
+      font-weight:900;
+    }
+    .cart-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .cart-actions .btn{
+      flex:1;
+    }
+
+    /* ---------- About ---------- */
     .about-wrap{
       display:grid;
       grid-template-columns: 1.3fr .7fr;
@@ -418,206 +860,6 @@
       line-height: 1.45;
     }
 
-    @media (max-width: 900px){
-      .about-wrap{ grid-template-columns: 1fr; }
-    }
-
-    /* ---------- Catalog blocks ---------- */
-    .catalog{ display:flex; flex-direction:column; gap: 18px; }
-
-    .block{
-      border-radius: var(--radius2);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.90);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    :root[data-theme="dark"] .block{
-      background: rgba(0,0,0,.22);
-    }
-
-    .block-head{
-      padding: 16px 16px 0;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 7px 10px; border-radius: 999px;
-      font-size: 11px; font-weight: 950;
-      letter-spacing: .10em; text-transform: uppercase;
-      border: 1px solid rgba(0,208,132,.18);
-      background: rgba(0,208,132,.10);
-      color:#0b4a33;
-      width: max-content;
-    }
-    :root[data-theme="dark"] .badge{ color:#bfffe6; }
-
-    .badge.core{
-      border-color: rgba(24,230,255,.22);
-      background: rgba(24,230,255,.10);
-      color:#063245;
-    }
-    :root[data-theme="dark"] .badge.core{ color:#c9f4ff; }
-
-    .block-title h3{
-      margin: 10px 0 6px;
-      font-size: 18px;
-      letter-spacing: -0.01em;
-    }
-    .block-title p{
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 13px;
-      max-width: 80ch;
-    }
-
-    .grid{
-      padding: 16px;
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .card{
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      overflow:hidden;
-      background: #fff;
-      box-shadow: 0 10px 22px rgba(0,0,0,.08);
-      display:flex;
-      flex-direction:column;
-      min-height:100%;
-      transition: transform .14s ease, box-shadow .14s ease;
-      min-width:0;
-    }
-    :root[data-theme="dark"] .card{
-      background: rgba(12,14,18,.85);
-      box-shadow: 0 10px 22px rgba(0,0,0,.50);
-    }
-    .card:hover{ transform: translateY(-4px); box-shadow: 0 18px 44px rgba(0,0,0,.14); }
-    :root[data-theme="dark"] .card:hover{ box-shadow: 0 18px 44px rgba(0,0,0,.70); }
-
-    .thumb{
-      position:relative;
-      background:#fff;
-      aspect-ratio: 4 / 3;
-      overflow:hidden;
-      border-bottom: 1px solid var(--line);
-    }
-    :root[data-theme="dark"] .thumb{ background: rgba(0,0,0,.25); }
-
-    .thumb img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      object-position: center;
-      transform: scale(1.01);
-      transition: transform .18s ease;
-    }
-    .card:hover .thumb img{ transform: scale(1.06); }
-
-    .label{
-      position:absolute;
-      top:12px; left:12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 950;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      background: rgba(255,255,255,.92);
-      border: 1px solid var(--line);
-      color: var(--text);
-      backdrop-filter: blur(10px);
-    }
-    :root[data-theme="dark"] .label{
-      background: rgba(0,0,0,.45);
-    }
-
-    .ribbon{
-      position:absolute;
-      top:12px; right:12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 950;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      background: rgba(0,208,132,.10);
-      border: 1px solid rgba(0,208,132,.18);
-      color:#0b4a33;
-      backdrop-filter: blur(10px);
-    }
-    :root[data-theme="dark"] .ribbon{ color:#bfffe6; }
-    .ribbon.hot{ background: rgba(255,200,0,.14); border-color: rgba(255,200,0,.28); color:#5a4200; }
-
-    .content{
-      padding: 12px 14px 14px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-      flex: 1;
-      min-width:0;
-    }
-    .topline{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .content h4{
-      margin: 0;
-      font-size: 14px;
-      letter-spacing: -0.01em;
-      min-width:0;
-    }
-    .price{
-      padding: 7px 10px;
-      border-radius: 12px;
-      font-weight: 950;
-      font-size: 13px;
-      white-space:nowrap;
-      background: rgba(0,208,132,.12);
-      border: 1px solid rgba(0,208,132,.18);
-      color:#0b4a33;
-      flex: 0 0 auto;
-    }
-    :root[data-theme="dark"] .price{ color:#bfffe6; }
-
-    .note{ margin: 0; color: var(--muted); font-size: 12px; }
-    .stars{ display:flex; align-items:center; gap:6px; font-size: 12px; color: var(--muted); }
-    .stars .s{ letter-spacing: .06em; color: #0b4a33; font-weight: 950; }
-    :root[data-theme="dark"] .stars .s{ color:#bfffe6; }
-
-    .buy{ margin-top:auto; display:flex; gap:8px; flex-wrap:wrap; }
-    .btn-mini{
-      flex: 1;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.94);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 950;
-      text-align:center;
-      cursor:pointer;
-      user-select:none;
-      transition: background .12s ease, transform .12s ease, box-shadow .12s ease;
-    }
-    :root[data-theme="dark"] .btn-mini{ background: rgba(0,0,0,.25); }
-    .btn-mini:hover{ background: rgba(0,0,0,.03); transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,.06); }
-    :root[data-theme="dark"] .btn-mini:hover{ background: rgba(255,255,255,.06); }
-    .btn-mini.primary{
-      border-color: transparent;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color:#012a19;
-    }
-    .btn-mini.primary:hover{ opacity:.96; }
-
     /* Footer */
     .footer{
       border-top: 1px solid var(--line);
@@ -637,51 +879,15 @@
     .footer a{ color: #0b4a33; font-weight: 950; }
     :root[data-theme="dark"] .footer a{ color:#bfffe6; }
 
-    /* WhatsApp floating */
-    .wa-float{
-      position:fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 80;
-      display:flex;
-      gap: 10px;
-      align-items:center;
+    @media (max-width: 900px){
+      .about-wrap{ grid-template-columns: 1fr; }
     }
-    .wa-pill{
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.94);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 950;
-      box-shadow: 0 18px 40px rgba(0,0,0,.10);
-      backdrop-filter: blur(12px);
-      white-space: nowrap;
-    }
-    :root[data-theme="dark"] .wa-pill{ background: rgba(0,0,0,.25); box-shadow: 0 18px 40px rgba(0,0,0,.45); }
-
-    .wa-btn{
-      width: 56px; height: 56px;
-      border-radius: 18px;
-      border: 1px solid rgba(0,208,132,.18);
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color:#012a19;
-      font-weight: 950;
-      display:grid;
-      place-items:center;
-      box-shadow: 0 18px 40px rgba(0,208,132,.16);
-      position:relative;
-      overflow:hidden;
-    }
-    .wa-btn:hover{ opacity:.96; }
 
     @media (max-width: 768px){
       :root{ --pad: 14px; --navH: 58px; --logoH: 30px; }
 
       .brand .sub{ display:none; }
       .nav-links{ display:none; }
-      .btn.btn-primary{ padding: 10px 12px; font-size: 12px; }
 
       .promo-rotator .container{ min-height: 40px; padding: 10px 14px; }
       .promo-item{ font-size: 11px; letter-spacing: .09em; }
@@ -729,10 +935,23 @@
         font-size: 13px;
       }
 
-      .wa-pill{ display:none; }
-      .wa-btn{ width: 58px; height: 58px; border-radius: 18px; }
-
       .theme-toggle{ padding: 10px 10px; font-size: 11px; }
+
+      .cart-mini{
+        display:none;
+      }
+      .cart-toggle{
+        width:58px;
+        height:58px;
+        border-radius:18px;
+      }
+      .cart-panel{
+        right: 8px;
+        left: 8px;
+        width: auto;
+        bottom: 80px;
+        max-height: 74vh;
+      }
     }
   </style>
 </head>
@@ -750,13 +969,12 @@
 
       <div class="nav">
         <nav class="nav-links" aria-label="Navegación">
-          <a href="#nosotros">Sobre nosotros</a>
           <a href="#catalogo">Catálogo</a>
+          <a href="#nosotros">Sobre nosotros</a>
         </nav>
 
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">Tema</button>
-
-        <a class="btn btn-primary" href="https://wa.me/34697625964" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        <button class="btn btn-dark" type="button" id="openCartTop">Ver carrito</button>
       </div>
     </div>
   </header>
@@ -772,83 +990,20 @@
       </div>
 
       <div class="promo-item" data-i="2">
-        <span>Pedido directo por WhatsApp</span>
+        <span>Añade varias mochilas y pide todo junto por WhatsApp</span>
       </div>
     </div>
   </div>
 
   <main>
-    <!-- ✅ SOBRE NOSOTROS -->
-    <section id="nosotros" class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2 class="section-title">Sobre NORTEPACK</h2>
-            <p class="section-sub">
-              Marca local nacida en Ourense. Mochilas con estilo, resistentes y a precio justo.
-            </p>
-          </div>
-        </div>
-
-        <div class="about-wrap" aria-label="Información sobre NORTEPACK">
-          <div class="about-card">
-            <div class="about-inner">
-              <div class="about-kicker">España · Envíos · Atención cercana</div>
-              <h3 class="about-title">
-                NORTEPACK nace en Ourense para acompañarte en tu día a día — y en tus objetivos.
-              </h3>
-              <p class="about-text">
-                Somos una marca de mochilas pensada para lo importante: comodidad, resistencia y estilo sin pagar de más.
-                Queremos que comprar sea fácil y claro: puedes pedir desde la web, recibir tu mochila con entrega en toda España
-                con envíos en 48 h, y hablar con nosotros directamente por WhatsApp.
-              </p>
-              <p class="about-text">
-                Nuestro símbolo es un <strong>astronauta</strong> porque representa a la gente con metas: la que estudia,
-                trabaja, entrena o viaja y no se detiene. Una mochila no es solo un accesorio: es lo que llevas contigo mientras
-                avanzas. En NORTEPACK, te acompañamos… <strong>hasta la luna</strong>.
-              </p>
-
-              <div class="about-actions">
-                <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
-                <a class="btn btn-ghost" href="https://wa.me/34697625964" target="_blank" rel="noopener">Hablar por WhatsApp</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="about-card">
-            <div class="about-side">
-              <div class="about-stat">
-                <div class="t">Entrega</div>
-                <div class="v">España (según zona/horario)</div>
-              </div>
-              <div class="about-stat">
-                <div class="t">Envíos</div>
-                <div class="v">Aprox. 48 h</div>
-              </div>
-              <div class="about-stat">
-                <div class="t">Pago</div>
-                <div class="v">Efectivo / Bizum</div>
-              </div>
-
-              <div class="about-astro">
-                <p class="big">Sueña · Carga · Avanza</p>
-                <p class="small">La mochila de los que van a por más. NORTEPACK.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CATÁLOGO -->
+    <!-- CATÁLOGO PRIMERO -->
     <section id="catalogo" class="section">
       <div class="container">
         <div class="section-head">
           <div>
             <h2 class="section-title">Catálogo NORTEPACK</h2>
             <p class="section-sub">
-              Elige tu modelo y pide por WhatsApp. Entrega en España (según zona/horario) y envíos aprox. 48 h.
+              Elige tus modelos, añádelos al carrito y envía tu pedido completo por WhatsApp. Entrega en España (según zona/horario) y envíos aprox. 48 h.
             </p>
 
             <div class="brand-lines" aria-label="Frases de marca">
@@ -892,7 +1047,7 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
                   <p class="note">Ligera y práctica para el día a día.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Azul" data-price="14,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Básica Azul" data-price="14.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
@@ -907,7 +1062,7 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
                   <p class="note">Ideal para instituto o trabajo ligero.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Roja" data-price="14,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Básica Roja" data-price="14.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
@@ -923,7 +1078,7 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
                   <p class="note">Combina con todo. Opción segura.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Negra" data-price="14,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Básica Negra" data-price="14.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
@@ -938,7 +1093,7 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
                   <p class="note">Estilo limpio y moderno.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Básica Blanca" data-price="14,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Básica Blanca" data-price="14.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
@@ -967,7 +1122,7 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
                   <p class="note">Acabados mejorados y más capacidad.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Rojo" data-price="19,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Rojo" data-price="19.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
@@ -982,7 +1137,7 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
                   <p class="note">Elegante y muy combinable.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Negro" data-price="19,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Negro" data-price="19.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
@@ -998,7 +1153,7 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
                   <p class="note">Estilo sobrio y actual.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Beige" data-price="19,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Beige" data-price="19.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
@@ -1014,7 +1169,7 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
                   <p class="note">Para destacar con buen gusto.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Amarillo" data-price="19,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Amarillo" data-price="19.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
@@ -1030,7 +1185,7 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
                   <p class="note">Color suave, moderno y muy combinable.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Verde Clarito" data-price="19,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Verde Clarito" data-price="19.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
@@ -1046,14 +1201,73 @@
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
                   <p class="note">Estilo dulce y elegante, destaca sin exagerar.</p>
                   <div class="buy">
-                    <a class="btn-mini primary buy-wa" href="#" data-model="Nortepack Core Rosa" data-price="19,99">Pedir esta</a>
+                    <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Rosa" data-price="19.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- SOBRE NOSOTROS ABAJO -->
+    <section id="nosotros" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Sobre NORTEPACK</h2>
+            <p class="section-sub">
+              Marca local nacida en Ourense. Mochilas con estilo, resistentes y a precio justo.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-wrap" aria-label="Información sobre NORTEPACK">
+          <div class="about-card">
+            <div class="about-inner">
+              <div class="about-kicker">España · Envíos · Atención cercana</div>
+              <h3 class="about-title">
+                NORTEPACK nace en Ourense para acompañarte en tu día a día — y en tus objetivos.
+              </h3>
+              <p class="about-text">
+                Somos una marca de mochilas pensada para lo importante: comodidad, resistencia y estilo sin pagar de más.
+                Queremos que comprar sea fácil y claro: eliges tus modelos, los añades al carrito y nos envías tu pedido completo por WhatsApp.
+              </p>
+              <p class="about-text">
+                Nuestro símbolo es un <strong>astronauta</strong> porque representa a la gente con metas: la que estudia,
+                trabaja, entrena o viaja y no se detiene. Una mochila no es solo un accesorio: es lo que llevas contigo mientras
+                avanzas. En NORTEPACK, te acompañamos… <strong>hasta la luna</strong>.
+              </p>
+
+              <div class="about-actions">
+                <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+                <a class="btn btn-ghost" href="https://wa.me/34697625964" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+              </div>
             </div>
           </div>
 
+          <div class="about-card">
+            <div class="about-side">
+              <div class="about-stat">
+                <div class="t">Entrega</div>
+                <div class="v">España (según zona/horario)</div>
+              </div>
+              <div class="about-stat">
+                <div class="t">Envíos</div>
+                <div class="v">Aprox. 48 h</div>
+              </div>
+              <div class="about-stat">
+                <div class="t">Pago</div>
+                <div class="v">Efectivo / Bizum</div>
+              </div>
+
+              <div class="about-astro">
+                <p class="big">Sueña · Carga · Avanza</p>
+                <p class="small">La mochila de los que van a por más. NORTEPACK.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1066,28 +1280,45 @@
     </div>
   </footer>
 
-  <div class="wa-float" aria-label="Contacto rápido">
-    <div class="wa-pill">¿Te ayudo a elegir color? Escríbenos</div>
-    <a class="wa-btn" href="https://wa.me/34697625964" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
-      WA
-    </a>
+  <!-- Carrito flotante -->
+  <div class="cart-dock" aria-label="Carrito rápido">
+    <div class="cart-mini">
+      <strong>Carrito</strong>
+      <div class="cart-count" id="cartCount">0</div>
+    </div>
+    <button class="cart-toggle" type="button" id="cartToggle" aria-label="Abrir carrito">
+      🛒
+    </button>
   </div>
+
+  <!-- Panel del carrito -->
+  <aside class="cart-panel" id="cartPanel" aria-label="Carrito de compra">
+    <div class="cart-head">
+      <div>
+        <h3>Tu carrito</h3>
+        <p>Añade varias mochilas y envía todo junto por WhatsApp.</p>
+      </div>
+      <button class="cart-close" type="button" id="cartClose">Cerrar</button>
+    </div>
+
+    <div class="cart-body" id="cartItems">
+      <div class="cart-empty">Todavía no has añadido ninguna mochila.</div>
+    </div>
+
+    <div class="cart-foot">
+      <div class="cart-summary">
+        <span>Total de unidades: <span id="cartQty">0</span></span>
+        <span>Productos distintos: <span id="cartKinds">0</span></span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn btn-ghost" type="button" id="clearCart">Vaciar carrito</button>
+        <button class="btn btn-primary" type="button" id="sendWhatsApp">Enviar por WhatsApp</button>
+      </div>
+    </div>
+  </aside>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // WhatsApp pre-rellenado por producto
-    const phone = "34697625964";
-    document.querySelectorAll(".buy-wa").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const model = btn.getAttribute("data-model") || "Mochila NORTEPACK";
-        const price = btn.getAttribute("data-price") || "";
-        const msg = `Hola, me gustaría pedir la ${model} (${price}€). Soy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.`;
-        const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-        window.open(url, "_blank", "noopener");
-      });
-    });
 
     // Filtros catálogo
     const chips = document.querySelectorAll(".chip");
@@ -1122,7 +1353,7 @@
       });
     });
 
-    /* ✅ Rotador PRO */
+    // Rotador promo
     (function(){
       const wrap = document.getElementById("promoRotator");
       if(!wrap) return;
@@ -1175,7 +1406,7 @@
       start();
     })();
 
-    /* ✅ Theme toggle */
+    // Theme toggle
     (function(){
       const root = document.documentElement;
       const btn = document.getElementById("themeToggle");
@@ -1202,6 +1433,192 @@
         setTheme(isDark ? "light" : "dark");
       });
     })();
+
+    // Carrito
+    const phone = "34697625964";
+    const cart = [];
+    const cartPanel = document.getElementById("cartPanel");
+    const cartToggle = document.getElementById("cartToggle");
+    const cartClose = document.getElementById("cartClose");
+    const openCartTop = document.getElementById("openCartTop");
+    const cartItems = document.getElementById("cartItems");
+    const cartCount = document.getElementById("cartCount");
+    const cartQty = document.getElementById("cartQty");
+    const cartKinds = document.getElementById("cartKinds");
+    const clearCart = document.getElementById("clearCart");
+    const sendWhatsApp = document.getElementById("sendWhatsApp");
+
+    function formatPrice(num){
+      return num.toFixed(2).replace(".", ",") + " €";
+    }
+
+    function openCart(){
+      cartPanel.classList.add("open");
+    }
+
+    function closeCart(){
+      cartPanel.classList.remove("open");
+    }
+
+    function saveCart(){
+      localStorage.setItem("nortepack-cart", JSON.stringify(cart));
+    }
+
+    function loadCart(){
+      const saved = localStorage.getItem("nortepack-cart");
+      if(!saved) return;
+      try{
+        const parsed = JSON.parse(saved);
+        if(Array.isArray(parsed)){
+          parsed.forEach(item => {
+            if(item && item.model && item.price && item.qty){
+              cart.push({
+                model: item.model,
+                price: Number(item.price),
+                qty: Number(item.qty)
+              });
+            }
+          });
+        }
+      }catch(err){}
+    }
+
+    function getTotals(){
+      const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+      return {
+        totalQty,
+        totalKinds: cart.length
+      };
+    }
+
+    function renderCart(){
+      const { totalQty, totalKinds } = getTotals();
+
+      cartCount.textContent = totalQty;
+      cartQty.textContent = totalQty;
+      cartKinds.textContent = totalKinds;
+
+      if(cart.length === 0){
+        cartItems.innerHTML = '<div class="cart-empty">Todavía no has añadido ninguna mochila.</div>';
+        return;
+      }
+
+      cartItems.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+          <div class="cart-item-top">
+            <div>
+              <p class="cart-item-title">${item.model}</p>
+            </div>
+            <div class="cart-item-price">${formatPrice(item.price)}</div>
+          </div>
+
+          <div class="qty-row">
+            <div class="qty-controls">
+              <button class="qty-btn" type="button" data-action="minus" data-index="${index}">−</button>
+              <div class="qty-num">${item.qty}</div>
+              <button class="qty-btn" type="button" data-action="plus" data-index="${index}">+</button>
+            </div>
+
+            <button class="remove-btn" type="button" data-action="remove" data-index="${index}">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      `).join("");
+
+      cartItems.querySelectorAll("[data-action]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const action = btn.getAttribute("data-action");
+          const index = Number(btn.getAttribute("data-index"));
+          const item = cart[index];
+          if(!item) return;
+
+          if(action === "plus"){
+            item.qty += 1;
+          }else if(action === "minus"){
+            item.qty -= 1;
+            if(item.qty <= 0){
+              cart.splice(index, 1);
+            }
+          }else if(action === "remove"){
+            cart.splice(index, 1);
+          }
+
+          saveCart();
+          renderCart();
+        });
+      });
+    }
+
+    function addToCart(model, price){
+      const existing = cart.find(item => item.model === model);
+      if(existing){
+        existing.qty += 1;
+      }else{
+        cart.push({
+          model,
+          price: Number(price),
+          qty: 1
+        });
+      }
+      saveCart();
+      renderCart();
+      openCart();
+    }
+
+    function buildWhatsAppMessage(){
+      if(cart.length === 0){
+        return "";
+      }
+
+      let msg = "Hola, me gustaría pedir estas mochilas:%0A%0A";
+      cart.forEach(item => {
+        msg += `• ${item.model} — Cantidad: ${item.qty} — Precio: ${formatPrice(item.price)}%0A`;
+      });
+
+      msg += "%0ASoy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.";
+      return msg;
+    }
+
+    document.querySelectorAll(".add-cart").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const model = btn.getAttribute("data-model") || "Mochila NORTEPACK";
+        const price = btn.getAttribute("data-price") || "0";
+        addToCart(model, price);
+      });
+    });
+
+    cartToggle.addEventListener("click", openCart);
+    openCartTop.addEventListener("click", openCart);
+    cartClose.addEventListener("click", closeCart);
+
+    clearCart.addEventListener("click", () => {
+      cart.length = 0;
+      saveCart();
+      renderCart();
+    });
+
+    sendWhatsApp.addEventListener("click", () => {
+      if(cart.length === 0){
+        alert("Tu carrito está vacío.");
+        return;
+      }
+      const msg = buildWhatsAppMessage();
+      const url = `https://wa.me/${phone}?text=${msg}`;
+      window.open(url, "_blank", "noopener");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsidePanel = cartPanel.contains(e.target);
+      const clickedToggle = cartToggle.contains(e.target);
+      const clickedTopBtn = openCartTop.contains(e.target);
+      if(!clickedInsidePanel && !clickedToggle && !clickedTopBtn && cartPanel.classList.contains("open")){
+        closeCart();
+      }
+    });
+
+    loadCart();
+    renderCart();
   </script>
 </body>
 </html>
