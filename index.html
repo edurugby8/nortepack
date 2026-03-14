@@ -68,7 +68,6 @@
     button{ font-family:inherit; }
     .container{ max-width: var(--container); margin: 0 auto; padding: 0 var(--pad); }
 
-    /* ---------- Header ---------- */
     .header{
       position: sticky; top:0; z-index:70;
       background: rgba(255,255,255,.84);
@@ -173,7 +172,6 @@
     }
     .theme-toggle:active{ transform: scale(.98); }
 
-    /* ---------- Promo rotator ---------- */
     .promo-rotator{
       border-bottom: 1px solid var(--line);
       background: rgba(255,255,255,.86);
@@ -217,7 +215,6 @@
       transform: translateX(-50%) translateY(-6px);
     }
 
-    /* ---------- Section ---------- */
     .section{ padding: 34px 0 48px; }
     .section-head{
       display:flex; align-items:flex-end; justify-content:space-between;
@@ -304,7 +301,6 @@
     }
     :root[data-theme="dark"] .chip.active{ color:#bfffe6; }
 
-    /* ---------- Catalog ---------- */
     .catalog{ display:flex; flex-direction:column; gap: 18px; }
 
     .block{
@@ -493,7 +489,7 @@
     }
     :root[data-theme="dark"] .price{ color:#bfffe6; }
 
-    .note{ margin: 0; color: var(--muted); font-size: 12px; }
+    .note{ margin: 0; color: var(--muted); font-size: 12px; min-height: 32px; }
     .stars{ display:flex; align-items:center; gap:6px; font-size: 12px; color: var(--muted); }
     .stars .s{ letter-spacing: .06em; color: #0b4a33; font-weight: 950; }
     :root[data-theme="dark"] .stars .s{ color:#bfffe6; }
@@ -525,15 +521,6 @@
     }
     .btn-mini.primary:hover{ opacity:.96; }
 
-    .btn-mini.secondary{
-      border-color: var(--line);
-      background: rgba(255,255,255,.92);
-    }
-    :root[data-theme="dark"] .btn-mini.secondary{
-      background: rgba(255,255,255,.05);
-    }
-
-    /* ---------- Cart ---------- */
     .cart-dock{
       position:fixed;
       right:16px;
@@ -669,7 +656,7 @@
     .cart-body{
       padding: 12px 12px 4px;
       overflow:auto;
-      max-height: calc(72vh - 178px);
+      max-height: calc(72vh - 210px);
     }
     .cart-empty{
       color: var(--muted);
@@ -698,6 +685,11 @@
       font-weight:900;
       font-size:14px;
       margin:0;
+    }
+    .cart-item-sub{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:12px;
     }
     .cart-item-price{
       font-size:12px;
@@ -770,6 +762,13 @@
       gap:10px;
       font-size:13px;
       font-weight:900;
+      flex-wrap:wrap;
+    }
+    .cart-total{
+      padding-top: 2px;
+      font-size: 14px;
+      font-weight: 950;
+      color: var(--text);
     }
     .cart-actions{
       display:flex;
@@ -780,7 +779,6 @@
       flex:1;
     }
 
-    /* ---------- Sticky final button ---------- */
     .checkout-bar{
       position:fixed;
       left:50%;
@@ -832,7 +830,6 @@
       flex:0 0 auto;
     }
 
-    /* ---------- Toast ---------- */
     .toast-wrap{
       position:fixed;
       top:88px;
@@ -870,7 +867,6 @@
       font-size:12px;
     }
 
-    /* ---------- About ---------- */
     .about-wrap{
       display:grid;
       grid-template-columns: 1.3fr .7fr;
@@ -997,7 +993,6 @@
       line-height: 1.45;
     }
 
-    /* Footer */
     .footer{
       border-top: 1px solid var(--line);
       background: rgba(255,255,255,.88);
@@ -1146,7 +1141,7 @@
         <span>Envíos aprox. 48 h</span>
       </div>
       <div class="promo-item" data-i="1">
-        <span>Entrega en España (según zona/horario)</span>
+        <span>Entrega en España (según zona y horario)</span>
       </div>
       <div class="promo-item" data-i="2">
         <span>Añade varias mochilas y pide todo junto por WhatsApp</span>
@@ -1165,7 +1160,6 @@
   </div>
 
   <main>
-    <!-- CATÁLOGO PRIMERO -->
     <section id="catalogo" class="section">
       <div class="container">
         <div class="section-head">
@@ -1193,11 +1187,10 @@
         </div>
 
         <div class="catalog">
-          <!-- BASICAS -->
           <div class="block" data-group="basica">
             <div class="block-head">
               <div class="block-title">
-                <div class="badge">LÍNEA BÁSICAS</div>
+                <div class="badge">Línea básicas</div>
                 <h3>BÁSICAS · sencillas, cómodas y versátiles</h3>
                 <p>Una opción excelente si buscas lo esencial al mejor precio.</p>
               </div>
@@ -1207,7 +1200,6 @@
               <article class="card" data-type="basica" data-model-card="Básica Azul">
                 <div class="thumb">
                   <span class="label">Básica</span>
-                  <span class="ribbon hot">Más vendida</span>
                   <img src="imagen/prod-01.jpg" alt="Mochila Básica Azul NORTEPACK">
                   <div class="product-count" data-count-for="Básica Azul">0</div>
                 </div>
@@ -1272,11 +1264,10 @@
             </div>
           </div>
 
-          <!-- CORE -->
           <div class="block" data-group="core">
             <div class="block-head">
               <div class="block-title">
-                <div class="badge core">LÍNEA NORTEPACK CORE</div>
+                <div class="badge core">Línea Nortepack Core</div>
                 <h3>NORTEPACK CORE · más estructura y presencia</h3>
                 <p>Recomendada si deseas una mochila con un acabado más premium.</p>
               </div>
@@ -1285,7 +1276,7 @@
             <div class="grid">
               <article class="card" data-type="core" data-model-card="Nortepack Core Rojo">
                 <div class="thumb">
-                  <span class="label">CORE</span>
+                  <span class="label">Core</span>
                   <span class="ribbon">Nueva</span>
                   <img src="imagen/prod-05.jpg" alt="Nortepack Core Rojo">
                   <div class="product-count" data-count-for="Nortepack Core Rojo">0</div>
@@ -1302,7 +1293,7 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Negro">
                 <div class="thumb">
-                  <span class="label">CORE</span>
+                  <span class="label">Core</span>
                   <img src="imagen/prod-06.jpg" alt="Nortepack Core Negro">
                   <div class="product-count" data-count-for="Nortepack Core Negro">0</div>
                 </div>
@@ -1318,7 +1309,7 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Beige">
                 <div class="thumb">
-                  <span class="label">CORE</span>
+                  <span class="label">Core</span>
                   <span class="ribbon hot">Más vendida</span>
                   <img src="imagen/prod-07.jpg" alt="Nortepack Core Beige">
                   <div class="product-count" data-count-for="Nortepack Core Beige">0</div>
@@ -1335,7 +1326,7 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Amarillo">
                 <div class="thumb">
-                  <span class="label">CORE</span>
+                  <span class="label">Core</span>
                   <span class="ribbon">Recomendada</span>
                   <img src="imagen/prod-08.jpg" alt="Nortepack Core Amarillo">
                   <div class="product-count" data-count-for="Nortepack Core Amarillo">0</div>
@@ -1352,7 +1343,7 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Verde Clarito">
                 <div class="thumb">
-                  <span class="label">CORE</span>
+                  <span class="label">Core</span>
                   <span class="ribbon">Nueva</span>
                   <img src="imagen/core-verde-clarito.jpg" alt="Nortepack Core Verde Clarito">
                   <div class="product-count" data-count-for="Nortepack Core Verde Clarito">0</div>
@@ -1369,7 +1360,7 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Rosa">
                 <div class="thumb">
-                  <span class="label">CORE</span>
+                  <span class="label">Core</span>
                   <span class="ribbon">Nueva</span>
                   <img src="imagen/core-rosa.jpg" alt="Nortepack Core Rosa">
                   <div class="product-count" data-count-for="Nortepack Core Rosa">0</div>
@@ -1389,7 +1380,6 @@
       </div>
     </section>
 
-    <!-- SOBRE NOSOTROS ABAJO -->
     <section id="nosotros" class="section">
       <div class="container">
         <div class="section-head">
@@ -1406,7 +1396,7 @@
             <div class="about-inner">
               <div class="about-kicker">España · Envíos · Atención cercana</div>
               <h3 class="about-title">
-                NORTEPACK nace en Ourense para acompañarte en tu día a día — y en tus objetivos.
+                NORTEPACK nace en Ourense para acompañarte en tu día a día y en tus objetivos.
               </h3>
               <p class="about-text">
                 Somos una marca de mochilas pensada para lo importante: comodidad, resistencia y estilo sin pagar de más.
@@ -1415,7 +1405,7 @@
               <p class="about-text">
                 Nuestro símbolo es un <strong>astronauta</strong> porque representa a la gente con metas: la que estudia,
                 trabaja, entrena o viaja y no se detiene. Una mochila no es solo un accesorio: es lo que llevas contigo mientras
-                avanzas. En NORTEPACK, te acompañamos… <strong>hasta la luna</strong>.
+                avanzas. En NORTEPACK, te acompañamos <strong>hasta la luna</strong>.
               </p>
 
               <div class="about-actions">
@@ -1429,7 +1419,7 @@
             <div class="about-side">
               <div class="about-stat">
                 <div class="t">Entrega</div>
-                <div class="v">España (según zona/horario)</div>
+                <div class="v">España (según zona y horario)</div>
               </div>
               <div class="about-stat">
                 <div class="t">Envíos</div>
@@ -1458,7 +1448,6 @@
     </div>
   </footer>
 
-  <!-- Carrito flotante -->
   <div class="cart-dock" aria-label="Carrito rápido">
     <div class="cart-mini">
       <strong>Carrito</strong>
@@ -1474,7 +1463,6 @@
     </button>
   </div>
 
-  <!-- Barra fija finalizar -->
   <div class="checkout-bar" id="checkoutBar">
     <div class="checkout-inner">
       <div class="checkout-meta">
@@ -1487,7 +1475,6 @@
     </div>
   </div>
 
-  <!-- Panel del carrito -->
   <aside class="cart-panel" id="cartPanel" aria-label="Carrito de compra">
     <div class="cart-head">
       <div>
@@ -1506,6 +1493,9 @@
         <span>Total de unidades: <span id="cartQty">0</span></span>
         <span>Productos distintos: <span id="cartKinds">0</span></span>
       </div>
+      <div class="cart-total">
+        Total estimado: <span id="cartTotalPrice">0,00 €</span>
+      </div>
       <div class="cart-actions">
         <button class="btn btn-ghost" type="button" id="clearCart">Vaciar carrito</button>
         <button class="btn btn-primary" type="button" id="sendWhatsApp">Enviar por WhatsApp</button>
@@ -1516,7 +1506,6 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Filtros catálogo
     const chips = document.querySelectorAll(".chip");
     const cards = document.querySelectorAll(".card");
     const blocks = document.querySelectorAll(".block");
@@ -1550,7 +1539,6 @@
       });
     });
 
-    // Rotador promo
     (function(){
       const wrap = document.getElementById("promoRotator");
       if(!wrap) return;
@@ -1603,7 +1591,6 @@
       start();
     })();
 
-    // Theme toggle
     (function(){
       const root = document.documentElement;
       const btn = document.getElementById("themeToggle");
@@ -1631,7 +1618,6 @@
       });
     })();
 
-    // Carrito
     const phone = "34697625964";
     const cart = [];
 
@@ -1643,6 +1629,7 @@
     const cartCount = document.getElementById("cartCount");
     const cartQty = document.getElementById("cartQty");
     const cartKinds = document.getElementById("cartKinds");
+    const cartTotalPrice = document.getElementById("cartTotalPrice");
     const clearCart = document.getElementById("clearCart");
     const sendWhatsApp = document.getElementById("sendWhatsApp");
     const cartToggleBadge = document.getElementById("cartToggleBadge");
@@ -1682,7 +1669,13 @@
         const parsed = JSON.parse(saved);
         if(Array.isArray(parsed)){
           parsed.forEach(item => {
-            if(item && item.model && item.price && item.qty){
+            if(
+              item &&
+              typeof item.model === "string" &&
+              !Number.isNaN(Number(item.price)) &&
+              !Number.isNaN(Number(item.qty)) &&
+              Number(item.qty) > 0
+            ){
               cart.push({
                 model: item.model,
                 price: Number(item.price),
@@ -1697,7 +1690,8 @@
     function getTotals(){
       const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
       const totalKinds = cart.length;
-      return { totalQty, totalKinds };
+      const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      return { totalQty, totalKinds, totalPrice };
     }
 
     function getItemQty(model){
@@ -1726,12 +1720,13 @@
     }
 
     function renderCart(){
-      const { totalQty, totalKinds } = getTotals();
+      const { totalQty, totalKinds, totalPrice } = getTotals();
 
       cartCount.textContent = totalQty;
       cartQty.textContent = totalQty;
       cartKinds.textContent = totalKinds;
       cartToggleBadge.textContent = totalQty;
+      cartTotalPrice.textContent = formatPrice(totalPrice);
 
       updateProductBadges();
       updateStickyCheckout(totalQty);
@@ -1746,6 +1741,7 @@
           <div class="cart-item-top">
             <div>
               <p class="cart-item-title">${item.model}</p>
+              <p class="cart-item-sub">Subtotal: ${formatPrice(item.price * item.qty)}</p>
             </div>
             <div class="cart-item-price">${formatPrice(item.price)}</div>
           </div>
@@ -1824,14 +1820,19 @@
     function buildWhatsAppMessage(){
       if(cart.length === 0) return "";
 
-      let msg = "Hola, me gustaría pedir estas mochilas:\n\n";
+      const { totalQty, totalPrice } = getTotals();
+
+      let msg = "Hola, me gustaría pedir estas mochilas:%0A%0A";
 
       cart.forEach(item => {
-        msg += `• ${item.model} — Cantidad: ${item.qty} — Precio: ${formatPrice(item.price)}\n`;
+        msg += `• ${item.model} — Cantidad: ${item.qty} — Precio unidad: ${formatPrice(item.price)} — Subtotal: ${formatPrice(item.price * item.qty)}%0A`;
       });
 
-      msg += "\nSoy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.";
-      return msg;
+      msg += `%0ATotal de unidades: ${totalQty}%0A`;
+      msg += `Total estimado: ${formatPrice(totalPrice)}%0A%0A`;
+      msg += "Soy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.";
+
+      return decodeURIComponent(msg);
     }
 
     function sendOrderToWhatsApp(){
@@ -1855,26 +1856,31 @@
 
     cartToggle.addEventListener("click", openCart);
     openCartTop.addEventListener("click", openCart);
+
     toastOpenCart.addEventListener("click", () => {
       openCart();
       cartToast.classList.remove("show");
     });
+
     cartClose.addEventListener("click", closeCart);
 
     clearCart.addEventListener("click", () => {
+      if(cart.length === 0) return;
       cart.length = 0;
       saveCart();
       renderCart();
+      closeCart();
     });
 
     sendWhatsApp.addEventListener("click", sendOrderToWhatsApp);
     checkoutNow.addEventListener("click", sendOrderToWhatsApp);
 
     document.addEventListener("click", (e) => {
-      const clickedInsidePanel = cartPanel.contains(e.target);
-      const clickedToggle = cartToggle.contains(e.target);
-      const clickedTopBtn = openCartTop.contains(e.target);
-      const clickedToast = cartToast.contains(e.target);
+      const target = e.target;
+      const clickedInsidePanel = cartPanel.contains(target);
+      const clickedToggle = cartToggle.contains(target);
+      const clickedTopBtn = openCartTop.contains(target);
+      const clickedToast = cartToast.contains(target);
 
       if(!clickedInsidePanel && !clickedToggle && !clickedTopBtn && !clickedToast && cartPanel.classList.contains("open")){
         closeCart();
