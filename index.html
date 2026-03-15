@@ -399,42 +399,11 @@
     }
     .card:hover .thumb img{ transform: scale(1.06); }
 
-    .label{
-      position:absolute;
-      top:12px; left:12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 950;
-      letter-spacing: .10em;
-      text-transform: uppercase;
-      background: rgba(255,255,255,.92);
-      border: 1px solid var(--line);
-      color: var(--text);
-      backdrop-filter: blur(10px);
-      z-index:2;
-    }
-    :root[data-theme="dark"] .label{
-      background: rgba(0,0,0,.45);
-    }
-
+    /* Etiquetas ocultas por seguridad */
+    .label,
     .ribbon{
-      position:absolute;
-      top:12px; right:12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 950;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      background: rgba(0,208,132,.10);
-      border: 1px solid rgba(0,208,132,.18);
-      color:#0b4a33;
-      backdrop-filter: blur(10px);
-      z-index:2;
+      display:none !important;
     }
-    :root[data-theme="dark"] .ribbon{ color:#bfffe6; }
-    .ribbon.hot{ background: rgba(255,200,0,.14); border-color: rgba(255,200,0,.28); color:#5a4200; }
 
     .product-count{
       position:absolute;
@@ -1199,7 +1168,6 @@
             <div class="grid">
               <article class="card" data-type="basica" data-model-card="Básica Azul">
                 <div class="thumb">
-                  <span class="label">Básica</span>
                   <img src="imagen/prod-01.jpg" alt="Mochila Básica Azul NORTEPACK">
                   <div class="product-count" data-count-for="Básica Azul">0</div>
                 </div>
@@ -1215,7 +1183,6 @@
 
               <article class="card" data-type="basica" data-model-card="Básica Roja">
                 <div class="thumb">
-                  <span class="label">Básica</span>
                   <img src="imagen/prod-02.jpg" alt="Mochila Básica Roja NORTEPACK">
                   <div class="product-count" data-count-for="Básica Roja">0</div>
                 </div>
@@ -1231,8 +1198,6 @@
 
               <article class="card" data-type="basica" data-model-card="Básica Negra">
                 <div class="thumb">
-                  <span class="label">Básica</span>
-                  <span class="ribbon">Recomendada</span>
                   <img src="imagen/prod-03.jpg" alt="Mochila Básica Negra NORTEPACK">
                   <div class="product-count" data-count-for="Básica Negra">0</div>
                 </div>
@@ -1248,7 +1213,6 @@
 
               <article class="card" data-type="basica" data-model-card="Básica Blanca">
                 <div class="thumb">
-                  <span class="label">Básica</span>
                   <img src="imagen/prod-04.jpg" alt="Mochila Básica Blanca NORTEPACK">
                   <div class="product-count" data-count-for="Básica Blanca">0</div>
                 </div>
@@ -1276,8 +1240,6 @@
             <div class="grid">
               <article class="card" data-type="core" data-model-card="Nortepack Core Rojo">
                 <div class="thumb">
-                  <span class="label">Core</span>
-                  <span class="ribbon">Nueva</span>
                   <img src="imagen/prod-05.jpg" alt="Nortepack Core Rojo">
                   <div class="product-count" data-count-for="Nortepack Core Rojo">0</div>
                 </div>
@@ -1293,7 +1255,6 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Negro">
                 <div class="thumb">
-                  <span class="label">Core</span>
                   <img src="imagen/prod-06.jpg" alt="Nortepack Core Negro">
                   <div class="product-count" data-count-for="Nortepack Core Negro">0</div>
                 </div>
@@ -1309,8 +1270,6 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Beige">
                 <div class="thumb">
-                  <span class="label">Core</span>
-                  <span class="ribbon hot">Más vendida</span>
                   <img src="imagen/prod-07.jpg" alt="Nortepack Core Beige">
                   <div class="product-count" data-count-for="Nortepack Core Beige">0</div>
                 </div>
@@ -1326,8 +1285,6 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Amarillo">
                 <div class="thumb">
-                  <span class="label">Core</span>
-                  <span class="ribbon">Recomendada</span>
                   <img src="imagen/prod-08.jpg" alt="Nortepack Core Amarillo">
                   <div class="product-count" data-count-for="Nortepack Core Amarillo">0</div>
                 </div>
@@ -1343,8 +1300,6 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Verde Clarito">
                 <div class="thumb">
-                  <span class="label">Core</span>
-                  <span class="ribbon">Nueva</span>
                   <img src="imagen/core-verde-clarito.jpg" alt="Nortepack Core Verde Clarito">
                   <div class="product-count" data-count-for="Nortepack Core Verde Clarito">0</div>
                 </div>
@@ -1360,8 +1315,6 @@
 
               <article class="card" data-type="core" data-model-card="Nortepack Core Rosa">
                 <div class="thumb">
-                  <span class="label">Core</span>
-                  <span class="ribbon">Nueva</span>
                   <img src="imagen/core-rosa.jpg" alt="Nortepack Core Rosa">
                   <div class="product-count" data-count-for="Nortepack Core Rosa">0</div>
                 </div>
@@ -1822,17 +1775,17 @@
 
       const { totalQty, totalPrice } = getTotals();
 
-      let msg = "Hola, me gustaría pedir estas mochilas:%0A%0A";
+      let msg = "Hola, me gustaría pedir estas mochilas:\n\n";
 
       cart.forEach(item => {
-        msg += `• ${item.model} — Cantidad: ${item.qty} — Precio unidad: ${formatPrice(item.price)} — Subtotal: ${formatPrice(item.price * item.qty)}%0A`;
+        msg += `• ${item.model} — Cantidad: ${item.qty} — Precio unidad: ${formatPrice(item.price)} — Subtotal: ${formatPrice(item.price * item.qty)}\n`;
       });
 
-      msg += `%0ATotal de unidades: ${totalQty}%0A`;
-      msg += `Total estimado: ${formatPrice(totalPrice)}%0A%0A`;
+      msg += `\nTotal de unidades: ${totalQty}\n`;
+      msg += `Total estimado: ${formatPrice(totalPrice)}\n\n`;
       msg += "Soy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.";
 
-      return decodeURIComponent(msg);
+      return msg;
     }
 
     function sendOrderToWhatsApp(){
