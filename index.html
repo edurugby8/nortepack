@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NORTEPACK | Catálogo</title>
-  <meta name="description" content="NORTEPACK · Mochilas económicas y resistentes. España + envíos. Pedido directo por WhatsApp. Pago en efectivo o Bizum.">
+  <meta name="description" content="NORTEPACK · Mochilas resistentes y funcionales. Pedido directo por WhatsApp. Pago por Bizum y opción de contra reembolso. Entrega local en Ourense y envíos a España.">
   <link rel="icon" type="image/png" href="imagen/logo-nortepack.png">
 
   <style>
@@ -399,7 +399,6 @@
     }
     .card:hover .thumb img{ transform: scale(1.06); }
 
-    /* Etiquetas ocultas por seguridad */
     .label,
     .ribbon{
       display:none !important;
@@ -489,6 +488,139 @@
       box-shadow: 0 10px 24px rgba(0,208,132,.16);
     }
     .btn-mini.primary:hover{ opacity:.96; }
+
+    .steps-grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:14px;
+      margin-top: 14px;
+    }
+
+    .step-card{
+      border-radius: 22px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.90);
+      box-shadow: var(--shadow);
+      padding: 18px 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    :root[data-theme="dark"] .step-card{
+      background: rgba(0,0,0,.22);
+    }
+    .step-number{
+      width:40px;
+      height:40px;
+      display:grid;
+      place-items:center;
+      border-radius: 12px;
+      font-weight:950;
+      font-size:14px;
+      color:#012a19;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 24px rgba(0,208,132,.18);
+      margin-bottom: 12px;
+    }
+    .step-card h3{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:-0.01em;
+    }
+    .step-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top: 16px;
+    }
+
+    .info-card{
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.90);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    :root[data-theme="dark"] .info-card{
+      background: rgba(0,0,0,.22);
+    }
+    .info-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(520px 180px at 15% 10%, rgba(24,230,255,.14), transparent 55%),
+        radial-gradient(520px 180px at 85% 90%, rgba(0,208,132,.12), transparent 55%);
+      pointer-events:none;
+      opacity:.95;
+    }
+    .info-card > *{
+      position:relative;
+      z-index:1;
+    }
+    .info-inner{
+      padding:18px;
+    }
+    .info-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:950;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      border: 1px solid rgba(0,208,132,.18);
+      background: rgba(0,208,132,.10);
+      color:#0b4a33;
+      margin-bottom: 12px;
+    }
+    :root[data-theme="dark"] .info-kicker{ color:#bfffe6; }
+
+    .info-inner h3{
+      margin:0 0 8px;
+      font-size:20px;
+      letter-spacing:-0.01em;
+    }
+    .info-inner p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .mini-points{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+    .mini-point{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background: rgba(255,255,255,.70);
+      padding: 12px;
+    }
+    :root[data-theme="dark"] .mini-point{
+      background: rgba(255,255,255,.04);
+    }
+    .mini-point strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:4px;
+    }
+    .mini-point span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
 
     .cart-dock{
       position:fixed;
@@ -939,7 +1071,7 @@
       font-weight: 950;
       font-size: 14px;
       color: var(--text);
-      line-height: 1.2;
+      line-height: 1.35;
     }
 
     .about-astro{
@@ -981,7 +1113,13 @@
     :root[data-theme="dark"] .footer a{ color:#bfffe6; }
 
     @media (max-width: 900px){
-      .about-wrap{ grid-template-columns: 1fr; }
+      .about-wrap,
+      .info-grid{
+        grid-template-columns: 1fr;
+      }
+      .steps-grid{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 768px){
@@ -1015,6 +1153,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       .block[data-group="core"] .grid{
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid{
         grid-template-columns: 1fr;
       }
 
@@ -1081,13 +1223,14 @@
         <img src="imagen/logo-nortepack.png" alt="Logo NORTEPACK">
         <div class="txt">
           <div class="name">NORTEPACK</div>
-          <div class="sub">Mochilas económicas · España + envíos 48 h · Efectivo / Bizum</div>
+          <div class="sub">Mochilas funcionales · Bizum / contra reembolso · Ourense y envíos a España</div>
         </div>
       </a>
 
       <div class="nav">
         <nav class="nav-links" aria-label="Navegación">
           <a href="#catalogo">Catálogo</a>
+          <a href="#como-comprar">Cómo comprar</a>
           <a href="#nosotros">Sobre nosotros</a>
         </nav>
 
@@ -1107,13 +1250,13 @@
   <div class="promo-rotator" aria-label="Anuncios NORTEPACK">
     <div class="container" id="promoRotator">
       <div class="promo-item active" data-i="0">
-        <span>Envíos aprox. 48 h</span>
+        <span>Entrega local en Ourense y envíos a España</span>
       </div>
       <div class="promo-item" data-i="1">
-        <span>Entrega en España (según zona y horario)</span>
+        <span>Pago por Bizum y opción de contra reembolso</span>
       </div>
       <div class="promo-item" data-i="2">
-        <span>Añade varias mochilas y pide todo junto por WhatsApp</span>
+        <span>Añade varias mochilas y envía tu pedido completo por WhatsApp</span>
       </div>
     </div>
   </div>
@@ -1135,12 +1278,12 @@
           <div>
             <h2 class="section-title">Catálogo NORTEPACK</h2>
             <p class="section-sub">
-              Elige tus modelos, añádelos al carrito y envía tu pedido completo por WhatsApp. Entrega en España (según zona/horario) y envíos aprox. 48 h.
+              Elige tus modelos, añádelos al carrito y envía tu pedido por WhatsApp. Confirmaremos stock, forma de pago y datos de entrega antes de preparar el envío.
             </p>
 
             <div class="brand-lines" aria-label="Frases de marca">
               <div class="brand-pill">
-                <span class="brand-text">¿Cuál es tu <span class="brand-accent">color favorito</span>?</span>
+                <span class="brand-text">Diseño práctico · <span class="brand-accent">precio justo</span></span>
               </div>
               <div class="brand-pill">
                 <span class="brand-text"><span class="brand-accent">Sueña</span> · Carga · Avanza</span>
@@ -1160,8 +1303,8 @@
             <div class="block-head">
               <div class="block-title">
                 <div class="badge">Línea básicas</div>
-                <h3>BÁSICAS · sencillas, cómodas y versátiles</h3>
-                <p>Una opción excelente si buscas lo esencial al mejor precio.</p>
+                <h3>BÁSICAS · funcionales, cómodas y versátiles</h3>
+                <p>La mejor opción si buscas una mochila práctica para el día a día con una excelente relación calidad-precio.</p>
               </div>
             </div>
 
@@ -1174,7 +1317,7 @@
                 <div class="content">
                   <div class="topline"><h4>Básica Azul</h4><div class="price">14,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
-                  <p class="note">Ligera y práctica para el día a día.</p>
+                  <p class="note">Ligera, cómoda y perfecta para uso diario.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Básica Azul" data-price="14.99">Añadir al carrito</button>
                   </div>
@@ -1189,7 +1332,7 @@
                 <div class="content">
                   <div class="topline"><h4>Básica Roja</h4><div class="price">14,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
-                  <p class="note">Ideal para instituto o trabajo ligero.</p>
+                  <p class="note">Ideal para estudio, trabajo o desplazamientos ligeros.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Básica Roja" data-price="14.99">Añadir al carrito</button>
                   </div>
@@ -1204,7 +1347,7 @@
                 <div class="content">
                   <div class="topline"><h4>Básica Negra</h4><div class="price">14,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
-                  <p class="note">Combina con todo. Opción segura.</p>
+                  <p class="note">Un diseño sobrio, combinable y siempre acertado.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Básica Negra" data-price="14.99">Añadir al carrito</button>
                   </div>
@@ -1219,7 +1362,7 @@
                 <div class="content">
                   <div class="topline"><h4>Básica Blanca</h4><div class="price">14,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Valoración media</span></div>
-                  <p class="note">Estilo limpio y moderno.</p>
+                  <p class="note">Estilo limpio y actual para cualquier ocasión.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Básica Blanca" data-price="14.99">Añadir al carrito</button>
                   </div>
@@ -1232,8 +1375,8 @@
             <div class="block-head">
               <div class="block-title">
                 <div class="badge core">Línea Nortepack Core</div>
-                <h3>NORTEPACK CORE · más estructura y presencia</h3>
-                <p>Recomendada si deseas una mochila con un acabado más premium.</p>
+                <h3>NORTEPACK CORE · más estructura y mejor presencia</h3>
+                <p>Una línea pensada para quienes buscan una mochila con imagen más premium, mayor presencia y mejor acabado visual.</p>
               </div>
             </div>
 
@@ -1246,7 +1389,7 @@
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Rojo</h4><div class="price">19,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Acabados mejorados y más capacidad.</p>
+                  <p class="note">Más capacidad y mejor presencia para el día a día.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Rojo" data-price="19.99">Añadir al carrito</button>
                   </div>
@@ -1261,7 +1404,7 @@
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Negro</h4><div class="price">19,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Elegante y muy combinable.</p>
+                  <p class="note">Elegante, discreta y muy fácil de combinar.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Negro" data-price="19.99">Añadir al carrito</button>
                   </div>
@@ -1276,7 +1419,7 @@
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Beige</h4><div class="price">19,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Estilo sobrio y actual.</p>
+                  <p class="note">Una opción sobria, actual y con estilo.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Beige" data-price="19.99">Añadir al carrito</button>
                   </div>
@@ -1291,7 +1434,7 @@
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Amarillo</h4><div class="price">19,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Para destacar con buen gusto.</p>
+                  <p class="note">Perfecta para destacar con personalidad.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Amarillo" data-price="19.99">Añadir al carrito</button>
                   </div>
@@ -1306,7 +1449,7 @@
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Verde Clarito</h4><div class="price">19,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Color suave, moderno y muy combinable.</p>
+                  <p class="note">Color suave y moderno con un acabado muy combinable.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Verde Clarito" data-price="19.99">Añadir al carrito</button>
                   </div>
@@ -1321,12 +1464,97 @@
                 <div class="content">
                   <div class="topline"><h4>Nortepack Core Rosa</h4><div class="price">19,99 €</div></div>
                   <div class="stars"><span class="s">★★★★★</span> <span>Acabado premium</span></div>
-                  <p class="note">Estilo dulce y elegante, destaca sin exagerar.</p>
+                  <p class="note">Una propuesta elegante y diferente, sin excesos.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Rosa" data-price="19.99">Añadir al carrito</button>
                   </div>
                 </div>
               </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-comprar" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Cómo comprar</h2>
+            <p class="section-sub">
+              Hemos preparado un proceso de compra sencillo, rápido y claro para que puedas hacer tu pedido con total comodidad.
+            </p>
+          </div>
+        </div>
+
+        <div class="steps-grid" aria-label="Pasos de compra">
+          <article class="step-card">
+            <div class="step-number">1</div>
+            <h3>Elige tus modelos</h3>
+            <p>Explora el catálogo, revisa los colores disponibles y añade al carrito las mochilas que te interesen.</p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-number">2</div>
+            <h3>Envía tu pedido</h3>
+            <p>Cuando tengas tu selección lista, pulsa en finalizar y envíanos el pedido completo por WhatsApp.</p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-number">3</div>
+            <h3>Confirmamos stock</h3>
+            <p>Te responderemos para confirmar disponibilidad, dirección, forma de entrega y método de pago.</p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-number">4</div>
+            <h3>Recibe tu mochila</h3>
+            <p>Preparamos el pedido y organizamos la entrega local en Ourense o el envío a tu dirección.</p>
+          </article>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-inner">
+              <div class="info-kicker">Pago y pedido</div>
+              <h3>Métodos de pago</h3>
+              <p>
+                Actualmente trabajamos con <strong>Bizum</strong> y con <strong>opción de contra reembolso</strong> en pedidos donde esté disponible.
+                Antes de enviar, confirmamos contigo todos los detalles para que el proceso sea claro y seguro.
+              </p>
+
+              <div class="mini-points">
+                <div class="mini-point">
+                  <strong>Bizum</strong>
+                  <span>Una opción rápida, cómoda y directa para confirmar tu pedido.</span>
+                </div>
+                <div class="mini-point">
+                  <strong>Contra reembolso</strong>
+                  <span>Paga al recibir tu pedido cuando esta modalidad esté disponible según destino o servicio.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-inner">
+              <div class="info-kicker">Entrega y envíos</div>
+              <h3>Formas de entrega</h3>
+              <p>
+                Realizamos <strong>entrega local en Ourense</strong> y también gestionamos <strong>envíos a España</strong>.
+                El plazo orientativo puede variar según destino, volumen del pedido y disponibilidad del servicio.
+              </p>
+
+              <div class="mini-points">
+                <div class="mini-point">
+                  <strong>Entrega local</strong>
+                  <span>Disponible en Ourense y alrededores, previa confirmación por WhatsApp.</span>
+                </div>
+                <div class="mini-point">
+                  <strong>Envíos a España</strong>
+                  <span>Preparamos el pedido y te confirmamos plazo, coste y modalidad antes de cerrar la compra.</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1339,7 +1567,7 @@
           <div>
             <h2 class="section-title">Sobre NORTEPACK</h2>
             <p class="section-sub">
-              Marca local nacida en Ourense. Mochilas con estilo, resistentes y a precio justo.
+              Una marca nacida en Ourense, enfocada en mochilas funcionales, resistentes y con buena imagen a un precio accesible.
             </p>
           </div>
         </div>
@@ -1349,16 +1577,16 @@
             <div class="about-inner">
               <div class="about-kicker">España · Envíos · Atención cercana</div>
               <h3 class="about-title">
-                NORTEPACK nace en Ourense para acompañarte en tu día a día y en tus objetivos.
+                NORTEPACK nace en Ourense con una idea clara: ofrecer mochilas prácticas, resistentes y bien presentadas.
               </h3>
               <p class="about-text">
-                Somos una marca de mochilas pensada para lo importante: comodidad, resistencia y estilo sin pagar de más.
-                Queremos que comprar sea fácil y claro: eliges tus modelos, los añades al carrito y nos envías tu pedido completo por WhatsApp.
+                Somos una marca orientada a personas que buscan una mochila útil para estudiar, trabajar, entrenar o moverse cada día sin renunciar a un diseño cuidado. Apostamos por productos funcionales, cómodos y con una relación calidad-precio honesta.
               </p>
               <p class="about-text">
-                Nuestro símbolo es un <strong>astronauta</strong> porque representa a la gente con metas: la que estudia,
-                trabaja, entrena o viaja y no se detiene. Una mochila no es solo un accesorio: es lo que llevas contigo mientras
-                avanzas. En NORTEPACK, te acompañamos <strong>hasta la luna</strong>.
+                Queremos que comprar en NORTEPACK sea una experiencia sencilla y profesional: eliges tus modelos, los añades al carrito, nos envías tu pedido y confirmamos contigo todos los detalles antes de preparar la entrega.
+              </p>
+              <p class="about-text">
+                Nuestro símbolo es un <strong>astronauta</strong> porque representa a las personas que avanzan, que tienen objetivos y que siempre llevan algo importante consigo. En NORTEPACK queremos acompañarte en ese camino.
               </p>
 
               <div class="about-actions">
@@ -1371,21 +1599,21 @@
           <div class="about-card">
             <div class="about-side">
               <div class="about-stat">
-                <div class="t">Entrega</div>
-                <div class="v">España (según zona y horario)</div>
+                <div class="t">Entrega local</div>
+                <div class="v">Ourense y alrededores<br>previa confirmación</div>
               </div>
               <div class="about-stat">
                 <div class="t">Envíos</div>
-                <div class="v">Aprox. 48 h</div>
+                <div class="v">España<br>según disponibilidad y destino</div>
               </div>
               <div class="about-stat">
                 <div class="t">Pago</div>
-                <div class="v">Efectivo / Bizum</div>
+                <div class="v">Bizum y opción de<br>contra reembolso</div>
               </div>
 
               <div class="about-astro">
                 <p class="big">Sueña · Carga · Avanza</p>
-                <p class="small">La mochila de los que van a por más. NORTEPACK.</p>
+                <p class="small">NORTEPACK acompaña a quienes se mueven cada día con objetivos claros.</p>
               </div>
             </div>
           </div>
@@ -1432,7 +1660,7 @@
     <div class="cart-head">
       <div>
         <h3>Tu carrito</h3>
-        <p>Añade varias mochilas y envía todo junto por WhatsApp.</p>
+        <p>Envía tu selección por WhatsApp y confirmaremos stock, pago y entrega contigo.</p>
       </div>
       <button class="cart-close" type="button" id="cartClose">Cerrar</button>
     </div>
@@ -1514,7 +1742,6 @@
         nxt.classList.remove("exiting");
 
         setTimeout(() => current.classList.remove("exiting"), 500);
-
         i = next;
       }
 
@@ -1526,7 +1753,7 @@
 
       function start(){
         stop();
-        timer = setInterval(tick, 2600);
+        timer = setInterval(tick, 2800);
       }
       function stop(){
         if(timer) clearInterval(timer);
@@ -1775,7 +2002,7 @@
 
       const { totalQty, totalPrice } = getTotals();
 
-      let msg = "Hola, me gustaría pedir estas mochilas:\n\n";
+      let msg = "Hola, me gustaría realizar este pedido de NORTEPACK:\n\n";
 
       cart.forEach(item => {
         msg += `• ${item.model} — Cantidad: ${item.qty} — Precio unidad: ${formatPrice(item.price)} — Subtotal: ${formatPrice(item.price * item.qty)}\n`;
@@ -1783,7 +2010,11 @@
 
       msg += `\nTotal de unidades: ${totalQty}\n`;
       msg += `Total estimado: ${formatPrice(totalPrice)}\n\n`;
-      msg += "Soy de ___ (Ourense / otra ciudad). ¿Hay stock disponible? Muchas gracias.";
+      msg += "Mis datos para confirmar el pedido:\n";
+      msg += "Nombre: ___\n";
+      msg += "Ciudad / provincia: ___\n";
+      msg += "Método de pago preferido: Bizum / contra reembolso\n\n";
+      msg += "Quedo pendiente de confirmación de stock, envío y forma de entrega. Gracias.";
 
       return msg;
     }
