@@ -14,7 +14,7 @@
   <meta property="og:title" content="NORTEPACK | Mochilas funcionales desde Ourense">
   <meta property="og:description" content="Mochilas desde 14,99 €, envío 24/48 h y compra sencilla por WhatsApp.">
   <meta property="og:url" content="https://www.nortepack.es/">
-  <meta property="og:image" content="https://www.nortepack.es/imagen/logo-nortepack.png">
+  <meta property="og:image" content="https://www.nortepack.es/imagen/nortepack%20modelo%201.jpg">
   <link rel="icon" type="image/png" href="imagen/logo-nortepack.png">
 
   <style>
@@ -83,50 +83,6 @@
       outline-offset: 3px;
     }
     .container{ max-width: var(--container); margin: 0 auto; padding: 0 var(--pad); }
-
-    .offer-strip{
-      color:#06251a;
-      background: linear-gradient(100deg, #8fffd6, #8eeeff);
-      border-bottom: 1px solid rgba(0,0,0,.10);
-    }
-    .offer-strip-inner{
-      min-height:44px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      padding-top:7px;
-      padding-bottom:7px;
-      text-align:center;
-      font-size:13px;
-    }
-    .offer-strip strong{
-      font-weight:950;
-      letter-spacing:.02em;
-    }
-    .offer-strip .offer-detail{
-      color:rgba(6,37,26,.78);
-      font-weight:750;
-    }
-    .promo-ended .offer-strip{
-      color:var(--text);
-      background:var(--bg2);
-    }
-    .promo-ended .offer-strip .offer-detail{ display:none; }
-    .countdown{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:152px;
-      padding:6px 10px;
-      border-radius:999px;
-      color:#fff;
-      background:#101113;
-      font-variant-numeric:tabular-nums;
-      font-size:12px;
-      font-weight:950;
-      white-space:nowrap;
-    }
 
     .header{
       position: sticky; top:0; z-index:70;
@@ -286,7 +242,7 @@
       align-items:stretch;
     }
     .hero-main,
-    .hero-offer{
+    .hero-photo{
       border:1px solid var(--line);
       border-radius:var(--radius2);
       background:rgba(255,255,255,.90);
@@ -295,11 +251,10 @@
       position:relative;
     }
     :root[data-theme="dark"] .hero-main,
-    :root[data-theme="dark"] .hero-offer{
+    :root[data-theme="dark"] .hero-photo{
       background:rgba(0,0,0,.24);
     }
-    .hero-main::before,
-    .hero-offer::before{
+    .hero-main::before{
       content:"";
       position:absolute;
       inset:-2px;
@@ -307,6 +262,18 @@
         radial-gradient(520px 220px at 15% 10%, rgba(24,230,255,.18), transparent 58%),
         radial-gradient(520px 220px at 90% 90%, rgba(0,208,132,.16), transparent 58%);
       pointer-events:none;
+    }
+    .hero-photo{
+      margin:0;
+      min-height:100%;
+      aspect-ratio:4 / 5;
+    }
+    .hero-photo img{
+      width:100%;
+      height:100%;
+      min-height:100%;
+      object-fit:cover;
+      object-position:center;
     }
     .hero-content{
       position:relative;
@@ -367,45 +334,6 @@
       font-weight:800;
     }
     :root[data-theme="dark"] .trust-list li{ background:rgba(255,255,255,.04); }
-    .hero-offer .hero-content{
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-    .offer-kicker{
-      margin:0 0 8px;
-      color:var(--muted);
-      font-size:12px;
-      font-weight:950;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-    }
-    .hero-offer h2{
-      margin:0;
-      font-size:clamp(28px, 4vw, 42px);
-      line-height:1.02;
-      letter-spacing:-.035em;
-    }
-    .offer-percent{
-      display:block;
-      margin-top:4px;
-      color:#07845a;
-    }
-    :root[data-theme="dark"] .offer-percent{ color:#6fffc9; }
-    .offer-copy{
-      margin:14px 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.55;
-    }
-    .hero-countdown{
-      width:max-content;
-      min-width:0;
-      margin-top:auto;
-      padding:9px 12px;
-    }
-
     .section{ padding: 34px 0 48px; }
     .section-head{
       display:flex; align-items:flex-end; justify-content:space-between;
@@ -666,24 +594,6 @@
       font-weight:800;
     }
     :root[data-theme="dark"] .product-facts span{ background:rgba(255,255,255,.04); }
-    .product-offer{
-      margin:0;
-      padding:9px 10px;
-      border-radius:13px;
-      border:1px solid rgba(0,208,132,.20);
-      color:#0b4a33;
-      background:rgba(0,208,132,.09);
-      font-size:11px;
-      font-weight:900;
-      line-height:1.35;
-    }
-    :root[data-theme="dark"] .product-offer{ color:#bfffe6; }
-    .promo-ended .product-offer{
-      color:var(--muted);
-      border-color:var(--line);
-      background:transparent;
-    }
-
     .buy{ margin-top:auto; display:flex; gap:8px; flex-wrap:wrap; }
     .btn-mini{
       flex: 1;
@@ -1102,22 +1012,6 @@
       gap:10px;
     }
     .cart-price-row + .cart-price-row{ margin-top:6px; }
-    .cart-discount{
-      color:#07845a;
-    }
-    :root[data-theme="dark"] .cart-discount{ color:#6fffc9; }
-    .cart-promo-note{
-      margin:0;
-      padding:9px 10px;
-      border-radius:13px;
-      border:1px solid rgba(0,208,132,.20);
-      color:#0b4a33;
-      background:rgba(0,208,132,.09);
-      font-size:11px;
-      font-weight:850;
-      line-height:1.4;
-    }
-    :root[data-theme="dark"] .cart-promo-note{ color:#bfffe6; }
     .cart-actions{
       display:flex;
       gap:8px;
@@ -1363,6 +1257,10 @@
       .hero-grid{
         grid-template-columns:1fr;
       }
+      .hero-photo{
+        height:clamp(440px, 78vw, 650px);
+        min-height:0;
+      }
       .about-wrap,
       .info-grid{
         grid-template-columns: 1fr;
@@ -1378,15 +1276,6 @@
       .brand .sub{ display:none; }
       .nav-links{ display:none; }
       .menu-toggle{ display:grid; }
-
-      .offer-strip-inner{
-        min-height:48px;
-        gap:6px 10px;
-        flex-wrap:wrap;
-        font-size:12px;
-      }
-      .offer-strip .offer-detail{ display:none; }
-      .countdown{ min-width:142px; font-size:11px; }
 
       .hero{ padding:24px 0 12px; }
       .hero-content{ padding:24px 20px; }
@@ -1494,9 +1383,6 @@
       .content h4{ font-size:16px; }
       .note{ font-size:13px; }
       .product-facts span{ font-size:12px; }
-      .offer-strip-inner{ padding-left:8px; padding-right:8px; }
-      .offer-strip strong{ width:100%; }
-      .hero-offer h2{ font-size:32px; }
       .trust-list{ display:grid; grid-template-columns:1fr; }
       .trust-list li{ border-radius:14px; }
       .cart-actions{ flex-direction:column; }
@@ -1515,14 +1401,6 @@
 </head>
 
 <body>
-  <div class="offer-strip" id="offerStrip">
-    <div class="container offer-strip-inner">
-      <strong>SEGUNDA MOCHILA CON UN 30 % DE DESCUENTO</strong>
-      <span class="offer-detail">En la mochila de menor precio · Hasta el 2 de agosto</span>
-      <span class="countdown" data-countdown aria-live="polite">Calculando oferta…</span>
-    </div>
-  </div>
-
   <header class="header">
     <div class="container header-inner">
       <a class="brand" href="#inicio" aria-label="Ir al inicio">
@@ -1602,16 +1480,16 @@
           </div>
         </div>
 
-        <aside class="hero-offer" aria-label="Oferta especial de esta semana">
-          <div class="hero-content">
-            <p class="offer-kicker">Oferta especial de esta semana</p>
-            <h2>Segunda mochila <span class="offer-percent">con un 30 % menos</span></h2>
-            <p class="offer-copy">
-              El descuento se aplica a una mochila de menor precio. Completa el pedido por WhatsApp antes del domingo 2 de agosto de 2026 a las 23:59.
-            </p>
-            <span class="countdown hero-countdown" data-countdown aria-live="polite">Calculando oferta…</span>
-          </div>
-        </aside>
+        <figure class="hero-photo">
+          <img
+            src="imagen/nortepack modelo 1.jpg"
+            alt="Persona con una mochila NORTEPACK frente a un mural de un astronauta"
+            width="1200"
+            height="1600"
+            loading="eager"
+            fetchpriority="high"
+          >
+        </figure>
       </div>
     </section>
 
@@ -1661,7 +1539,6 @@
                   <div class="topline"><h4>Básica Azul</h4><div class="price">14,99 €</div></div>
                   <p class="note">Ligera, cómoda y perfecta para uso diario.</p>
                   <div class="product-facts"><span>Color: azul</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Básica Azul" data-color="Azul" data-price="14.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Básica Azul" data-color="Azul">Comprar por WhatsApp</button>
@@ -1678,7 +1555,6 @@
                   <div class="topline"><h4>Básica Roja</h4><div class="price">14,99 €</div></div>
                   <p class="note">Ideal para estudio, trabajo o desplazamientos ligeros.</p>
                   <div class="product-facts"><span>Color: rojo</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Básica Roja" data-color="Rojo" data-price="14.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Básica Roja" data-color="Rojo">Comprar por WhatsApp</button>
@@ -1695,7 +1571,6 @@
                   <div class="topline"><h4>Básica Negra</h4><div class="price">14,99 €</div></div>
                   <p class="note">Un diseño sobrio, combinable y siempre acertado.</p>
                   <div class="product-facts"><span>Color: negro</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Básica Negra" data-color="Negro" data-price="14.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Básica Negra" data-color="Negro">Comprar por WhatsApp</button>
@@ -1712,7 +1587,6 @@
                   <div class="topline"><h4>Básica Blanca</h4><div class="price">14,99 €</div></div>
                   <p class="note">Estilo limpio y actual para cualquier ocasión.</p>
                   <div class="product-facts"><span>Color: blanco</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Básica Blanca" data-color="Blanco" data-price="14.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Básica Blanca" data-color="Blanco">Comprar por WhatsApp</button>
@@ -1741,7 +1615,6 @@
                   <div class="topline"><h4>Nortepack Core Rojo</h4><div class="price">19,99 €</div></div>
                   <p class="note">Más capacidad y mejor presencia para el día a día.</p>
                   <div class="product-facts"><span>Color: rojo</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Rojo" data-color="Rojo" data-price="19.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Nortepack Core Rojo" data-color="Rojo">Comprar por WhatsApp</button>
@@ -1758,7 +1631,6 @@
                   <div class="topline"><h4>Nortepack Core Negro</h4><div class="price">19,99 €</div></div>
                   <p class="note">Elegante, discreta y muy fácil de combinar.</p>
                   <div class="product-facts"><span>Color: negro</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Negro" data-color="Negro" data-price="19.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Nortepack Core Negro" data-color="Negro">Comprar por WhatsApp</button>
@@ -1775,7 +1647,6 @@
                   <div class="topline"><h4>Nortepack Core Beige</h4><div class="price">19,99 €</div></div>
                   <p class="note">Una opción sobria, actual y con estilo.</p>
                   <div class="product-facts"><span>Color: beige</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Beige" data-color="Beige" data-price="19.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Nortepack Core Beige" data-color="Beige">Comprar por WhatsApp</button>
@@ -1792,7 +1663,6 @@
                   <div class="topline"><h4>Nortepack Core Amarillo</h4><div class="price">19,99 €</div></div>
                   <p class="note">Perfecta para destacar con personalidad.</p>
                   <div class="product-facts"><span>Color: amarillo</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Amarillo" data-color="Amarillo" data-price="19.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Nortepack Core Amarillo" data-color="Amarillo">Comprar por WhatsApp</button>
@@ -1809,7 +1679,6 @@
                   <div class="topline"><h4>Nortepack Core Verde Clarito</h4><div class="price">19,99 €</div></div>
                   <p class="note">Color suave y moderno con un acabado muy combinable.</p>
                   <div class="product-facts"><span>Color: verde claro</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Verde Clarito" data-color="Verde clarito" data-price="19.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Nortepack Core Verde Clarito" data-color="Verde clarito">Comprar por WhatsApp</button>
@@ -1826,7 +1695,6 @@
                   <div class="topline"><h4>Nortepack Core Rosa</h4><div class="price">19,99 €</div></div>
                   <p class="note">Una propuesta elegante y diferente, sin excesos.</p>
                   <div class="product-facts"><span>Color: rosa</span><span>Funcional y resistente</span><span>Envío 24/48 h</span></div>
-                  <p class="product-offer">2.ª mochila: 30 % de descuento en la de menor precio.</p>
                   <div class="buy">
                     <button class="btn-mini primary add-cart" type="button" data-model="Nortepack Core Rosa" data-color="Rosa" data-price="19.99">Añadir al pedido</button>
                     <button class="btn-mini direct-whatsapp" type="button" data-model="Nortepack Core Rosa" data-color="Rosa">Comprar por WhatsApp</button>
@@ -2037,17 +1905,10 @@
         <span>Total de unidades: <span id="cartQty">0</span></span>
         <span>Productos distintos: <span id="cartKinds">0</span></span>
       </div>
-      <p class="cart-promo-note" id="cartPromoNote">
-        Añade dos mochilas para aplicar el 30 % de descuento a una de menor precio.
-      </p>
       <div class="cart-total">
         <div class="cart-price-row">
           <span>Subtotal</span>
           <span id="cartSubtotalPrice">0,00 €</span>
-        </div>
-        <div class="cart-price-row cart-discount" id="cartDiscountRow" hidden>
-          <span>Descuento de la oferta</span>
-          <span id="cartDiscountPrice">−0,00 €</span>
         </div>
         <div class="cart-price-row">
           <span>Total estimado</span>
@@ -2164,60 +2025,6 @@
       });
     })();
 
-    const PROMO_TIME_ZONE = "Europe/Madrid";
-    const PROMO_END = new Date("2026-08-02T23:59:59+02:00").getTime();
-    let promoTimer = null;
-    let previousPromoState = null;
-
-    function isPromotionActive(){
-      return Date.now() <= PROMO_END;
-    }
-
-    function updatePromotionState(){
-      const active = isPromotionActive();
-      const remaining = Math.max(0, PROMO_END - Date.now());
-      const days = Math.floor(remaining / 86400000);
-      const hours = Math.floor((remaining % 86400000) / 3600000);
-      const minutes = Math.floor((remaining % 3600000) / 60000);
-      const seconds = Math.floor((remaining % 60000) / 1000);
-      const endLabel = new Intl.DateTimeFormat("es-ES", {
-        timeZone: PROMO_TIME_ZONE,
-        dateStyle: "long",
-        timeStyle: "short"
-      }).format(new Date(PROMO_END));
-
-      document.body.classList.toggle("promo-ended", !active);
-      document.querySelectorAll("[data-countdown]").forEach(element => {
-        element.textContent = active
-          ? `Termina en ${days}d ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`
-          : "Oferta finalizada";
-        element.title = `Hora límite: ${endLabel} (${PROMO_TIME_ZONE})`;
-      });
-
-      document.querySelectorAll(".product-offer").forEach(element => {
-        element.textContent = active
-          ? "2.ª mochila: 30 % de descuento en la de menor precio."
-          : "Oferta finalizada.";
-      });
-
-      if(previousPromoState !== null && previousPromoState !== active){
-        renderCart();
-      }
-      previousPromoState = active;
-
-      if(!active && promoTimer){
-        clearInterval(promoTimer);
-        promoTimer = null;
-      }
-    }
-
-    function startPromotionCountdown(){
-      updatePromotionState();
-      if(isPromotionActive()){
-        promoTimer = setInterval(updatePromotionState, 1000);
-      }
-    }
-
     const phone = "34697625964";
     const cart = [];
     const productCatalog = new Map(
@@ -2239,10 +2046,7 @@
     const cartQty = document.getElementById("cartQty");
     const cartKinds = document.getElementById("cartKinds");
     const cartSubtotalPrice = document.getElementById("cartSubtotalPrice");
-    const cartDiscountRow = document.getElementById("cartDiscountRow");
-    const cartDiscountPrice = document.getElementById("cartDiscountPrice");
     const cartTotalPrice = document.getElementById("cartTotalPrice");
-    const cartPromoNote = document.getElementById("cartPromoNote");
     const clearCart = document.getElementById("clearCart");
     const sendWhatsApp = document.getElementById("sendWhatsApp");
     const cartToggleBadge = document.getElementById("cartToggleBadge");
@@ -2315,14 +2119,8 @@
       const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
       const totalKinds = cart.length;
       const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-      const eligiblePrice = totalQty >= 2
-        ? Math.min(...cart.map(item => item.price))
-        : 0;
-      const discount = isPromotionActive()
-        ? Math.round(eligiblePrice * 0.30 * 100) / 100
-        : 0;
-      const totalPrice = Math.max(0, subtotal - discount);
-      return { totalQty, totalKinds, subtotal, discount, totalPrice };
+      const totalPrice = subtotal;
+      return { totalQty, totalKinds, subtotal, totalPrice };
     }
 
     function getItemQty(model){
@@ -2351,23 +2149,14 @@
     }
 
     function renderCart(){
-      const { totalQty, totalKinds, subtotal, discount, totalPrice } = getTotals();
+      const { totalQty, totalKinds, subtotal, totalPrice } = getTotals();
 
       cartCount.textContent = totalQty;
       cartQty.textContent = totalQty;
       cartKinds.textContent = totalKinds;
       cartToggleBadge.textContent = totalQty;
       cartSubtotalPrice.textContent = formatPrice(subtotal);
-      cartDiscountPrice.textContent = "−" + formatPrice(discount);
-      cartDiscountRow.hidden = discount <= 0;
       cartTotalPrice.textContent = formatPrice(totalPrice);
-      if(!isPromotionActive()){
-        cartPromoNote.textContent = "La oferta de esta semana ha finalizado.";
-      }else if(totalQty < 2){
-        cartPromoNote.textContent = "Añade dos mochilas para aplicar el 30 % de descuento a una de menor precio.";
-      }else{
-        cartPromoNote.textContent = `Oferta aplicada: ahorras ${formatPrice(discount)} en una mochila de menor precio.`;
-      }
 
       updateProductBadges();
       updateStickyCheckout(totalQty);
@@ -2464,7 +2253,7 @@
     function buildWhatsAppMessage(){
       if(cart.length === 0) return "";
 
-      const { totalQty, subtotal, discount, totalPrice } = getTotals();
+      const { totalQty, subtotal, totalPrice } = getTotals();
 
       let msg = "Hola, quiero realizar este pedido de NORTEPACK:\n\n";
 
@@ -2474,13 +2263,7 @@
 
       msg += `\nTotal de unidades: ${totalQty}\n`;
       msg += `Subtotal: ${formatPrice(subtotal)}\n`;
-      if(discount > 0){
-        msg += `Oferta segunda mochila (30 % en una de menor precio): −${formatPrice(discount)}\n`;
-      }
       msg += `Total estimado: ${formatPrice(totalPrice)}\n\n`;
-      if(isPromotionActive()){
-        msg += "También quiero aprovechar la oferta de la segunda mochila con un 30 % de descuento.\n\n";
-      }
       msg += "Mis datos para confirmar el pedido:\n";
       msg += "Nombre: ___\n";
       msg += "Ciudad / provincia: ___\n";
@@ -2516,10 +2299,7 @@
       btn.addEventListener("click", () => {
         const model = btn.getAttribute("data-model") || "NORTEPACK";
         const color = btn.getAttribute("data-color") || "";
-        let message = `Hola, quiero comprar la mochila ${model} en color ${color}.`;
-        if(isPromotionActive()){
-          message += " También quiero aprovechar la oferta de la segunda mochila con un 30 % de descuento.";
-        }
+        const message = `Hola, quiero comprar la mochila ${model} en color ${color}.`;
         openWhatsApp(message);
       });
     });
@@ -2527,10 +2307,7 @@
     const heroWhatsApp = document.getElementById("heroWhatsApp");
     heroWhatsApp.addEventListener("click", (event) => {
       event.preventDefault();
-      let message = "Hola, quiero comprar una mochila NORTEPACK.";
-      if(isPromotionActive()){
-        message += " También quiero aprovechar la oferta de la segunda mochila con un 30 % de descuento.";
-      }
+      const message = "Hola, quiero comprar una mochila NORTEPACK.";
       openWhatsApp(message);
     });
 
@@ -2575,7 +2352,6 @@
     });
 
     loadCart();
-    startPromotionCountdown();
     renderCart();
   </script>
 </body>
