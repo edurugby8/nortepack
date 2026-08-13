@@ -16,6 +16,7 @@
   <meta property="og:url" content="https://www.nortepack.es/">
   <meta property="og:image" content="https://www.nortepack.es/imagen/nortepack%20modelo%201.jpg">
   <link rel="icon" type="image/png" href="imagen/logo-nortepack.png">
+  <link rel="preload" as="image" href="imagen/logo-nortepack.png" fetchpriority="high">
 
   <style>
     :root{
@@ -203,7 +204,6 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:9px;
       padding:8px 32px;
       font-size:12px;
       line-height:1;
@@ -220,11 +220,6 @@
       border-radius:50%;
       background:rgba(1,42,25,.50);
       box-shadow:0 0 0 4px rgba(255,255,255,.18);
-    }
-    .shipping-icon{
-      width:18px;
-      height:18px;
-      flex:0 0 auto;
     }
     @keyframes shipping-scroll{
       from{ transform:translateX(0); }
@@ -1682,7 +1677,7 @@
   <div class="splash-screen" id="splashScreen" role="status" aria-label="Cargando NORTEPACK">
     <div class="splash-content">
       <div class="splash-logo-frame">
-        <img class="splash-logo" src="imagen/logo-nortepack.png" alt="NORTEPACK">
+        <img class="splash-logo" src="imagen/logo-nortepack.png" alt="NORTEPACK" loading="eager" decoding="sync" fetchpriority="high">
       </div>
       <p class="splash-tagline">Sueña · Carga · Avanza</p>
       <div class="splash-loader" aria-hidden="true"></div>
@@ -1690,47 +1685,17 @@
   </div>
   <noscript><style>.splash-screen{display:none!important}body.splash-active{overflow:auto!important}</style></noscript>
 
-  <div class="shipping-marquee" role="region" aria-label="Envíos gratis a toda España. Entrega en 24 a 48 horas.">
+  <div class="shipping-marquee" role="region" aria-label="Oferta especial. Envíos gratis a toda España. Entrega en 24 a 48 horas.">
     <div class="shipping-track" aria-hidden="true">
       <div class="shipping-group">
-        <span class="shipping-message">
-          <svg class="shipping-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 6.5h11v10H3zM14 10h3.4l3.1 3.4v3.1H14zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM17.5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Envíos gratis a toda España · Entrega en 24/48 h
-        </span>
-        <span class="shipping-message">
-          <svg class="shipping-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 6.5h11v10H3zM14 10h3.4l3.1 3.4v3.1H14zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM17.5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Envíos gratis a toda España · Entrega en 24/48 h
-        </span>
-        <span class="shipping-message">
-          <svg class="shipping-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 6.5h11v10H3zM14 10h3.4l3.1 3.4v3.1H14zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM17.5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Envíos gratis a toda España · Entrega en 24/48 h
-        </span>
+        <span class="shipping-message">Oferta especial · Envíos gratis a toda España · Entrega en 24/48 h</span>
+        <span class="shipping-message">Oferta especial · Envíos gratis a toda España · Entrega en 24/48 h</span>
+        <span class="shipping-message">Oferta especial · Envíos gratis a toda España · Entrega en 24/48 h</span>
       </div>
       <div class="shipping-group">
-        <span class="shipping-message">
-          <svg class="shipping-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 6.5h11v10H3zM14 10h3.4l3.1 3.4v3.1H14zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM17.5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Envíos gratis a toda España · Entrega en 24/48 h
-        </span>
-        <span class="shipping-message">
-          <svg class="shipping-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 6.5h11v10H3zM14 10h3.4l3.1 3.4v3.1H14zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM17.5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Envíos gratis a toda España · Entrega en 24/48 h
-        </span>
-        <span class="shipping-message">
-          <svg class="shipping-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 6.5h11v10H3zM14 10h3.4l3.1 3.4v3.1H14zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM17.5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Envíos gratis a toda España · Entrega en 24/48 h
-        </span>
+        <span class="shipping-message">Oferta especial · Envíos gratis a toda España · Entrega en 24/48 h</span>
+        <span class="shipping-message">Oferta especial · Envíos gratis a toda España · Entrega en 24/48 h</span>
+        <span class="shipping-message">Oferta especial · Envíos gratis a toda España · Entrega en 24/48 h</span>
       </div>
     </div>
   </div>
@@ -2285,11 +2250,11 @@
         splash.classList.add("is-hiding");
         splash.setAttribute("aria-hidden", "true");
         document.body.classList.remove("splash-active");
-      }, 1450);
+      }, 3000);
 
       window.setTimeout(() => {
         splash.remove();
-      }, 2000);
+      }, 3550);
     })();
 
     const chips = document.querySelectorAll(".chip");
