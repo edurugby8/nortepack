@@ -1252,6 +1252,42 @@
       flex:1;
     }
 
+    .promo-box{
+      display:grid;
+      gap:8px;
+      padding:11px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(0,208,132,.06);
+    }
+    .promo-box label{ font-size:12px; font-weight:950; }
+    .promo-row{ display:flex; gap:7px; }
+    .promo-row input{
+      min-width:0;
+      flex:1;
+      border:1px solid var(--line);
+      border-radius:11px;
+      padding:10px 11px;
+      background:var(--card);
+      color:var(--text);
+      text-transform:uppercase;
+      outline:none;
+    }
+    .promo-row input:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(0,208,132,.12);
+    }
+    .promo-feedback{
+      min-height:16px;
+      margin:0;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:800;
+    }
+    .promo-feedback.success{ color:#008654; }
+    .promo-feedback.error{ color:var(--danger); }
+    .discount-row{ color:#008654; }
+
     .checkout-bar{
       position:fixed;
       left:50%;
@@ -1664,6 +1700,7 @@
       }
     }
   </style>
+  <script src="config.js"></script>
   <script>
     try{
       if(sessionStorage.getItem("np-splash-seen") === "1"){
@@ -1715,6 +1752,7 @@
           <a href="#catalogo">Catálogo</a>
           <a href="#como-comprar">Cómo comprar</a>
           <a href="#nosotros">Sobre nosotros</a>
+          <a href="panel.html">Colaboradores</a>
         </nav>
 
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Activar tema oscuro">
@@ -1740,6 +1778,7 @@
         <a href="#catalogo">Ver mochilas</a>
         <a href="#como-comprar">Cómo comprar</a>
         <a href="#nosotros">Sobre NORTEPACK</a>
+        <a href="panel.html">Panel de colaboradores</a>
         <a href="https://wa.me/34697625964" target="_blank" rel="noopener">Hablar por WhatsApp</a>
       </nav>
     </div>
@@ -2204,10 +2243,22 @@
         <span>Total de unidades: <span id="cartQty">0</span></span>
         <span>Productos distintos: <span id="cartKinds">0</span></span>
       </div>
+      <div class="promo-box">
+        <label for="promoCode">Código promocional</label>
+        <div class="promo-row">
+          <input id="promoCode" type="text" maxlength="30" autocomplete="off" placeholder="Ej.: BARBARA22">
+          <button class="btn btn-ghost" type="button" id="applyPromo">Aplicar</button>
+        </div>
+        <p class="promo-feedback" id="promoFeedback">También puedes entrar desde el enlace de un colaborador.</p>
+      </div>
       <div class="cart-total">
         <div class="cart-price-row">
           <span>Subtotal</span>
           <span id="cartSubtotalPrice">0,00 €</span>
+        </div>
+        <div class="cart-price-row discount-row" id="discountRow" hidden>
+          <span id="discountLabel">Descuento</span>
+          <span id="cartDiscountPrice">−0,00 €</span>
         </div>
         <div class="cart-price-row">
           <span>Total estimado</span>
@@ -2432,6 +2483,101 @@
       });
     })();
 
+    const npConfig = window.NORTEPACK_CONFIG || {};
+    const referralStorageKey = "nortepack-referral";
+    const promotionStorageKey = "nortepack-promotion";
+
+    function safeStoredJson(key){
+      try{ return JSON.parse(localStorage.getItem(key) || "null"); }catch(error){ return null; }
+    }
+
+    function normalizeReferral(value){
+      return String(value || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 60);
+    }
+
+    function saveReferral(slug, source, promoCodeValue = ""){
+      const normalized = normalizeReferral(slug);
+      if(!normalized) return null;
+      const previous = safeStoredJson(referralStorageKey);
+      const referral = {
+        slug:normalized,
+        source,
+        promoCode:String(promoCodeValue || "").toUpperCase(),
+        firstSeenAt:previous?.slug === normalized && previous?.firstSeenAt ? previous.firstSeenAt : new Date().toISOString(),
+        lastSeenAt:new Date().toISOString()
+      };
+      localStorage.setItem(referralStorageKey, JSON.stringify(referral));
+      return referral;
+    }
+
+    const referralFromUrl = normalizeReferral(new URL(window.location.href).searchParams.get("ref"));
+    const previouslyStoredReferral = safeStoredJson(referralStorageKey);
+    if(referralFromUrl){
+      saveReferral(referralFromUrl, "link");
+      if(previouslyStoredReferral?.slug && previouslyStoredReferral.slug !== referralFromUrl){
+        localStorage.removeItem(promotionStorageKey);
+      }
+    }
+
+    const savedPromotion = safeStoredJson(promotionStorageKey);
+    let activePromotion = null;
+
+    function currentReferral(){ return safeStoredJson(referralStorageKey); }
+
+    async function resolveCollaboration(value){
+      if(!npConfig.supabaseUrl || !npConfig.supabasePublishableKey){
+        throw new Error("La promoción no está disponible temporalmente.");
+      }
+      const response = await fetch(`${npConfig.supabaseUrl}/rest/v1/rpc/resolve_collaboration`, {
+        method:"POST",
+        headers:{
+          "content-type":"application/json",
+          apikey:npConfig.supabasePublishableKey
+        },
+        body:JSON.stringify({p_value:String(value || "").trim()})
+      });
+      const data = await response.json().catch(() => []);
+      if(!response.ok){
+        const error = new Error("No se ha podido comprobar la colaboración ahora mismo.");
+        error.code = "service_unavailable";
+        throw error;
+      }
+      if(!Array.isArray(data) || !data[0]){
+        const error = new Error("Código no válido o colaboración finalizada.");
+        error.code = "inactive_or_invalid";
+        throw error;
+      }
+      return data[0];
+    }
+
+    function activatePromotion(collaborator, source){
+      activePromotion = {
+        name:collaborator.collaborator_name,
+        slug:collaborator.collaborator_slug,
+        promoCode:collaborator.promo_code,
+        discountPercent:Number(collaborator.discount_percent || 0),
+        source,
+        validatedAt:new Date().toISOString()
+      };
+      localStorage.setItem(promotionStorageKey, JSON.stringify(activePromotion));
+      saveReferral(activePromotion.slug, source, activePromotion.promoCode);
+    }
+
+    function createOrderReference(){
+      const time = Date.now().toString(36).toUpperCase();
+      const random = (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2))
+        .replaceAll("-", "")
+        .slice(0, 7)
+        .toUpperCase();
+      return `NP-${time}-${random}`;
+    }
+
     const phone = "34697625964";
     const cart = [];
     const productCatalog = new Map(
@@ -2453,7 +2599,13 @@
     const cartQty = document.getElementById("cartQty");
     const cartKinds = document.getElementById("cartKinds");
     const cartSubtotalPrice = document.getElementById("cartSubtotalPrice");
+    const cartDiscountPrice = document.getElementById("cartDiscountPrice");
     const cartTotalPrice = document.getElementById("cartTotalPrice");
+    const discountRow = document.getElementById("discountRow");
+    const discountLabel = document.getElementById("discountLabel");
+    const promoCodeInput = document.getElementById("promoCode");
+    const applyPromo = document.getElementById("applyPromo");
+    const promoFeedback = document.getElementById("promoFeedback");
     const clearCart = document.getElementById("clearCart");
     const sendWhatsApp = document.getElementById("sendWhatsApp");
     const cartToggleBadge = document.getElementById("cartToggleBadge");
@@ -2526,8 +2678,10 @@
       const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
       const totalKinds = cart.length;
       const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-      const totalPrice = subtotal;
-      return { totalQty, totalKinds, subtotal, totalPrice };
+      const discountPercent = Math.max(0, Math.min(100, Number(activePromotion?.discountPercent || 0)));
+      const discountAmount = subtotal * discountPercent / 100;
+      const totalPrice = Math.max(0, subtotal - discountAmount);
+      return { totalQty, totalKinds, subtotal, discountPercent, discountAmount, totalPrice };
     }
 
     function getItemQty(model){
@@ -2556,14 +2710,19 @@
     }
 
     function renderCart(){
-      const { totalQty, totalKinds, subtotal, totalPrice } = getTotals();
+      const { totalQty, totalKinds, subtotal, discountPercent, discountAmount, totalPrice } = getTotals();
 
       cartCount.textContent = totalQty;
       cartQty.textContent = totalQty;
       cartKinds.textContent = totalKinds;
       cartToggleBadge.textContent = totalQty;
       cartSubtotalPrice.textContent = formatPrice(subtotal);
+      cartDiscountPrice.textContent = `−${formatPrice(discountAmount)}`;
       cartTotalPrice.textContent = formatPrice(totalPrice);
+      discountRow.hidden = !(discountPercent > 0);
+      discountLabel.textContent = discountPercent > 0
+        ? `Descuento ${discountPercent}%${activePromotion?.name ? ` · ${activePromotion.name}` : ""}`
+        : "Descuento";
 
       updateProductBadges();
       updateStickyCheckout(totalQty);
@@ -2657,10 +2816,11 @@
       renderCart();
     }
 
-    function buildWhatsAppMessage(){
+    function buildWhatsAppMessage(orderReference){
       if(cart.length === 0) return "";
 
-      const { totalQty, subtotal, totalPrice } = getTotals();
+      const { totalQty, subtotal, discountPercent, discountAmount, totalPrice } = getTotals();
+      const referral = currentReferral();
 
       let msg = "Hola, quiero realizar este pedido de NORTEPACK:\n\n";
 
@@ -2670,7 +2830,15 @@
 
       msg += `\nTotal de unidades: ${totalQty}\n`;
       msg += `Subtotal: ${formatPrice(subtotal)}\n`;
+      if(discountPercent > 0){
+        msg += `Descuento promocional (${discountPercent}%): −${formatPrice(discountAmount)}\n`;
+      }
       msg += `Total estimado: ${formatPrice(totalPrice)}\n\n`;
+      msg += `Referencia del pedido: ${orderReference}\n`;
+      if(referral?.slug){
+        msg += `Colaboración: ${referral.slug}${referral.promoCode ? ` · Código ${referral.promoCode}` : ""}\n`;
+      }
+      msg += "\n";
       msg += "Mis datos para confirmar el pedido:\n";
       msg += "Nombre: ___\n";
       msg += "Ciudad / provincia: ___\n";
@@ -2691,7 +2859,7 @@
         return;
       }
 
-      const msg = buildWhatsAppMessage();
+      const msg = buildWhatsAppMessage(createOrderReference());
       openWhatsApp(msg);
     }
 
@@ -2706,7 +2874,19 @@
       btn.addEventListener("click", () => {
         const model = btn.getAttribute("data-model") || "NORTEPACK";
         const color = btn.getAttribute("data-color") || "";
-        const message = `Hola, quiero comprar la mochila ${model} en color ${color}.`;
+        const referral = currentReferral();
+        const product = productCatalog.get(model);
+        const originalPrice = Number(product?.price || 0);
+        const discountPercent = Number(activePromotion?.discountPercent || 0);
+        const finalPrice = originalPrice * (1 - discountPercent / 100);
+        let message = `Hola, quiero comprar la mochila ${model} en color ${color}.\n`;
+        message += `Referencia del pedido: ${createOrderReference()}\n`;
+        if(discountPercent > 0){
+          message += `Descuento promocional: ${discountPercent}% · Total estimado: ${formatPrice(finalPrice)}\n`;
+        }
+        if(referral?.slug){
+          message += `Colaboración: ${referral.slug}${referral.promoCode ? ` · Código ${referral.promoCode}` : ""}\n`;
+        }
         openWhatsApp(message);
       });
     });
@@ -2714,8 +2894,44 @@
     const heroWhatsApp = document.getElementById("heroWhatsApp");
     heroWhatsApp.addEventListener("click", (event) => {
       event.preventDefault();
-      const message = "Hola, quiero comprar una mochila NORTEPACK.";
+      const referral = currentReferral();
+      let message = "Hola, quiero comprar una mochila NORTEPACK.";
+      if(referral?.slug){
+        message += `\nVengo de la colaboración: ${referral.slug}${referral.promoCode ? ` · Código ${referral.promoCode}` : ""}`;
+      }
       openWhatsApp(message);
+    });
+
+    applyPromo.addEventListener("click", async () => {
+      const code = promoCodeInput.value.trim().toUpperCase();
+      if(!code){
+        promoFeedback.textContent = "Escribe un código antes de aplicarlo.";
+        promoFeedback.className = "promo-feedback error";
+        return;
+      }
+      applyPromo.disabled = true;
+      promoFeedback.textContent = "Comprobando código…";
+      promoFeedback.className = "promo-feedback";
+      try{
+        const collaborator = await resolveCollaboration(code);
+        activatePromotion(collaborator, "code");
+        promoCodeInput.value = collaborator.promo_code;
+        promoFeedback.textContent = `Código aplicado · ${collaborator.discount_percent}% de descuento`;
+        promoFeedback.className = "promo-feedback success";
+        renderCart();
+      }catch(error){
+        promoFeedback.textContent = error.message;
+        promoFeedback.className = "promo-feedback error";
+      }finally{
+        applyPromo.disabled = false;
+      }
+    });
+
+    promoCodeInput.addEventListener("keydown", event => {
+      if(event.key === "Enter"){
+        event.preventDefault();
+        applyPromo.click();
+      }
     });
 
     cartToggle.addEventListener("click", openCart);
@@ -2760,6 +2976,38 @@
 
     loadCart();
     renderCart();
+
+    (async function validateSavedReferral(){
+      const referral = currentReferral();
+      if(!referral?.slug) return;
+
+      promoCodeInput.value = savedPromotion?.promoCode || referral.promoCode || "";
+      promoFeedback.textContent = "Comprobando colaboración…";
+      promoFeedback.className = "promo-feedback";
+
+      try{
+        const collaborator = await resolveCollaboration(referral.slug);
+        activatePromotion(collaborator, referral.source || "link");
+        promoCodeInput.value = collaborator.promo_code || "";
+        promoFeedback.textContent = collaborator.discount_percent > 0
+          ? `Promoción de ${collaborator.collaborator_name} activa · ${collaborator.discount_percent}% de descuento`
+          : `Compra atribuida a ${collaborator.collaborator_name}`;
+        promoFeedback.className = "promo-feedback success";
+        renderCart();
+      }catch(error){
+        activePromotion = null;
+        localStorage.removeItem(promotionStorageKey);
+        if(error.code === "inactive_or_invalid"){
+          localStorage.removeItem(referralStorageKey);
+          promoCodeInput.value = "";
+          promoFeedback.textContent = "Esta colaboración ha finalizado.";
+        }else{
+          promoFeedback.textContent = "No se pudo comprobar la colaboración. Inténtalo de nuevo antes de comprar.";
+          promoFeedback.className = "promo-feedback error";
+        }
+        renderCart();
+      }
+    })();
   </script>
 </body>
 </html>
