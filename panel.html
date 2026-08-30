@@ -29,7 +29,19 @@
         <p class="muted">Consulta ventas, bonus y pagos con las credenciales facilitadas por NORTEPACK.</p>
         <div class="field"><label for="loginEmail">Correo</label><input id="loginEmail" name="email" type="email" autocomplete="username" required></div>
         <div class="field"><label for="loginPassword">Contraseña</label><input id="loginPassword" name="password" type="password" autocomplete="current-password" required></div>
-        <button class="btn" id="loginBtn" type="submit">Entrar al panel</button><div class="message" id="loginMessage" role="status"></div>
+        <button class="btn" id="loginBtn" type="submit">Entrar al panel</button>
+        <button class="btn secondary" id="forgotPasswordBtn" type="button" style="margin-top:10px">He olvidado mi contraseña</button>
+        <div class="message" id="loginMessage" role="status"></div>
+      </form>
+    </section>
+
+    <section class="login-wrap hidden" id="recoveryView">
+      <form class="card login-card" id="recoveryPasswordForm">
+        <div class="eyebrow">Recuperación de acceso</div><h1>Crea una nueva contraseña</h1>
+        <p class="muted">El enlace es correcto. Elige una contraseña personal de al menos 10 caracteres.</p>
+        <div class="field"><label for="recoveryPassword">Nueva contraseña</label><input id="recoveryPassword" name="password" type="password" minlength="10" autocomplete="new-password" required></div>
+        <div class="field"><label for="recoveryPasswordConfirm">Repetir contraseña</label><input id="recoveryPasswordConfirm" name="confirmPassword" type="password" minlength="10" autocomplete="new-password" required></div>
+        <button class="btn" id="recoveryPasswordBtn" type="submit">Guardar contraseña</button><div class="message" id="recoveryMessage" role="status"></div>
       </form>
     </section>
 
@@ -94,7 +106,7 @@
 
     const config = window.NORTEPACK_CONFIG || {};
     const supabase = createClient(config.supabaseUrl, config.supabasePublishableKey, { auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true} });
-    const loginView = document.getElementById("loginView"); const appView = document.getElementById("appView"); const adminView = document.getElementById("adminView"); const logoutBtn = document.getElementById("logoutBtn");
+    const loginView = document.getElementById("loginView"); const recoveryView = document.getElementById("recoveryView"); const appView = document.getElementById("appView"); const adminView = document.getElementById("adminView"); const logoutBtn = document.getElementById("logoutBtn");
     let state = { profile:null, user:null, collaborators:[], summaries:[], sales:[], payments:[], products:[] };
 
     const euroCents = value => (Number(value || 0) / 100).toLocaleString("es-ES",{style:"currency",currency:"EUR"});
@@ -102,7 +114,9 @@
     const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]));
     const statusName = value => ({pending:"Pendiente",confirmed:"Confirmada",cancelled:"Cancelada",returned:"Devuelta"}[value] || value);
     function showMessage(element,text,type="error"){element.textContent=text;element.className=`message show ${type}`;} function clearMessage(element){element.className="message";element.textContent="";}
-    function showLogin(){loginView.classList.remove("hidden");appView.classList.add("hidden");logoutBtn.classList.add("hidden");} function showApp(){loginView.classList.add("hidden");appView.classList.remove("hidden");logoutBtn.classList.remove("hidden");}
+    function showLogin(){loginView.classList.remove("hidden");recoveryView.classList.add("hidden");appView.classList.add("hidden");logoutBtn.classList.add("hidden");}
+    function showRecovery(){loginView.classList.add("hidden");recoveryView.classList.remove("hidden");appView.classList.add("hidden");logoutBtn.classList.add("hidden");}
+    function showApp(){loginView.classList.add("hidden");recoveryView.classList.add("hidden");appView.classList.remove("hidden");logoutBtn.classList.remove("hidden");}
 
     async function invoke(action,payload={}){
       const {data,error}=await supabase.functions.invoke("collaborations",{body:{action,...payload}});
@@ -140,6 +154,8 @@
     }
 
     document.getElementById("loginForm").addEventListener("submit",async event=>{event.preventDefault();const button=document.getElementById("loginBtn");const message=document.getElementById("loginMessage");clearMessage(message);button.disabled=true;try{const form=new FormData(event.currentTarget);const {error}=await supabase.auth.signInWithPassword({email:form.get("email"),password:form.get("password")});if(error)throw new Error("Correo o contraseña incorrectos.");await loadDashboard();}catch(error){showMessage(message,error.message);}finally{button.disabled=false;}});
+    document.getElementById("forgotPasswordBtn").addEventListener("click",async()=>{const email=document.getElementById("loginEmail").value.trim();const message=document.getElementById("loginMessage");clearMessage(message);if(!email){showMessage(message,"Escribe primero tu correo.","info");document.getElementById("loginEmail").focus();return;}const button=document.getElementById("forgotPasswordBtn");button.disabled=true;try{const redirectTo=`${location.origin}${location.pathname}`;const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo});if(error)throw error;showMessage(message,"Te hemos enviado un enlace para crear una nueva contraseña.","success");}catch(error){const limited=/rate limit/i.test(error.message||"");showMessage(message,limited?"Se han enviado demasiados correos. Espera una hora antes de intentarlo otra vez.":"No se pudo enviar el correo de recuperación.");}finally{button.disabled=false;}});
+    document.getElementById("recoveryPasswordForm").addEventListener("submit",async event=>{event.preventDefault();const form=new FormData(event.currentTarget);const message=document.getElementById("recoveryMessage");const button=document.getElementById("recoveryPasswordBtn");clearMessage(message);if(form.get("password")!==form.get("confirmPassword")){showMessage(message,"Las contraseñas no coinciden.");return;}button.disabled=true;try{const {error}=await supabase.auth.updateUser({password:form.get("password"),data:{must_change_password:false}});if(error)throw error;showMessage(message,"Contraseña actualizada correctamente.","success");setTimeout(()=>loadDashboard().catch(error=>{showLogin();showMessage(document.getElementById("loginMessage"),error.message);}),700);}catch(error){showMessage(message,error.message);}finally{button.disabled=false;}});
     document.getElementById("passwordForm").addEventListener("submit",async event=>{event.preventDefault();const message=document.getElementById("passwordMessage");const form=new FormData(event.currentTarget);if(form.get("password")!==form.get("confirmPassword")){showMessage(message,"Las contraseñas no coinciden.");return;}const {error}=await supabase.auth.updateUser({password:form.get("password"),data:{...state.user.user_metadata,must_change_password:false}});if(error)showMessage(message,error.message);else{showMessage(message,"Contraseña actualizada.","success");document.getElementById("passwordForm").classList.add("hidden");}});
     document.getElementById("generatePassword").addEventListener("click",()=>{const values=new Uint32Array(3);crypto.getRandomValues(values);document.querySelector('#collaboratorForm [name="password"]').value=`NP!${[...values].map(value=>value.toString(36)).join("-")}aA7`;});
     document.getElementById("collaboratorForm").addEventListener("submit",async event=>{event.preventDefault();const form=event.currentTarget;const message=document.getElementById("collaboratorMessage");const box=document.getElementById("createdBox");clearMessage(message);box.classList.add("hidden");const payload=Object.fromEntries(new FormData(form));const temporaryPassword=String(payload.password||"");for(const key of ["discountPercent","unitCommissionEuros","bonusEveryUnits","bonusEuros"])payload[key]=Number(payload[key]);try{const result=await invoke("create-collaborator",payload);box.innerHTML=`<strong>Cuenta creada correctamente</strong><code>Enlace: ${escapeHtml(result.referralLink)}</code><code>Código: ${escapeHtml(result.collaborator.promo_code)}</code><code>Correo: ${escapeHtml(result.collaborator.email)}</code><code>Contraseña temporal: ${escapeHtml(temporaryPassword)}</code><p class="foot-note">Copia estos datos ahora y envíaselos de forma privada. La contraseña no volverá a mostrarse.</p>`;box.classList.remove("hidden");showMessage(message,"Colaborador creado.","success");form.reset();form.elements.startedAt.value=new Date().toISOString().slice(0,10);form.elements.discountPercent.value="30";form.elements.unitCommissionEuros.value="3";form.elements.bonusEveryUnits.value="8";form.elements.bonusEuros.value="30";await loadDashboard();}catch(error){showMessage(message,error.message);}});
@@ -148,7 +164,9 @@
     document.getElementById("paymentForm").addEventListener("submit",async event=>{event.preventDefault();const form=event.currentTarget;const message=document.getElementById("paymentMessage");clearMessage(message);const payload=Object.fromEntries(new FormData(form));payload.amountEuros=Number(payload.amountEuros);try{await invoke("record-payment",payload);showMessage(message,"Pago registrado.","success");form.reset();await loadDashboard();}catch(error){showMessage(message,error.message);}});
     document.addEventListener("click",async event=>{const remove=event.target.closest("[data-remove-item]");if(remove){const rows=document.querySelectorAll("[data-item-row]");if(rows.length>1)remove.closest("[data-item-row]").remove();}const copy=event.target.closest("[data-copy-target]");if(copy){const input=document.getElementById(copy.dataset.copyTarget);if(input){await navigator.clipboard.writeText(input.value);const old=copy.textContent;copy.textContent="Copiado";setTimeout(()=>copy.textContent=old,1200);}}const toggle=event.target.closest("[data-toggle-collaborator]");if(toggle){toggle.disabled=true;try{await invoke("set-collaborator-status",{collaboratorId:toggle.dataset.toggleCollaborator,active:toggle.dataset.active==="true"});await loadDashboard();}catch(error){showMessage(document.getElementById("appMessage"),error.message);}finally{toggle.disabled=false;}}const save=event.target.closest("[data-save-sale]");if(save){save.disabled=true;const id=save.dataset.saveSale;try{const result=await invoke("update-sale",{saleId:id,status:document.getElementById(`status-${id}`).value,returnedUnits:Number(document.getElementById(`returned-${id}`).value)});showMessage(document.getElementById("appMessage"),result.email?.sent?"Venta actualizada y correo enviado.":"Venta actualizada.","success");await loadDashboard();}catch(error){showMessage(document.getElementById("appMessage"),error.message);}finally{save.disabled=false;}}});
     document.getElementById("refreshBtn").addEventListener("click",()=>loadDashboard().catch(error=>showMessage(document.getElementById("appMessage"),error.message)));logoutBtn.addEventListener("click",async()=>{await supabase.auth.signOut();showLogin();});document.querySelector('#collaboratorForm [name="startedAt"]').value=new Date().toISOString().slice(0,10);
-    const {data:{session}}=await supabase.auth.getSession();if(session){try{await loadDashboard();}catch(error){showApp();showMessage(document.getElementById("appMessage"),error.message);}}else showLogin();
+    let recoveryMode=false;
+    supabase.auth.onAuthStateChange((event)=>{if(event==="PASSWORD_RECOVERY"){recoveryMode=true;showRecovery();}});
+    const {data:{session}}=await supabase.auth.getSession();if(session&&!recoveryMode){try{await loadDashboard();}catch(error){showApp();showMessage(document.getElementById("appMessage"),error.message);}}else if(!session)showLogin();
   </script>
 </body>
 </html>
