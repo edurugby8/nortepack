@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <style id="cart-viewport-fix">
+    /* Keep the complete order reachable, including promotion and checkout. */
+    .cart-panel {
+      max-height: min(650px, calc(100vh - 100px)) !important;
+      max-height: min(650px, calc(100dvh - 100px - env(safe-area-inset-top, 0px))) !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cart-panel .cart-body { overflow: visible; max-height: none; }
+    @media (max-width: 700px) {
+      .cart-panel {
+        max-height: calc(100vh - 104px) !important;
+        max-height: calc(100dvh - 104px - env(safe-area-inset-top, 0px)) !important;
+      }
+    }
+  </style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NORTEPACK | Mochilas funcionales desde Ourense</title>
