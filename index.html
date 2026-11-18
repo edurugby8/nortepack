@@ -1823,6 +1823,11 @@
               Diseños prácticos, resistentes y a precios accesibles. Envíos a España en 24/48 horas y atención directa por WhatsApp.
             </p>
 
+            <div id="blackFridayBanner" hidden style="margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--bg2)" role="region" aria-label="Condiciones de Black Friday">
+              <strong style="display:block;font-size:clamp(22px,4vw,32px)">BLACK FRIDAY · −50 % EN TODAS</strong>
+              <p style="margin:10px 0">Básicas <strong>7,50 €</strong> · CORE <strong>10,00 €</strong> · <strong>Envío gratis</strong></p>
+              <small>Del 23 al 30 de noviembre de 2026, hasta las 23:59 (hora de España peninsular). Precios por unidad redondeados al céntimo. El 2×1 queda suspendido durante la campaña. No acumulable a otras promociones.</small>
+            </div>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#catalogo">Ver las mochilas</a>
               <a class="btn btn-dark" id="heroWhatsApp" href="https://wa.me/34697625964" target="_blank" rel="noopener">Comprar por WhatsApp</a>
@@ -2693,13 +2698,49 @@
       }catch(err){}
     }
 
+
+    // Campaign window uses explicit Europe/Madrid November offsets.
+    const blackFridayStart = Date.parse("2026-11-23T00:00:00+01:00");
+    const blackFridayEnd = Date.parse("2026-12-01T00:00:00+01:00");
+    function isBlackFriday(now = Date.now()){
+      return now >= blackFridayStart && now < blackFridayEnd;
+    }
+    function sellingPrice(price){
+      return isBlackFriday() ? Math.round(Math.round(Number(price) * 100) / 2) / 100 : Number(price);
+    }
+    function currentDiscountPercent(){
+      return isBlackFriday() ? 50 : Math.max(0, Math.min(100, Number(activePromotion?.discountPercent || 0)));
+    }
+    function syncBlackFridayDisplay(){
+      const active = isBlackFriday();
+      document.querySelectorAll("[data-model-card]").forEach(card => {
+        const button = card.querySelector(".add-cart");
+        const price = card.querySelector(".price");
+        if(button && price) price.textContent = formatPrice(sellingPrice(button.dataset.price));
+      });
+      document.getElementById("blackFridayBanner").hidden = !active;
+      document.querySelector(".promo-box").hidden = active;
+      document.querySelectorAll(".shipping-message").forEach(el => {
+        if(!el.dataset.regularText) el.dataset.regularText = el.textContent;
+        el.textContent = active ? "BLACK FRIDAY · −50 % en todas las mochilas · Envío gratis · 23–30 noviembre" : el.dataset.regularText;
+      });
+      const eyebrow = document.querySelector(".hero .eyebrow");
+      if(!eyebrow.dataset.regularText) eyebrow.dataset.regularText = eyebrow.textContent;
+      eyebrow.textContent = active ? "BLACK FRIDAY · Desde 7,50 € · Envío gratis" : eyebrow.dataset.regularText;
+      const shipping = document.querySelector(".shipping-marquee");
+      if(!shipping.dataset.regularLabel) shipping.dataset.regularLabel = shipping.getAttribute("aria-label");
+      shipping.setAttribute("aria-label", active ? "Black Friday: 50% en todas las mochilas y envío gratis, del 23 al 30 de noviembre." : shipping.dataset.regularLabel);
+    }
+
     function getTotals(){
       const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
       const totalKinds = cart.length;
       const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-      const discountPercent = Math.max(0, Math.min(100, Number(activePromotion?.discountPercent || 0)));
-      const discountAmount = subtotal * discountPercent / 100;
-      const totalPrice = Math.max(0, subtotal - discountAmount);
+      const discountPercent = currentDiscountPercent();
+      const totalPrice = isBlackFriday()
+        ? cart.reduce((sum, item) => sum + sellingPrice(item.price) * item.qty, 0)
+        : Math.max(0, subtotal - subtotal * discountPercent / 100);
+      const discountAmount = subtotal - totalPrice;
       return { totalQty, totalKinds, subtotal, discountPercent, discountAmount, totalPrice };
     }
 
@@ -2729,6 +2770,7 @@
     }
 
     function renderCart(){
+      syncBlackFridayDisplay();
       const { totalQty, totalKinds, subtotal, discountPercent, discountAmount, totalPrice } = getTotals();
 
       cartCount.textContent = totalQty;
@@ -2739,7 +2781,7 @@
       cartDiscountPrice.textContent = `−${formatPrice(discountAmount)}`;
       cartTotalPrice.textContent = formatPrice(totalPrice);
       discountRow.hidden = !(discountPercent > 0);
-      discountLabel.textContent = discountPercent > 0
+      discountLabel.textContent = isBlackFriday() ? "Black Friday · 50% (no acumulable)" : discountPercent > 0
         ? `Descuento ${discountPercent}%${activePromotion?.name ? ` · ${activePromotion.name}` : ""}`
         : "Descuento";
 
@@ -2756,9 +2798,9 @@
           <div class="cart-item-top">
             <div>
               <p class="cart-item-title">${item.model}</p>
-              <p class="cart-item-sub">Color: ${item.color} · Subtotal: ${formatPrice(item.price * item.qty)}</p>
+              <p class="cart-item-sub">Color: ${item.color} · Subtotal: ${formatPrice(sellingPrice(item.price) * item.qty)}</p>
             </div>
-            <div class="cart-item-price">${formatPrice(item.price)}</div>
+            <div class="cart-item-price">${formatPrice(sellingPrice(item.price))}</div>
           </div>
 
           <div class="qty-row">
@@ -2844,15 +2886,16 @@
       let msg = "Hola, quiero realizar este pedido de NORTEPACK:\n\n";
 
       cart.forEach(item => {
-        msg += `• ${item.model} — Color: ${item.color} — Cantidad: ${item.qty} — Precio unidad: ${formatPrice(item.price)} — Subtotal: ${formatPrice(item.price * item.qty)}\n`;
+        msg += `• ${item.model} — Color: ${item.color} — Cantidad: ${item.qty} — Precio unidad: ${formatPrice(sellingPrice(item.price))} — Subtotal: ${formatPrice(sellingPrice(item.price) * item.qty)}\n`;
       });
 
       msg += `\nTotal de unidades: ${totalQty}\n`;
-      msg += `Subtotal: ${formatPrice(subtotal)}\n`;
+      msg += `${isBlackFriday() ? "Subtotal antes de Black Friday" : "Subtotal"}: ${formatPrice(subtotal)}\n`;
       if(discountPercent > 0){
-        msg += `Descuento promocional (${discountPercent}%): −${formatPrice(discountAmount)}\n`;
+        msg += `${isBlackFriday() ? "Black Friday (no acumulable)" : "Descuento promocional"} (${discountPercent}%): −${formatPrice(discountAmount)}\n`;
       }
       msg += `Total estimado: ${formatPrice(totalPrice)}\n\n`;
+      if(isBlackFriday()) msg += "Envío gratis · Campaña 23–30 noviembre · 2×1 suspendido y descuentos no acumulables.\n\n";
       msg += `Referencia del pedido: ${orderReference}\n`;
       if(referral?.slug){
         msg += `Colaboración: ${referral.slug}${referral.promoCode ? ` · Código ${referral.promoCode}` : ""}\n`;
@@ -2920,14 +2963,15 @@
         const referral = currentReferral();
         const product = productCatalog.get(model);
         const originalPrice = Number(product?.price || 0);
-        const discountPercent = Number(activePromotion?.discountPercent || 0);
-        const finalPrice = originalPrice * (1 - discountPercent / 100);
+        const discountPercent = currentDiscountPercent();
+        const finalPrice = isBlackFriday() ? sellingPrice(originalPrice) : originalPrice * (1 - discountPercent / 100);
         const orderReference=createOrderReference();
         let message = `Hola, quiero comprar la mochila ${model} en color ${color}.\n`;
         message += `Referencia del pedido: ${orderReference}\n`;
         if(discountPercent > 0){
           message += `Descuento promocional: ${discountPercent}% · Total estimado: ${formatPrice(finalPrice)}\n`;
         }
+        if(isBlackFriday()) message += "Black Friday · Envío gratis · Sin 2×1 ni descuentos acumulables · 23–30 noviembre.\n";
         if(referral?.slug){
           message += `Colaboración: ${referral.slug}${referral.promoCode ? ` · Código ${referral.promoCode}` : ""}\n`;
         }
@@ -2948,6 +2992,11 @@
     });
 
     applyPromo.addEventListener("click", async () => {
+      if(isBlackFriday()){
+        promoFeedback.textContent = "Black Friday se aplica automáticamente y no se acumula a otros descuentos.";
+        renderCart();
+        return;
+      }
       const code = promoCodeInput.value.trim().toUpperCase();
       if(!code){
         promoFeedback.textContent = "Escribe un código antes de aplicarlo.";
@@ -3021,6 +3070,11 @@
 
     loadCart();
     renderCart();
+    let previousCampaignState = isBlackFriday();
+    setInterval(() => {
+      const state = isBlackFriday();
+      if(state !== previousCampaignState){ previousCampaignState = state; renderCart(); }
+    }, 30000);
 
     (async function validateSavedReferral(){
       const referral = currentReferral();
